@@ -187,11 +187,17 @@ uv run grid.py export runs/deepseek-smoke-001 --out probes/deepseek-smoke-001
 
 # After verifying the smoke, freeze a separate measured grid.
 uv run grid.py plan --spec grids/deepseek.json --count 100 \
-  --out runs/deepseek-history-001 --max-cost 20
+  --out runs/deepseek-history-001 --concurrency 16 --max-cost 20
 uv run grid.py run runs/deepseek-history-001
 uv run grid.py export runs/deepseek-history-001 --out results/deepseek-history-001
 uv run bench.py report
 ```
+
+The measured command above uses a ceiling of 16 concurrent calls, with the
+same adaptive backoff controller. Paid OpenRouter models have no platform-level
+request cap, but pinned upstream capacity and account in-flight budgets still
+apply. The controller can reduce concurrency on errors.
+[OpenRouter limits](https://openrouter.ai/docs/api_reference/limits).
 
 This profile explicitly sends temperature 0.7 or 1.0, top-p 1, top-k 0,
 frequency penalty 0 and a 4,096 generated-token limit including reasoning.

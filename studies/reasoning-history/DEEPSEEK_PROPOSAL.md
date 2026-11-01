@@ -183,9 +183,42 @@ are terminal invalid observations, retained separately; they are not replaced
 or used as numbers. Reported OpenRouter usage cost was $0.01233.
 [Smoke evidence](../../probes/2026-11-01-deepseek-history-smoke-001/manifest.json).
 
-The separate 4,400-trial measured run was then frozen and launched as
+The initial 4,400-trial measured run was then frozen and launched as
 `2026-11-01-deepseek-history-001`, with four concurrent calls, a 180-second
 attempt timeout, 24-hour active-run ceiling and $20 reported-cost ceiling.
 The smoke is not pooled into the measured result. The full grid retains
 V3.1 thinking-on to measure its validity as well as any accepted distribution.
 See [the fixed-decoding reproduction steps](../../GRIDS.md#deepseek-history-with-fixed-decoding).
+
+
+### Concurrency revision requested during execution
+
+On 2026-11-01, Bryan requested higher parallelism for the paid API. The original
+four-concurrency run was stopped and preserved as a separate execution pilot:
+[archived evidence](../../probes/2026-11-01-deepseek-history-c4-pilot/manifest.json).
+It contains 222 terminal logical trials (202 valid, 20 invalid), plus two timeout
+attempts and four requests interrupted during shutdown. All 228 physical
+attempts remain available. Its frozen status is `paused`; it is superseded and
+must not be resumed alongside the replacement. Its reported cost was $0.06998,
+with missing costs on six attempts.
+
+A new independent full grid, `2026-11-01-deepseek-history-c16-001`, was frozen
+with **16 concurrent calls** and the same seven models, 22 model/mode/temperature
+cells, two prompts, 100 trials per prompt/cell, pinned providers, 180-second
+attempt timeout and bounded adaptive retries. The earlier pilot is not pooled
+into the new result, and its invalid answers are not replaced within that pilot.
+The operational change was requested to improve runtime, not selected using
+number frequencies.
+
+The new reported-cost ceiling is $19.90, reserving $0.10 for the approximately
+$0.0823 already reported across the smoke and superseded run. Missing usage and
+in-flight overshoot remain limitations of reported-cost enforcement. All model
+settings and evidence snapshots remain immutable. Only the new grid is scheduled
+for the measured `RESULTS.md` export; the pilot stays in `PROBES.md`.
+
+```sh
+uv run grid.py plan --spec grids/deepseek.json --count 100 \
+  --out runs/2026-11-01-deepseek-history-c16-001 --concurrency 16 \
+  --timeout 180 --max-seconds 86400 --max-cost 19.9
+uv run grid.py run runs/2026-11-01-deepseek-history-c16-001
+```
