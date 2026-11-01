@@ -4,6 +4,11 @@ Study proposed on 2026-11-01. This is a hypothesis and candidate registry, not
 a finding or a launched historical grid. The existing 100-trial grids continue
 under their original frozen protocol and provider defaults.
 
+Selected first family: **DeepSeek**. See the [full seven-release grid
+proposal](DEEPSEEK_PROPOSAL.md), covering 4,400 planned trials with two prompts
+and two temperatures. That proposal is still for review; no DeepSeek grid has
+been launched.
+
 ## Hypothesis
 
 Reasoning-oriented post-training may increase concentration of responses to a
