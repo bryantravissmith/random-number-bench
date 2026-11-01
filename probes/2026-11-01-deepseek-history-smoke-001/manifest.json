@@ -1,0 +1,2416 @@
+{
+  "schema": "random-number-public-grid-v2",
+  "exported_at": "2026-11-01T20:16:54.797017+00:00",
+  "grid": {
+    "schema": "random-number-grid-v2",
+    "created_at": "2026-11-01T20:13:26.294851+00:00",
+    "runner": "pi",
+    "provider": "openrouter",
+    "protocol": {
+      "version": "random-number-bench-v1",
+      "range": [
+        1,
+        10
+      ],
+      "default_trials_per_condition": 1000,
+      "prompts": {
+        "baseline": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+        "meta": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+      }
+    },
+    "cells": [
+      {
+        "id": "deepseek--deepseek-chat--off--t0.7",
+        "model": "deepseek/deepseek-chat",
+        "thinking": "off",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 0.7,
+          "reasoning": null,
+          "provider": {
+            "only": [
+              "deepinfra/fp4/flex"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "DeepInfra",
+          "accepted_models": [
+            "deepseek/deepseek-chat",
+            "deepseek/deepseek-chat-v3"
+          ],
+          "release_period": "2024-12",
+          "stratum": "historical_anchor",
+          "quantization": "fp4",
+          "mode": "non_reasoning"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-chat--off--t1",
+        "model": "deepseek/deepseek-chat",
+        "thinking": "off",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 1.0,
+          "reasoning": null,
+          "provider": {
+            "only": [
+              "deepinfra/fp4/flex"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "DeepInfra",
+          "accepted_models": [
+            "deepseek/deepseek-chat",
+            "deepseek/deepseek-chat-v3"
+          ],
+          "release_period": "2024-12",
+          "stratum": "historical_anchor",
+          "quantization": "fp4",
+          "mode": "non_reasoning"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-chat-v3-0324--off--t0.7",
+        "model": "deepseek/deepseek-chat-v3-0324",
+        "thinking": "off",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 0.7,
+          "reasoning": null,
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-chat-v3-0324"
+          ],
+          "release_period": "2025-03",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "non_reasoning"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-chat-v3-0324--off--t1",
+        "model": "deepseek/deepseek-chat-v3-0324",
+        "thinking": "off",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 1.0,
+          "reasoning": null,
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-chat-v3-0324"
+          ],
+          "release_period": "2025-03",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "non_reasoning"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-r1-0528--high--t0.7",
+        "model": "deepseek/deepseek-r1-0528",
+        "thinking": "high",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 0.7,
+          "reasoning": {
+            "enabled": true
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-r1-0528"
+          ],
+          "release_period": "2025-05",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "required"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-r1-0528--high--t1",
+        "model": "deepseek/deepseek-r1-0528",
+        "thinking": "high",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 1.0,
+          "reasoning": {
+            "enabled": true
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-r1-0528"
+          ],
+          "release_period": "2025-05",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "required"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-chat-v3.1--off--t0.7",
+        "model": "deepseek/deepseek-chat-v3.1",
+        "thinking": "off",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 0.7,
+          "reasoning": {
+            "enabled": false
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-chat-v3.1"
+          ],
+          "release_period": "2025-08",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "off"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-chat-v3.1--off--t1",
+        "model": "deepseek/deepseek-chat-v3.1",
+        "thinking": "off",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 1.0,
+          "reasoning": {
+            "enabled": false
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-chat-v3.1"
+          ],
+          "release_period": "2025-08",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "off"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-chat-v3.1--high--t0.7",
+        "model": "deepseek/deepseek-chat-v3.1",
+        "thinking": "high",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 0.7,
+          "reasoning": {
+            "enabled": true
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-chat-v3.1"
+          ],
+          "release_period": "2025-08",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "on"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-chat-v3.1--high--t1",
+        "model": "deepseek/deepseek-chat-v3.1",
+        "thinking": "high",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 1.0,
+          "reasoning": {
+            "enabled": true
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-chat-v3.1"
+          ],
+          "release_period": "2025-08",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "on"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-v3.2--off--t0.7",
+        "model": "deepseek/deepseek-v3.2",
+        "thinking": "off",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 0.7,
+          "reasoning": {
+            "enabled": false
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-v3.2",
+            "deepseek/deepseek-v3.2-20251201"
+          ],
+          "release_period": "2025-12",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "off"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-v3.2--off--t1",
+        "model": "deepseek/deepseek-v3.2",
+        "thinking": "off",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 1.0,
+          "reasoning": {
+            "enabled": false
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-v3.2",
+            "deepseek/deepseek-v3.2-20251201"
+          ],
+          "release_period": "2025-12",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "off"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-v3.2--high--t0.7",
+        "model": "deepseek/deepseek-v3.2",
+        "thinking": "high",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 0.7,
+          "reasoning": {
+            "enabled": true
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-v3.2",
+            "deepseek/deepseek-v3.2-20251201"
+          ],
+          "release_period": "2025-12",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "on"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-v3.2--high--t1",
+        "model": "deepseek/deepseek-v3.2",
+        "thinking": "high",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 1.0,
+          "reasoning": {
+            "enabled": true
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-v3.2",
+            "deepseek/deepseek-v3.2-20251201"
+          ],
+          "release_period": "2025-12",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "on"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-v4-pro-0813--off--t0.7",
+        "model": "deepseek/deepseek-v4-pro-0813",
+        "thinking": "off",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 0.7,
+          "reasoning": {
+            "enabled": false
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-v4-pro-0813",
+            "deepseek/deepseek-v4-pro-20260813"
+          ],
+          "release_period": "2026-08",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "off"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-v4-pro-0813--off--t1",
+        "model": "deepseek/deepseek-v4-pro-0813",
+        "thinking": "off",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 1.0,
+          "reasoning": {
+            "enabled": false
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-v4-pro-0813",
+            "deepseek/deepseek-v4-pro-20260813"
+          ],
+          "release_period": "2026-08",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "off"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-v4-pro-0813--high--t0.7",
+        "model": "deepseek/deepseek-v4-pro-0813",
+        "thinking": "high",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 0.7,
+          "reasoning": {
+            "enabled": true,
+            "effort": "high"
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-v4-pro-0813",
+            "deepseek/deepseek-v4-pro-20260813"
+          ],
+          "release_period": "2026-08",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "on"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-v4-pro-0813--high--t1",
+        "model": "deepseek/deepseek-v4-pro-0813",
+        "thinking": "high",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 1.0,
+          "reasoning": {
+            "enabled": true,
+            "effort": "high"
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-v4-pro-0813",
+            "deepseek/deepseek-v4-pro-20260813"
+          ],
+          "release_period": "2026-08",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "on"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-v4.1-flash-1017--off--t0.7",
+        "model": "deepseek/deepseek-v4.1-flash-1017",
+        "thinking": "off",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 0.7,
+          "reasoning": {
+            "enabled": false
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-v4.1-flash-1017",
+            "deepseek/deepseek-v4.1-flash-20261017"
+          ],
+          "release_period": "2026-10",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "off"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-v4.1-flash-1017--off--t1",
+        "model": "deepseek/deepseek-v4.1-flash-1017",
+        "thinking": "off",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 1.0,
+          "reasoning": {
+            "enabled": false
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-v4.1-flash-1017",
+            "deepseek/deepseek-v4.1-flash-20261017"
+          ],
+          "release_period": "2026-10",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "off"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-v4.1-flash-1017--high--t0.7",
+        "model": "deepseek/deepseek-v4.1-flash-1017",
+        "thinking": "high",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 0.7,
+          "reasoning": {
+            "enabled": true,
+            "effort": "high"
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-v4.1-flash-1017",
+            "deepseek/deepseek-v4.1-flash-20261017"
+          ],
+          "release_period": "2026-10",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "on"
+        }
+      },
+      {
+        "id": "deepseek--deepseek-v4.1-flash-1017--high--t1",
+        "model": "deepseek/deepseek-v4.1-flash-1017",
+        "thinking": "high",
+        "request_profile": {
+          "schema": "openrouter-fixed-decoding-v1",
+          "top_p": 1.0,
+          "top_k": 0,
+          "frequency_penalty": 0,
+          "max_tokens": 4096,
+          "temperature": 1.0,
+          "reasoning": {
+            "enabled": true,
+            "effort": "high"
+          },
+          "provider": {
+            "only": [
+              "siliconflow/fp8"
+            ],
+            "allow_fallbacks": false,
+            "require_parameters": true
+          },
+          "expected_provider": "SiliconFlow",
+          "accepted_models": [
+            "deepseek/deepseek-v4.1-flash-1017",
+            "deepseek/deepseek-v4.1-flash-20261017"
+          ],
+          "release_period": "2026-10",
+          "stratum": "matched_fp8",
+          "quantization": "fp8",
+          "mode": "on"
+        }
+      }
+    ],
+    "planned_per_condition": 1,
+    "order_seed": 8340391137781308359,
+    "design": "randomized_complete_cell_blocks_with_adjacent_prompt_pairs",
+    "order_note": "Every block randomizes all model/effort cells and each cell's two prompts. Scheduling randomness is never inserted in prompts or model sampling parameters.",
+    "batch_manifest_sha256": "5a1205009a459cf70732fe940f4b94509e0c2c14fbae60f9f53f574c51cd8b84"
+  },
+  "schedule": [
+    {
+      "trial": 1,
+      "block": 1,
+      "cell": "deepseek--deepseek-r1-0528--high--t1",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-r1-0528",
+      "thinking": "high",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": true
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-r1-0528"
+        ],
+        "release_period": "2025-05",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "required"
+      }
+    },
+    {
+      "trial": 2,
+      "block": 1,
+      "cell": "deepseek--deepseek-r1-0528--high--t1",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-r1-0528",
+      "thinking": "high",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": true
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-r1-0528"
+        ],
+        "release_period": "2025-05",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "required"
+      }
+    },
+    {
+      "trial": 3,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4.1-flash-1017--high--t0.7",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "thinking": "high",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": true,
+          "effort": "high"
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4.1-flash-1017",
+          "deepseek/deepseek-v4.1-flash-20261017"
+        ],
+        "release_period": "2026-10",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 4,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4.1-flash-1017--high--t0.7",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "thinking": "high",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": true,
+          "effort": "high"
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4.1-flash-1017",
+          "deepseek/deepseek-v4.1-flash-20261017"
+        ],
+        "release_period": "2026-10",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 5,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat-v3.1--off--t1",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat-v3.1",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-chat-v3.1"
+        ],
+        "release_period": "2025-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 6,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat-v3.1--off--t1",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat-v3.1",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-chat-v3.1"
+        ],
+        "release_period": "2025-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 7,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4-pro-0813--high--t0.7",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4-pro-0813",
+      "thinking": "high",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": true,
+          "effort": "high"
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4-pro-0813",
+          "deepseek/deepseek-v4-pro-20260813"
+        ],
+        "release_period": "2026-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 8,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4-pro-0813--high--t0.7",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4-pro-0813",
+      "thinking": "high",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": true,
+          "effort": "high"
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4-pro-0813",
+          "deepseek/deepseek-v4-pro-20260813"
+        ],
+        "release_period": "2026-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 9,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat-v3-0324--off--t0.7",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat-v3-0324",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": null,
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-chat-v3-0324"
+        ],
+        "release_period": "2025-03",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "non_reasoning"
+      }
+    },
+    {
+      "trial": 10,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat-v3-0324--off--t0.7",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat-v3-0324",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": null,
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-chat-v3-0324"
+        ],
+        "release_period": "2025-03",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "non_reasoning"
+      }
+    },
+    {
+      "trial": 11,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat--off--t0.7",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": null,
+        "provider": {
+          "only": [
+            "deepinfra/fp4/flex"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "DeepInfra",
+        "accepted_models": [
+          "deepseek/deepseek-chat",
+          "deepseek/deepseek-chat-v3"
+        ],
+        "release_period": "2024-12",
+        "stratum": "historical_anchor",
+        "quantization": "fp4",
+        "mode": "non_reasoning"
+      }
+    },
+    {
+      "trial": 12,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat--off--t0.7",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": null,
+        "provider": {
+          "only": [
+            "deepinfra/fp4/flex"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "DeepInfra",
+        "accepted_models": [
+          "deepseek/deepseek-chat",
+          "deepseek/deepseek-chat-v3"
+        ],
+        "release_period": "2024-12",
+        "stratum": "historical_anchor",
+        "quantization": "fp4",
+        "mode": "non_reasoning"
+      }
+    },
+    {
+      "trial": 13,
+      "block": 1,
+      "cell": "deepseek--deepseek-r1-0528--high--t0.7",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-r1-0528",
+      "thinking": "high",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": true
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-r1-0528"
+        ],
+        "release_period": "2025-05",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "required"
+      }
+    },
+    {
+      "trial": 14,
+      "block": 1,
+      "cell": "deepseek--deepseek-r1-0528--high--t0.7",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-r1-0528",
+      "thinking": "high",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": true
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-r1-0528"
+        ],
+        "release_period": "2025-05",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "required"
+      }
+    },
+    {
+      "trial": 15,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4-pro-0813--high--t1",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4-pro-0813",
+      "thinking": "high",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": true,
+          "effort": "high"
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4-pro-0813",
+          "deepseek/deepseek-v4-pro-20260813"
+        ],
+        "release_period": "2026-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 16,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4-pro-0813--high--t1",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4-pro-0813",
+      "thinking": "high",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": true,
+          "effort": "high"
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4-pro-0813",
+          "deepseek/deepseek-v4-pro-20260813"
+        ],
+        "release_period": "2026-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 17,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4.1-flash-1017--off--t0.7",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4.1-flash-1017",
+          "deepseek/deepseek-v4.1-flash-20261017"
+        ],
+        "release_period": "2026-10",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 18,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4.1-flash-1017--off--t0.7",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4.1-flash-1017",
+          "deepseek/deepseek-v4.1-flash-20261017"
+        ],
+        "release_period": "2026-10",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 19,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat-v3.1--high--t1",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat-v3.1",
+      "thinking": "high",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": true
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-chat-v3.1"
+        ],
+        "release_period": "2025-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 20,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat-v3.1--high--t1",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat-v3.1",
+      "thinking": "high",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": true
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-chat-v3.1"
+        ],
+        "release_period": "2025-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 21,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4-pro-0813--off--t0.7",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4-pro-0813",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4-pro-0813",
+          "deepseek/deepseek-v4-pro-20260813"
+        ],
+        "release_period": "2026-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 22,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4-pro-0813--off--t0.7",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4-pro-0813",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4-pro-0813",
+          "deepseek/deepseek-v4-pro-20260813"
+        ],
+        "release_period": "2026-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 23,
+      "block": 1,
+      "cell": "deepseek--deepseek-v3.2--high--t0.7",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v3.2",
+      "thinking": "high",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": true
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v3.2",
+          "deepseek/deepseek-v3.2-20251201"
+        ],
+        "release_period": "2025-12",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 24,
+      "block": 1,
+      "cell": "deepseek--deepseek-v3.2--high--t0.7",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v3.2",
+      "thinking": "high",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": true
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v3.2",
+          "deepseek/deepseek-v3.2-20251201"
+        ],
+        "release_period": "2025-12",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 25,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat-v3-0324--off--t1",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat-v3-0324",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": null,
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-chat-v3-0324"
+        ],
+        "release_period": "2025-03",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "non_reasoning"
+      }
+    },
+    {
+      "trial": 26,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat-v3-0324--off--t1",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat-v3-0324",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": null,
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-chat-v3-0324"
+        ],
+        "release_period": "2025-03",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "non_reasoning"
+      }
+    },
+    {
+      "trial": 27,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat-v3.1--high--t0.7",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat-v3.1",
+      "thinking": "high",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": true
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-chat-v3.1"
+        ],
+        "release_period": "2025-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 28,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat-v3.1--high--t0.7",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat-v3.1",
+      "thinking": "high",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": true
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-chat-v3.1"
+        ],
+        "release_period": "2025-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 29,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4-pro-0813--off--t1",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4-pro-0813",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4-pro-0813",
+          "deepseek/deepseek-v4-pro-20260813"
+        ],
+        "release_period": "2026-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 30,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4-pro-0813--off--t1",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4-pro-0813",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4-pro-0813",
+          "deepseek/deepseek-v4-pro-20260813"
+        ],
+        "release_period": "2026-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 31,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4.1-flash-1017--off--t1",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4.1-flash-1017",
+          "deepseek/deepseek-v4.1-flash-20261017"
+        ],
+        "release_period": "2026-10",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 32,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4.1-flash-1017--off--t1",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4.1-flash-1017",
+          "deepseek/deepseek-v4.1-flash-20261017"
+        ],
+        "release_period": "2026-10",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 33,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat-v3.1--off--t0.7",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat-v3.1",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-chat-v3.1"
+        ],
+        "release_period": "2025-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 34,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat-v3.1--off--t0.7",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat-v3.1",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-chat-v3.1"
+        ],
+        "release_period": "2025-08",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 35,
+      "block": 1,
+      "cell": "deepseek--deepseek-v3.2--off--t0.7",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v3.2",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v3.2",
+          "deepseek/deepseek-v3.2-20251201"
+        ],
+        "release_period": "2025-12",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 36,
+      "block": 1,
+      "cell": "deepseek--deepseek-v3.2--off--t0.7",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v3.2",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 0.7,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v3.2",
+          "deepseek/deepseek-v3.2-20251201"
+        ],
+        "release_period": "2025-12",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 37,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4.1-flash-1017--high--t1",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "thinking": "high",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": true,
+          "effort": "high"
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4.1-flash-1017",
+          "deepseek/deepseek-v4.1-flash-20261017"
+        ],
+        "release_period": "2026-10",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 38,
+      "block": 1,
+      "cell": "deepseek--deepseek-v4.1-flash-1017--high--t1",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "thinking": "high",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": true,
+          "effort": "high"
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v4.1-flash-1017",
+          "deepseek/deepseek-v4.1-flash-20261017"
+        ],
+        "release_period": "2026-10",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 39,
+      "block": 1,
+      "cell": "deepseek--deepseek-v3.2--off--t1",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v3.2",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v3.2",
+          "deepseek/deepseek-v3.2-20251201"
+        ],
+        "release_period": "2025-12",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 40,
+      "block": 1,
+      "cell": "deepseek--deepseek-v3.2--off--t1",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v3.2",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": false
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v3.2",
+          "deepseek/deepseek-v3.2-20251201"
+        ],
+        "release_period": "2025-12",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "off"
+      }
+    },
+    {
+      "trial": 41,
+      "block": 1,
+      "cell": "deepseek--deepseek-v3.2--high--t1",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v3.2",
+      "thinking": "high",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": true
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v3.2",
+          "deepseek/deepseek-v3.2-20251201"
+        ],
+        "release_period": "2025-12",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 42,
+      "block": 1,
+      "cell": "deepseek--deepseek-v3.2--high--t1",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-v3.2",
+      "thinking": "high",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": {
+          "enabled": true
+        },
+        "provider": {
+          "only": [
+            "siliconflow/fp8"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "SiliconFlow",
+        "accepted_models": [
+          "deepseek/deepseek-v3.2",
+          "deepseek/deepseek-v3.2-20251201"
+        ],
+        "release_period": "2025-12",
+        "stratum": "matched_fp8",
+        "quantization": "fp8",
+        "mode": "on"
+      }
+    },
+    {
+      "trial": 43,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat--off--t1",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": null,
+        "provider": {
+          "only": [
+            "deepinfra/fp4/flex"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "DeepInfra",
+        "accepted_models": [
+          "deepseek/deepseek-chat",
+          "deepseek/deepseek-chat-v3"
+        ],
+        "release_period": "2024-12",
+        "stratum": "historical_anchor",
+        "quantization": "fp4",
+        "mode": "non_reasoning"
+      }
+    },
+    {
+      "trial": 44,
+      "block": 1,
+      "cell": "deepseek--deepseek-chat--off--t1",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "deepseek/deepseek-chat",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "openrouter_profile": {
+        "schema": "openrouter-fixed-decoding-v1",
+        "top_p": 1.0,
+        "top_k": 0,
+        "frequency_penalty": 0,
+        "max_tokens": 4096,
+        "temperature": 1.0,
+        "reasoning": null,
+        "provider": {
+          "only": [
+            "deepinfra/fp4/flex"
+          ],
+          "allow_fallbacks": false,
+          "require_parameters": true
+        },
+        "expected_provider": "DeepInfra",
+        "accepted_models": [
+          "deepseek/deepseek-chat",
+          "deepseek/deepseek-chat-v3"
+        ],
+        "release_period": "2024-12",
+        "stratum": "historical_anchor",
+        "quantization": "fp4",
+        "mode": "non_reasoning"
+      }
+    }
+  ],
+  "service": {
+    "runner": "pi",
+    "provider": "openrouter",
+    "evidence_level": "pi_http_request",
+    "runner_version": "1.3.0",
+    "runner_binary_sha256": null,
+    "runner_format": null,
+    "auth_type": "oauth",
+    "pi_version": "1.3.0",
+    "pi_settings_sha256": "780869754ddb8fbb8d517b5ab3d0078e0730c05da389569137312c503ae6e53e",
+    "models_file_sha256": "6c6d9c8515f2a8042d7348e1f96d1af6988475dafa688546ce7c7861bf848702",
+    "openrouter_routing": null,
+    "system_prompt": "You are a helpful assistant.",
+    "system_preamble_application": "system override plus cwd",
+    "working_directory": "/",
+    "working_directory_sha256": "8a5edab282632443219e051e4ade2d1d5bbc671c781051bf1437897cbdfea0f1",
+    "controller": "One bounded concurrency controller shared by every cell and prompt in this service grid",
+    "concurrency_ceiling": 4,
+    "control_settings": {
+      "max_attempts": 3,
+      "timeout": 180.0,
+      "base_backoff": 15,
+      "max_backoff": 300,
+      "recovery_successes": 20,
+      "circuit_errors": 8,
+      "max_seconds": 3600.0,
+      "max_cost": 1.0
+    },
+    "prompt_policy": "Frozen per-trial prompts",
+    "sampling": "Explicit fixed decoding and reasoning settings per frozen OpenRouter trial profile; request audit verifies their application",
+    "error_policy": "Transport failures excluded; bounded retries within logical trial; invalid answers never retried",
+    "raw_schema_version": "random-numbers-v1.0",
+    "raw_created_at": "2026-11-01T20:13:26.512818+00:00",
+    "raw_manifest_sha256": "5a1205009a459cf70732fe940f4b94509e0c2c14fbae60f9f53f574c51cd8b84",
+    "grid_json_sha256": "d9211d88579310137f9479e5577256c9020160e5e683d16886151ec7decd5826",
+    "state": "complete",
+    "elapsed_seconds": 177.93220020795707,
+    "source_sha256": {
+      "batch.py": "97e8622d83e5245ce258b0cfd7b36fec2a55399ef7b6d7407a1dcf160ebf0ceb",
+      "pi-audit.ts": "880f391e9ff4284a9d166b017b57dbe8f4efb41406dace8be3ccd20ad64f69f1",
+      "verify.py": "4277b038ac923b89d08a45a83bc18ed1af7f5cd181d235d9896e2ff13749f94b",
+      "grid.py": "ed7a4b1b1dc3ed453fa52f0cd4f8f34f39e6591a01a7e586dab1f3667e2fc420",
+      "openrouter_profiles.py": "43af7f58da14dcfcb7b9a1d1bd237ebe3f172a6a39dc651840d20101ecf3dbc4",
+      "pi-profile.ts": "1a8194073d22aaee6f36a37853829129e7205a39ed8ac240e6e3e83d2c69aace"
+    },
+    "raw_verifier": "Frozen snapshot verify.py, run in a subprocess after source hash checks",
+    "raw_verification": {
+      "physical_attempts": 44,
+      "accepted_unique_trials": 40,
+      "unique_sessions": 40,
+      "counts_from_native_sessions": {
+        "1": 1,
+        "2": 0,
+        "3": 0,
+        "4": 5,
+        "5": 3,
+        "6": 1,
+        "7": 24,
+        "8": 5,
+        "9": 1,
+        "10": 0
+      },
+      "evidence_hashes_match": true,
+      "error_attempts_excluded": true,
+      "configuration_matches": true
+    }
+  },
+  "interval": {
+    "method": "wilson_score",
+    "confidence": 0.95,
+    "scope": "Pointwise per cell, prompt and answer; proportion of accepted answers only"
+  },
+  "redactions": [
+    "Working directories are replaced by hashes; a neutral root directory is disclosed as / when used.",
+    "Session and response IDs are hashed. Credentials, environment, CLI argv, binary paths and free-form error text are not exported.",
+    "Public rows are selected fields from verified native logs. Raw logs stay local; raw file hashes are commitments, not transcripts."
+  ],
+  "cost_basis": "OpenRouter response usage.cost for the pinned route when exposed, including failed attempts with usage; not a verified bill. Field name pi_reported_cost is kept for compatibility.",
+  "model_identity": "Requested model and effort come from the frozen schedule. Native reported model is retained and checked where exposed. Immutable backend snapshot is not independently established.",
+  "files_sha256": {
+    "attempts.jsonl": "3c50758f98e1a2f769121f3eba00f0bb59e7443a6b70953d9f2dcbb9d9c14dce",
+    "source/batch.py": "97e8622d83e5245ce258b0cfd7b36fec2a55399ef7b6d7407a1dcf160ebf0ceb",
+    "source/grid.py": "ed7a4b1b1dc3ed453fa52f0cd4f8f34f39e6591a01a7e586dab1f3667e2fc420",
+    "source/openrouter_profiles.py": "43af7f58da14dcfcb7b9a1d1bd237ebe3f172a6a39dc651840d20101ecf3dbc4",
+    "source/pi-audit.ts": "880f391e9ff4284a9d166b017b57dbe8f4efb41406dace8be3ccd20ad64f69f1",
+    "source/pi-profile.ts": "1a8194073d22aaee6f36a37853829129e7205a39ed8ac240e6e3e83d2c69aace",
+    "source/verify.py": "4277b038ac923b89d08a45a83bc18ed1af7f5cd181d235d9896e2ff13749f94b",
+    "summary.json": "1ee6f4d03ff4b815492cb815812f95f5839a0f151bcf640f7a0b989781bcff2b"
+  }
+}

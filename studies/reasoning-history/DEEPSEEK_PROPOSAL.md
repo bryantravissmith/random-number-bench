@@ -107,6 +107,17 @@ ceiling can stop the experiment early, and in-flight calls can slightly exceed
 it. At the full output cap on every call, even without retries, cost can exceed
 that ceiling. Publish any resulting shortfall.
 
+| Average reasoning tokens per thinking call | 4,400-trial estimate | With separate 44-trial smoke |
+| ---: | ---: | ---: |
+| 500 | $2.05 | $2.07 |
+| 1,000 | $3.88 | $3.91 |
+| 2,000 | $7.53 | $7.61 |
+| 4,095, reaching the output cap with a one-token answer | $15.19 | $15.34 |
+
+These scenarios assume that non-thinking calls produce one output token and
+there are no retries. The last row is not an upper bound on the bill: invalid
+verbose non-thinking responses and failed attempts may also consume tokens.
+
 Estimate duration from the 44-call smoke's observed latency and exclusions.
 Do not transfer the much shorter GPT-4o runtime to these reasoning models.
 
@@ -162,3 +173,19 @@ listing does not establish live account access or parameter behavior.
 - [Provider routing and fallbacks](https://openrouter.ai/docs/guides/routing/provider-selection)
 
 The requested action here is a proposal. No DeepSeek inference has been launched.
+
+## Execution record
+
+The authorized 44-trial smoke completed on 2026-11-01 in 177.9 seconds. All
+requests passed the frozen routing/decoding/mode checks. It produced 40 valid
+answers and four empty final responses, all from V3.1 thinking-on cells. Those
+are terminal invalid observations, retained separately; they are not replaced
+or used as numbers. Reported OpenRouter usage cost was $0.01233.
+[Smoke evidence](../../probes/2026-11-01-deepseek-history-smoke-001/manifest.json).
+
+The separate 4,400-trial measured run was then frozen and launched as
+`2026-11-01-deepseek-history-001`, with four concurrent calls, a 180-second
+attempt timeout, 24-hour active-run ceiling and $20 reported-cost ceiling.
+The smoke is not pooled into the measured result. The full grid retains
+V3.1 thinking-on to measure its validity as well as any accepted distribution.
+See [the fixed-decoding reproduction steps](../../GRIDS.md#deepseek-history-with-fixed-decoding).

@@ -10,7 +10,7 @@ export default function (pi: any) {
   pi.on("before_provider_request", (event: any) => {
     const payload: Record<string, unknown> = {};
     for (const key of ["model", "input", "messages", "instructions", "reasoning", "reasoning_effort", "temperature",
-      "top_p", "seed", "max_output_tokens", "max_tokens", "max_completion_tokens", "tools", "tool_choice", "stream", "store", "provider"])
+      "top_p", "top_k", "min_p", "frequency_penalty", "presence_penalty", "repetition_penalty", "seed", "max_output_tokens", "max_tokens", "max_completion_tokens", "tools", "tool_choice", "stream", "stream_options", "store", "provider", "response_format"])
       if (event.payload[key] !== undefined) payload[key] = event.payload[key];
     record({ type: "request", payload });
   });
@@ -20,6 +20,11 @@ export default function (pi: any) {
     const metadata: Record<string, unknown> = {};
     for (const key of ["id", "model", "provider", "system_fingerprint", "usage", "error"])
       if (data[key] !== undefined) metadata[key] = data[key];
+    if (Array.isArray(data.choices)) {
+      const reasons = data.choices.map((c: any) => c.finish_reason).filter(Boolean);
+      if (reasons.length) metadata.finish_reasons = reasons;
+      if (data.choices.some((c: any) => c.delta?.reasoning || c.delta?.reasoning_content || c.delta?.reasoning_details?.length)) metadata.has_reasoning = true;
+    }
     if (Object.keys(metadata).length) record({type: "provider_metadata", ...metadata});
   });
   // Pi 1.3.0's response hook misses thrown HTTP errors. Observe fetch itself,

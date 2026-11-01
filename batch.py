@@ -182,7 +182,11 @@ def trial_config(manifest, trial):
         raise ValueError("Schedule trial identity mismatch")
     return {
         **manifest["config"],
-        **{key: entry[key] for key in ("prompt", "model", "thinking") if key in entry},
+        **{
+            key: entry[key]
+            for key in ("prompt", "model", "thinking", "openrouter_profile")
+            if key in entry
+        },
     }
 
 
@@ -215,6 +219,27 @@ def parse_attempt(folder, config, returncode, timed_out=False, interrupted=False
             if b.get("type") == "text"
         )
         result["usage"] = final.get("usage")
+        if config.get("openrouter_profile"):
+            # OpenRouter returns the pinned route's actual usage cost. Pi's
+            # generic catalog estimate can describe a different upstream.
+            provider_usage = [
+                e["usage"]
+                for e in audit
+                if e.get("type") == "provider_metadata"
+                and isinstance(e.get("usage"), dict)
+            ]
+            result["usage"] = dict(result["usage"] or {})
+            result["usage"]["cost"] = {
+                "total": next(
+                    (u["cost"] for u in reversed(provider_usage) if "cost" in u), None
+                )
+            }
+            cost = result["usage"]["cost"]["total"]
+            if cost is not None and (
+                type(cost) not in (int, float) or not math.isfinite(cost) or cost < 0
+            ):
+                result["usage"]["cost"]["total"] = None
+                raise ValueError("Invalid OpenRouter reported cost")
         result["response_id"] = final.get("responseId")
         result["session_id"] = next(
             (e.get("id") for e in native if e.get("type") == "session"), None
@@ -241,6 +266,7 @@ def parse_attempt(folder, config, returncode, timed_out=False, interrupted=False
             return result
         requests = [e for e in audit if e.get("type") == "request"]
         issues = []
+        truncated = False
         if len(sessions) != 1 or [m.get("role") for m in messages] != [
             "system",
             "user",
@@ -283,7 +309,9 @@ def parse_attempt(folder, config, returncode, timed_out=False, interrupted=False
             payload = requests[0]["payload"]
             if payload.get("model") != config["model"] or payload.get("tools"):
                 issues.append("Requested model mismatch or declared tools")
-            if any(k in payload for k in ("temperature", "top_p", "seed")):
+            if not config.get("openrouter_profile") and any(
+                k in payload for k in ("temperature", "top_p", "seed")
+            ):
                 issues.append("Unexpected sampling override")
             if config["provider"] == "openai":
                 expected = expected_input(config)
@@ -295,6 +323,24 @@ def parse_attempt(folder, config, returncode, timed_out=False, interrupted=False
                     issues.append("Effective provider input mismatch")
                 if payload.get("reasoning", {}).get("effort") != config["thinking"]:
                     issues.append("Effective provider reasoning mismatch")
+            elif config["provider"] == "openrouter" and config.get(
+                "openrouter_profile"
+            ):
+                import openrouter_profiles
+
+                try:
+                    observed = openrouter_profiles.audit(
+                        config,
+                        payload,
+                        [e for e in audit if e.get("type") == "provider_metadata"],
+                        final,
+                    )
+                    truncated = observed.pop("truncated")
+                    result.update(observed)
+                    if result.get("usage") is not None:
+                        result["usage"]["reasoning"] = observed.get("reasoning_tokens")
+                except ValueError as exc:
+                    issues.append(str(exc))
             elif config["provider"] == "openrouter":
                 expected = [
                     {
@@ -357,6 +403,14 @@ def parse_attempt(folder, config, returncode, timed_out=False, interrupted=False
         if issues:
             result.update(outcome="protocol_error", error="; ".join(issues))
             return result
+        if truncated:
+            result.update(
+                outcome="invalid_response",
+                invalid_reason="truncated",
+                error="Truncated provider response",
+                number=None,
+            )
+            return result
         text = result["response"].strip()
         if final.get("stopReason") == "stop" and re.fullmatch(
             r"(?:[1-9]|10)", text, re.ASCII
@@ -367,6 +421,8 @@ def parse_attempt(folder, config, returncode, timed_out=False, interrupted=False
                 outcome="invalid_response",
                 error="Final response was not a complete bare integer in 1-10",
             )
+            if config.get("openrouter_profile"):
+                result["invalid_reason"] = "format"
     except (ValueError, KeyError, TypeError, OSError) as exc:
         result.update(
             outcome="interrupted"
@@ -526,7 +582,11 @@ class PiEnvironment:
         if (source / "models.json").exists():
             shutil.copyfile(source / "models.json", path / "models.json")
             (path / "models.json").chmod(0o600)
-        if self.manifest and self.manifest["config"]["provider"] == "openrouter":
+        if (
+            self.manifest
+            and self.manifest["config"]["provider"] == "openrouter"
+            and not self.manifest["config"].get("openrouter_profile")
+        ):
             models = (
                 read(path / "models.json") if (path / "models.json").exists() else {}
             )
@@ -608,6 +668,16 @@ async def attempt(batch, manifest, environment, trial, attempt_no, limit, genera
         "--",
         config["prompt"],
     ]
+    attempt_env = {**environment, "RANDOM_BENCH_AUDIT": str(folder / "audit.jsonl")}
+    if config.get("openrouter_profile"):
+        profile_path = folder / "request-profile.json"
+        save(profile_path, config["openrouter_profile"])
+        attempt_env["RANDOM_BENCH_REQUEST_PROFILE"] = str(profile_path)
+        position = command.index("--extension")
+        command[position:position] = [
+            "--extension",
+            str(batch / "snapshot/pi-profile.ts"),
+        ]
     if config.get("runner", "pi") != "pi":
         import cli_runners
 
@@ -638,7 +708,7 @@ async def attempt(batch, manifest, environment, trial, attempt_no, limit, genera
             process = await asyncio.create_subprocess_exec(
                 *command,
                 cwd=config["cwd"],
-                env={**environment, "RANDOM_BENCH_AUDIT": str(folder / "audit.jsonl")},
+                env=attempt_env,
                 stdin=asyncio.subprocess.DEVNULL,
                 stdout=stdout,
                 stderr=stderr,
@@ -987,7 +1057,11 @@ def plan(args):
     }
     config.update(prompt=args.prompt, system_prompt=SYSTEM, cwd=str(args.cwd.resolve()))
     config["runner"] = args.runner
-    if args.runner == "pi" and args.provider == "openrouter":
+    if getattr(args, "openrouter_profile", None):
+        if args.runner != "pi" or args.provider != "openrouter":
+            raise ValueError("Fixed-decoding profile requires Pi/OpenRouter")
+        config["openrouter_profile"] = args.openrouter_profile
+    elif args.runner == "pi" and args.provider == "openrouter":
         if args.thinking != "off":
             raise ValueError("The OpenRouter profile currently requires thinking off")
         config["openrouter_routing"] = {"only": ["openai"], "allow_fallbacks": False}
@@ -1011,12 +1085,23 @@ def plan(args):
             "cell",
             "condition",
             "condition_trial",
+            "openrouter_profile",
         }:
             raise ValueError("Unexpected per-trial override")
         if "prompt" in row and (
             not isinstance(row["prompt"], str) or not row["prompt"].strip()
         ):
             raise ValueError("Invalid per-trial prompt")
+    if config.get("openrouter_profile"):
+        import openrouter_profiles
+
+        for row in schedule:
+            selected = trial_config(
+                {"config": config, "schedule": schedule}, row["trial"]
+            )
+            openrouter_profiles.validate_profile(
+                selected["openrouter_profile"], selected["model"], selected["thinking"]
+            )
     command = (
         json.loads(args.pi_command) if args.pi_command else [shutil.which("pi") or "pi"]
     )
@@ -1038,6 +1123,8 @@ def plan(args):
     files = ["batch.py", "pi-audit.ts", "verify.py"]
     if getattr(args, "grid_spec", None):
         files.append("grid.py")
+    if config.get("openrouter_profile"):
+        files.extend(["openrouter_profiles.py", "pi-profile.ts"])
     if args.runner != "pi":
         files.append("cli_runners.py")
     for name in files:
@@ -1064,6 +1151,10 @@ def plan(args):
     }
     if getattr(args, "grid_spec", None):
         manifest["grid"] = args.grid_spec
+    if config.get("openrouter_profile"):
+        manifest["sampling"] = (
+            "Explicit fixed decoding and reasoning settings per frozen OpenRouter trial profile; request audit verifies their application"
+        )
     save(batch / "manifest.json", manifest)
     print(
         json.dumps(

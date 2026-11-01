@@ -290,7 +290,10 @@ def _export(sources, destination, protocol, schedule, design, seed):
 def verify_public(root):
     root = root.resolve()
     manifest = read(root / "manifest.json")
-    if manifest.get("schema") == "random-number-public-grid-v1":
+    if manifest.get("schema") in (
+        "random-number-public-grid-v1",
+        "random-number-public-grid-v2",
+    ):
         import grid_results
 
         return grid_results.verify_public(root)
@@ -413,9 +416,9 @@ def report(results, output, *, probes=False):
     for folder in sorted(results.iterdir() if results.exists() else []):
         if not (folder / "manifest.json").exists():
             continue
-        if (
-            read(folder / "manifest.json").get("schema")
-            == "random-number-public-grid-v1"
+        if read(folder / "manifest.json").get("schema") in (
+            "random-number-public-grid-v1",
+            "random-number-public-grid-v2",
         ):
             grid_folders.append(folder)
             continue

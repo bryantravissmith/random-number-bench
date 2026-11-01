@@ -17,6 +17,7 @@ import batch
 
 ROOT = Path(__file__).resolve().parent
 SCHEMA = "random-number-grid-v1"
+PROFILE_SCHEMA = "random-number-grid-v2"
 EFFORTS = ("low", "medium", "high", "xhigh", "max")
 MODELS = {
     "codex": [
@@ -67,6 +68,51 @@ def cells_for(runner):
     return cells
 
 
+def profile_cells(profile):
+    """Expand the fixed-decoding profile into independently labeled cells."""
+    if profile["runner"] != "pi":
+        raise ValueError("Fixed-decoding profiles require Pi")
+    sampling = profile["sampling"]
+    cells = []
+    for model in profile["models"]:
+        for mode in model["modes"]:
+            for temperature in sampling["temperatures"]:
+                request = {
+                    "schema": "openrouter-fixed-decoding-v1",
+                    **{k: v for k, v in sampling.items() if k != "temperatures"},
+                    "temperature": temperature,
+                    "reasoning": mode["reasoning"],
+                    "provider": {
+                        "only": [model["provider_tag"]],
+                        "allow_fallbacks": False,
+                        "require_parameters": True,
+                    },
+                    **{
+                        k: model[k]
+                        for k in (
+                            "expected_provider",
+                            "accepted_models",
+                            "release_period",
+                            "stratum",
+                            "quantization",
+                        )
+                    },
+                    "mode": mode["mode"],
+                }
+                cells.append(
+                    {
+                        "id": model["model"].replace("/", "--")
+                        + "--"
+                        + mode["thinking"]
+                        + f"--t{temperature:g}",
+                        "model": model["model"],
+                        "thinking": mode["thinking"],
+                        "request_profile": request,
+                    }
+                )
+    return cells
+
+
 def plan(args):
     if args.count < 1:
         raise ValueError("Count must be positive")
@@ -77,6 +123,9 @@ def plan(args):
     )
     if not cells or len({c["id"] for c in cells}) != len(cells):
         raise ValueError("Grid requires unique cells")
+    profiled = any("request_profile" in c for c in cells)
+    if profiled and not all("request_profile" in c for c in cells):
+        raise ValueError("Every cell in a fixed-decoding grid requires a profile")
     root = args.out.resolve()
     root.mkdir(parents=True, exist_ok=False)
     protocol = batch.read(ROOT / "protocol.json")
@@ -102,11 +151,16 @@ def plan(args):
                         "model": cell["model"],
                         "thinking": cell["thinking"],
                         "prompt": protocol["prompts"][condition],
+                        **(
+                            {"openrouter_profile": cell["request_profile"]}
+                            if profiled
+                            else {}
+                        ),
                     }
                 )
     first = cells[0]
     spec = {
-        "schema": SCHEMA,
+        "schema": PROFILE_SCHEMA if profiled else SCHEMA,
         "created_at": batch.now(),
         "runner": args.runner,
         "provider": "openrouter"
@@ -141,6 +195,7 @@ def plan(args):
         trial_schedule=schedule,
         pi_command=getattr(args, "pi_command", None),
         grid_spec=spec.copy(),
+        openrouter_profile=first.get("request_profile"),
     )
     batch.plan(options)
     spec["batch_manifest_sha256"] = batch.digest(root / "batch/manifest.json")
@@ -153,7 +208,7 @@ def validate(root):
     spec = batch.read(root / "grid.json")
     manifest = batch.read(root / "batch/manifest.json")
     if (
-        spec["schema"] != SCHEMA
+        spec["schema"] not in (SCHEMA, PROFILE_SCHEMA)
         or batch.digest(root / "batch/manifest.json") != spec["batch_manifest_sha256"]
     ):
         raise ValueError("Frozen grid manifest changed")
@@ -189,6 +244,7 @@ def validate_schedule(spec, schedule, config):
         if (
             any(row[k] != cell[k] for k in ("model", "thinking"))
             or row["prompt"] != spec["protocol"]["prompts"][row["condition"]]
+            or row.get("openrouter_profile") != cell.get("request_profile")
         ):
             raise ValueError("Grid label differs from effective request")
         if row["block"] != row["condition_trial"]:
@@ -237,15 +293,18 @@ def main():
             if args.runner not in MODELS:
                 raise ValueError("Unknown profile runner")
             args.cells = []
-            for row in profile["models"]:
-                for effort in row["efforts"]:
-                    args.cells.append(
-                        {
-                            "id": row["model"].replace("/", "--") + "--" + effort,
-                            "model": row["model"],
-                            "thinking": effort,
-                        }
-                    )
+            if profile.get("profile_schema") == "openrouter-fixed-decoding-grid-v1":
+                args.cells = profile_cells(profile)
+            else:
+                for row in profile["models"]:
+                    for effort in row["efforts"]:
+                        args.cells.append(
+                            {
+                                "id": row["model"].replace("/", "--") + "--" + effort,
+                                "model": row["model"],
+                                "thinking": effort,
+                            }
+                        )
         plan(args)
         return 0
     root = args.grid.resolve()

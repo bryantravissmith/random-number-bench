@@ -67,7 +67,7 @@ def verify(root):
             **base_config,
             **{
                 key: scheduled[key]
-                for key in ("prompt", "model", "thinking")
+                for key in ("prompt", "model", "thinking", "openrouter_profile")
                 if key in scheduled
             },
         }
@@ -88,6 +88,35 @@ def verify(root):
 
             # Reparse exclusions too, so edited outcomes cannot hide answers.
             cli_runners.verify_attempt(path.parent, config, result)
+        elif config.get("openrouter_profile"):
+            import batch
+
+            assert (
+                load(path.parent / "request-profile.json")
+                == config["openrouter_profile"]
+            )
+            again = batch.parse_attempt(
+                path.parent,
+                config,
+                result.get("returncode"),
+                timed_out=result["outcome"] == "timeout",
+                interrupted=result["outcome"] == "interrupted",
+            )
+            for key in (
+                "outcome",
+                "invalid_reason",
+                "number",
+                "response",
+                "session_id",
+                "response_id",
+                "observed_model",
+                "upstream_provider",
+                "system_fingerprints",
+                "usage",
+            ):
+                assert again.get(key) == result.get(key), (
+                    f"Profile reparse mismatch: {key}"
+                )
         if result["outcome"] != "valid":
             assert result["number"] is None, "Error attempt contributed a number"
             continue
@@ -130,7 +159,8 @@ def verify(root):
         assert [e["status"] for e in audit if e["type"] == "http_response"] == [200]
         payload = requests[0]["payload"]
         assert payload["model"] == config["model"] and not payload.get("tools")
-        assert not any(k in payload for k in ("temperature", "top_p", "seed"))
+        if not config.get("openrouter_profile"):
+            assert not any(k in payload for k in ("temperature", "top_p", "seed"))
         if config["provider"] == "openai":
             assert payload["reasoning"]["effort"] == config["thinking"]
             expected_input = [
@@ -154,6 +184,23 @@ def verify(root):
                     },
                 ],
             )
+        elif config["provider"] == "openrouter" and config.get("openrouter_profile"):
+            import openrouter_profiles
+
+            checked = openrouter_profiles.audit(
+                config,
+                payload,
+                [e for e in audit if e.get("type") == "provider_metadata"],
+                final,
+            )
+            assert not checked["truncated"]
+            for key in (
+                "observed_model",
+                "upstream_provider",
+                "system_fingerprints",
+                "response_id",
+            ):
+                assert checked[key] == result[key]
         elif config["provider"] == "openrouter":
             assert config["thinking"] == "off"
             assert not any(k in payload for k in ("reasoning", "reasoning_effort"))

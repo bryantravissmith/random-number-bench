@@ -26,6 +26,8 @@ from statistics_helpers import CONFIDENCE, tv_to_uniform, wilson_interval
 REPO = Path(__file__).resolve().parent
 SCHEMA = "random-number-public-grid-v1"
 GRID_SCHEMA = "random-number-grid-v1"
+PROFILE_SCHEMA = "random-number-public-grid-v2"
+PROFILE_GRID_SCHEMA = "random-number-grid-v2"
 DESIGN = "randomized_complete_cell_blocks_with_adjacent_prompt_pairs"
 CONDITIONS = public_results.CONDITIONS
 OUTCOMES = public_results.OUTCOMES
@@ -137,10 +139,20 @@ def json_sha256(value):
     return hashlib.sha256(text.encode()).hexdigest()
 
 
-def source_files(runner):
-    return {"batch.py", "verify.py", "pi-audit.ts", "grid.py"} | (
-        {"cli_runners.py"} if runner != "pi" else set()
+def source_files(runner, grid_schema=GRID_SCHEMA):
+    return (
+        {"batch.py", "verify.py", "pi-audit.ts", "grid.py"}
+        | ({"cli_runners.py"} if runner != "pi" else set())
+        | (
+            {"openrouter_profiles.py", "pi-profile.ts"}
+            if grid_schema == PROFILE_GRID_SCHEMA
+            else set()
+        )
     )
+
+
+def public_schema(grid):
+    return PROFILE_SCHEMA if grid["schema"] == PROFILE_GRID_SCHEMA else SCHEMA
 
 
 def evidence_level(runner):
@@ -169,6 +181,11 @@ def planned_schedule(grid):
                         "model": cell["model"],
                         "thinking": cell["thinking"],
                         "prompt": prompts[condition],
+                        **(
+                            {"openrouter_profile": cell["request_profile"]}
+                            if grid["schema"] == PROFILE_GRID_SCHEMA
+                            else {}
+                        ),
                     }
                 )
     return schedule
@@ -176,8 +193,12 @@ def planned_schedule(grid):
 
 def validate_grid(grid, schedule):
     """Check cell definitions and the complete frozen schedule; return cells by id."""
-    if set(grid) != GRID_KEYS or grid["schema"] != GRID_SCHEMA:
+    if set(grid) != GRID_KEYS or grid["schema"] not in (
+        GRID_SCHEMA,
+        PROFILE_GRID_SCHEMA,
+    ):
         raise ValueError("Unexpected grid specification")
+    profiled = grid["schema"] == PROFILE_GRID_SCHEMA
     if grid["design"] != DESIGN:
         raise ValueError("Unknown grid design")
     prompts = grid["protocol"].get("prompts")
@@ -191,12 +212,29 @@ def validate_grid(grid, schedule):
     for cell in grid["cells"]:
         if (
             not isinstance(cell, dict)
-            or set(cell) != {"id", "model", "thinking"}
-            or not all(isinstance(v, str) and v for v in cell.values())
-            or cell["id"] != f"{cell['model'].replace('/', '--')}--{cell['thinking']}"
+            or set(cell)
+            != (
+                {"id", "model", "thinking", "request_profile"}
+                if profiled
+                else {"id", "model", "thinking"}
+            )
+            or not all(
+                isinstance(cell[k], str) and cell[k]
+                for k in ("id", "model", "thinking")
+            )
             or cell["id"] in cells
         ):
             raise ValueError("Invalid or duplicate cell definition")
+        expected_id = f"{cell['model'].replace('/', '--')}--{cell['thinking']}"
+        if profiled:
+            import openrouter_profiles
+
+            openrouter_profiles.validate_profile(
+                cell["request_profile"], cell["model"], cell["thinking"]
+            )
+            expected_id += f"--t{cell['request_profile']['temperature']:g}"
+        if cell["id"] != expected_id:
+            raise ValueError("Cell identity differs from its model and settings")
         cells[cell["id"]] = cell
     count = grid["planned_per_condition"]
     if not cells or type(count) is not int or count < 1:
@@ -208,7 +246,9 @@ def validate_grid(grid, schedule):
         raise ValueError("Grid trial count mismatch")
     seen = set()
     for i, row in enumerate(schedule, 1):
-        if not isinstance(row, dict) or set(row) != SCHEDULE_KEYS:
+        if not isinstance(row, dict) or set(row) != (
+            SCHEDULE_KEYS | {"openrouter_profile"} if profiled else SCHEDULE_KEYS
+        ):
             raise ValueError("Unexpected grid schedule fields")
         cell = cells.get(row["cell"])
         key = (row["cell"], row["condition"], row["condition_trial"])
@@ -225,6 +265,7 @@ def validate_grid(grid, schedule):
             or row["model"] != cell["model"]
             or row["thinking"] != cell["thinking"]
             or row["prompt"] != prompts[row["condition"]]
+            or row.get("openrouter_profile") != cell.get("request_profile")
         ):
             raise ValueError("Invalid grid trial mapping")
         seen.add(key)
@@ -240,7 +281,7 @@ def validate_grid(grid, schedule):
     return cells
 
 
-def tally(rows, planned):
+def tally(rows, planned, profiled=False):
     valid = [r for r in rows if r["outcome"] == "valid"]
     if len({r["global_trial"] for r in valid}) != len(valid):
         raise ValueError("Duplicate accepted logical trial")
@@ -254,6 +295,15 @@ def tally(rows, planned):
         "physical_attempts": len(rows),
         "excluded_attempts": len(rows) - n,
         "invalid_response_attempts": invalid,
+        **(
+            {
+                "truncated_response_attempts": sum(
+                    r["invalid_reason"] == "truncated" for r in rows
+                )
+            }
+            if profiled
+            else {}
+        ),
         "operational_exclusions": len(rows) - n - invalid,
         "outcomes": dict(sorted(Counter(r["outcome"] for r in rows).items())),
         "counts": counts,
@@ -275,14 +325,23 @@ def summarize(rows, grid):
         cells[cell["id"]] = {
             "model": cell["model"],
             "thinking": cell["thinking"],
+            **(
+                {"request_profile": cell["request_profile"]}
+                if "request_profile" in cell
+                else {}
+            ),
             "conditions": {
-                c: tally([r for r in mine if r["condition"] == c], planned)
+                c: tally(
+                    [r for r in mine if r["condition"] == c],
+                    planned,
+                    grid["schema"] == PROFILE_GRID_SCHEMA,
+                )
                 for c in CONDITIONS
             },
         }
     valid = [r for r in rows if r["outcome"] == "valid"]
     return {
-        "schema": SCHEMA,
+        "schema": public_schema(grid),
         "interval_method": "wilson_score_pointwise",
         "confidence": CONFIDENCE,
         "totals": {
@@ -391,6 +450,8 @@ def recount(raw, runner, schedule):
             if runner == "pi"
             else None,
         )
+        if "openrouter_profile" in entry:
+            row["invalid_reason"] = record.get("invalid_reason")
         rows.append(row)
     rows.sort(key=lambda r: (r["global_trial"], r["attempt"]))
     return rows
@@ -420,7 +481,7 @@ def _export(root, destination):
         raise ValueError("Grid service does not match the frozen batch")
     validate_grid(grid, schedule)
     sources = manifest["source_sha256"]
-    if set(sources) != source_files(runner):
+    if set(sources) != source_files(runner, grid["schema"]):
         raise ValueError("Unexpected source snapshot files")
     # Never execute frozen code before every snapshot hash is checked.
     for name, sha in sources.items():
@@ -503,7 +564,7 @@ def _export(root, destination):
         for name in sorted(sources):
             shutil.copyfile(raw / "snapshot" / name, target / "source" / name)
         metadata = {
-            "schema": SCHEMA,
+            "schema": public_schema(grid),
             "exported_at": batch.now(),
             "grid": grid,
             "schedule": schedule,
@@ -518,7 +579,11 @@ def _export(root, destination):
                 "Session and response IDs are hashed. Credentials, environment, CLI argv, binary paths and free-form error text are not exported.",
                 "Public rows are selected fields from verified native logs. Raw logs stay local; raw file hashes are commitments, not transcripts.",
             ],
-            "cost_basis": "Runner-reported API-equivalent usage metadata when available, not a verified bill. Field name pi_reported_cost is kept for compatibility.",
+            "cost_basis": (
+                "OpenRouter response usage.cost for the pinned route when exposed, including failed attempts with usage; not a verified bill. Field name pi_reported_cost is kept for compatibility."
+                if grid["schema"] == PROFILE_GRID_SCHEMA
+                else "Runner-reported API-equivalent usage metadata when available, not a verified bill. Field name pi_reported_cost is kept for compatibility."
+            ),
             "model_identity": "Requested model and effort come from the frozen schedule. Native reported model is retained and checked where exposed. Immutable backend snapshot is not independently established.",
         }
         metadata["files_sha256"] = {
@@ -553,7 +618,10 @@ def verify_public(root):
     """Independently validate a public grid export; return (manifest, summary)."""
     root = Path(root).resolve()
     manifest = read(root / "manifest.json")
-    if set(manifest) != MANIFEST_KEYS or manifest["schema"] != SCHEMA:
+    if set(manifest) != MANIFEST_KEYS or manifest["schema"] not in (
+        SCHEMA,
+        PROFILE_SCHEMA,
+    ):
         raise ValueError("Unexpected public grid manifest")
     grid, schedule, service = (
         manifest["grid"],
@@ -561,6 +629,8 @@ def verify_public(root):
         manifest["service"],
     )
     validate_grid(grid, schedule)
+    if manifest["schema"] != public_schema(grid):
+        raise ValueError("Public schema differs from the frozen grid schema")
     runner = service["runner"]
     if (
         runner not in PREAMBLE
@@ -577,7 +647,7 @@ def verify_public(root):
     max_attempts = service["control_settings"]["max_attempts"]
     if type(max_attempts) is not int or max_attempts < 1:
         raise ValueError("Invalid retry budget")
-    if set(service["source_sha256"]) != source_files(runner):
+    if set(service["source_sha256"]) != source_files(runner, grid["schema"]):
         raise ValueError("Invalid source metadata")
     files = manifest["files_sha256"]
     for name, sha in service["source_sha256"].items():
@@ -597,8 +667,15 @@ def verify_public(root):
     ]
     keys, accepted, sessions = set(), set(), set()
     for row in rows:
-        if set(row) != ROW_KEYS:
+        profiled = grid["schema"] == PROFILE_GRID_SCHEMA
+        if set(row) != ROW_KEYS | ({"invalid_reason"} if profiled else set()):
             raise ValueError("Unexpected public row fields")
+        if profiled and (
+            row["invalid_reason"] not in (None, "truncated", "format")
+            or (row["outcome"] == "invalid_response")
+            != (row["invalid_reason"] is not None)
+        ):
+            raise ValueError("Invalid response reason does not match outcome")
         if not (
             (
                 row["observed_model"] is None
@@ -704,7 +781,18 @@ def verify_public(root):
         if runner == "pi" and row["http_statuses"] != [200]:
             raise ValueError("Errored HTTP response counted")
         observed = row["observed_model"]
-        if observed is not None and entry["model"] not in (
+        profile = entry.get("openrouter_profile")
+        if profile:
+            if (
+                observed not in profile["accepted_models"]
+                or row["upstream_provider"] != profile["expected_provider"]
+            ):
+                raise ValueError("Observed profile model or upstream mismatch")
+            if profile["mode"] in ("off", "non_reasoning") and row[
+                "reasoning_tokens"
+            ] not in (None, 0):
+                raise ValueError("Reasoning observed in a thinking-off cell")
+        elif observed is not None and entry["model"] not in (
             observed,
             DATED_SUFFIX.sub("", observed),
         ):
@@ -768,6 +856,13 @@ def report_lines(root, base=REPO):
     )
     grid, service, totals = manifest["grid"], manifest["service"], summary["totals"]
     cells = summary["cells"]
+    profiled = grid["schema"] == PROFILE_GRID_SCHEMA
+    dimensions = (
+        "Model | Mode | Requested effort | Temperature | Release | Upstream / precision | Stratum"
+        if profiled
+        else "Model | Requested effort"
+    )
+    dimension_rules = " | ".join(["---"] * (7 if profiled else 2))
     invalid = sum(
         row["invalid_response_attempts"]
         for cell in cells.values()
@@ -797,8 +892,8 @@ def report_lines(root, base=REPO):
         "",
         "### Cell summary",
         "",
-        "| Model | Requested effort | Prompt | Accepted / planned | Invalid responses | Operational exclusions | TV | Reported metadata (USD) |",
-        "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: |",
+        f"| {dimensions} | Prompt | Accepted / planned | Invalid responses | Operational exclusions | TV | Reported metadata (USD) |",
+        f"| {dimension_rules} | --- | ---: | ---: | ---: | ---: | ---: |",
     ]
     answers = [
         "",
@@ -806,13 +901,18 @@ def report_lines(root, base=REPO):
         "",
         "Each entry is count [low, high] for the proportion of accepted answers in that cell and prompt.",
         "",
-        "| Model | Requested effort | Prompt | n | " + " | ".join(NUMBERS) + " |",
-        "| --- | --- | --- | ---: | " + " | ".join(["---:"] * len(NUMBERS)) + " |",
+        f"| {dimensions} | Prompt | n | " + " | ".join(NUMBERS) + " |",
+        f"| {dimension_rules} | --- | ---: | "
+        + " | ".join(["---:"] * len(NUMBERS))
+        + " |",
     ]
     for cell in cells.values():
         for condition in CONDITIONS:
             row = cell["conditions"][condition]
             label = f"| {cell['model']} | {cell['thinking']} | {condition} |"
+            if profiled:
+                profile = cell["request_profile"]
+                label = f"| {cell['model']} | {profile['mode']} | {cell['thinking']} | {profile['temperature']:g} | {profile['release_period']} | {profile['expected_provider']} / {profile['quantization']} | {profile['stratum']} | {condition} |"
             tv = (
                 "n/a" if row["tv_to_uniform"] is None else f"{row['tv_to_uniform']:.3f}"
             )

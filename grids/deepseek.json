@@ -1,0 +1,186 @@
+{
+  "runner": "pi",
+  "profile_schema": "openrouter-fixed-decoding-grid-v1",
+  "sampling": {
+    "temperatures": [
+      0.7,
+      1.0
+    ],
+    "top_p": 1.0,
+    "top_k": 0,
+    "frequency_penalty": 0,
+    "max_tokens": 4096
+  },
+  "models": [
+    {
+      "model": "deepseek/deepseek-chat",
+      "release_period": "2024-12",
+      "stratum": "historical_anchor",
+      "provider_tag": "deepinfra/fp4/flex",
+      "expected_provider": "DeepInfra",
+      "quantization": "fp4",
+      "accepted_models": [
+        "deepseek/deepseek-chat",
+        "deepseek/deepseek-chat-v3"
+      ],
+      "modes": [
+        {
+          "mode": "non_reasoning",
+          "thinking": "off",
+          "reasoning": null
+        }
+      ]
+    },
+    {
+      "model": "deepseek/deepseek-chat-v3-0324",
+      "release_period": "2025-03",
+      "stratum": "matched_fp8",
+      "provider_tag": "siliconflow/fp8",
+      "expected_provider": "SiliconFlow",
+      "quantization": "fp8",
+      "accepted_models": [
+        "deepseek/deepseek-chat-v3-0324"
+      ],
+      "modes": [
+        {
+          "mode": "non_reasoning",
+          "thinking": "off",
+          "reasoning": null
+        }
+      ]
+    },
+    {
+      "model": "deepseek/deepseek-r1-0528",
+      "release_period": "2025-05",
+      "stratum": "matched_fp8",
+      "provider_tag": "siliconflow/fp8",
+      "expected_provider": "SiliconFlow",
+      "quantization": "fp8",
+      "accepted_models": [
+        "deepseek/deepseek-r1-0528"
+      ],
+      "modes": [
+        {
+          "mode": "required",
+          "thinking": "high",
+          "reasoning": {
+            "enabled": true
+          }
+        }
+      ]
+    },
+    {
+      "model": "deepseek/deepseek-chat-v3.1",
+      "release_period": "2025-08",
+      "stratum": "matched_fp8",
+      "provider_tag": "siliconflow/fp8",
+      "expected_provider": "SiliconFlow",
+      "quantization": "fp8",
+      "accepted_models": [
+        "deepseek/deepseek-chat-v3.1"
+      ],
+      "modes": [
+        {
+          "mode": "off",
+          "thinking": "off",
+          "reasoning": {
+            "enabled": false
+          }
+        },
+        {
+          "mode": "on",
+          "thinking": "high",
+          "reasoning": {
+            "enabled": true
+          }
+        }
+      ]
+    },
+    {
+      "model": "deepseek/deepseek-v3.2",
+      "release_period": "2025-12",
+      "stratum": "matched_fp8",
+      "provider_tag": "siliconflow/fp8",
+      "expected_provider": "SiliconFlow",
+      "quantization": "fp8",
+      "accepted_models": [
+        "deepseek/deepseek-v3.2",
+        "deepseek/deepseek-v3.2-20251201"
+      ],
+      "modes": [
+        {
+          "mode": "off",
+          "thinking": "off",
+          "reasoning": {
+            "enabled": false
+          }
+        },
+        {
+          "mode": "on",
+          "thinking": "high",
+          "reasoning": {
+            "enabled": true
+          }
+        }
+      ]
+    },
+    {
+      "model": "deepseek/deepseek-v4-pro-0813",
+      "release_period": "2026-08",
+      "stratum": "matched_fp8",
+      "provider_tag": "siliconflow/fp8",
+      "expected_provider": "SiliconFlow",
+      "quantization": "fp8",
+      "accepted_models": [
+        "deepseek/deepseek-v4-pro-0813",
+        "deepseek/deepseek-v4-pro-20260813"
+      ],
+      "modes": [
+        {
+          "mode": "off",
+          "thinking": "off",
+          "reasoning": {
+            "enabled": false
+          }
+        },
+        {
+          "mode": "on",
+          "thinking": "high",
+          "reasoning": {
+            "enabled": true,
+            "effort": "high"
+          }
+        }
+      ]
+    },
+    {
+      "model": "deepseek/deepseek-v4.1-flash-1017",
+      "release_period": "2026-10",
+      "stratum": "matched_fp8",
+      "provider_tag": "siliconflow/fp8",
+      "expected_provider": "SiliconFlow",
+      "quantization": "fp8",
+      "accepted_models": [
+        "deepseek/deepseek-v4.1-flash-1017",
+        "deepseek/deepseek-v4.1-flash-20261017"
+      ],
+      "modes": [
+        {
+          "mode": "off",
+          "thinking": "off",
+          "reasoning": {
+            "enabled": false
+          }
+        },
+        {
+          "mode": "on",
+          "thinking": "high",
+          "reasoning": {
+            "enabled": true,
+            "effort": "high"
+          }
+        }
+      ]
+    }
+  ]
+}

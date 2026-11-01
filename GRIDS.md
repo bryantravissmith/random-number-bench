@@ -170,3 +170,65 @@ uv run tests/test_grid_results.py
 uv run tests/test_pi_http.py
 uv run tests/test_openrouter.py
 ```
+
+## DeepSeek history with fixed decoding
+
+[grids/deepseek.json](grids/deepseek.json) expands seven releases into 22
+model/mode/temperature cells. With both prompts and 100 trials per prompt this
+is 4,400 logical trials. See the [study proposal](studies/reasoning-history/DEEPSEEK_PROPOSAL.md)
+for the hypotheses, historical serving exception and cost scenarios.
+
+```sh
+# Separate 44-call validation run. Never pool this with measured results.
+uv run grid.py plan --spec grids/deepseek.json --count 1 \
+  --out runs/deepseek-smoke-001 --max-cost 1 --max-seconds 3600
+uv run grid.py run runs/deepseek-smoke-001
+uv run grid.py export runs/deepseek-smoke-001 --out probes/deepseek-smoke-001
+
+# After verifying the smoke, freeze a separate measured grid.
+uv run grid.py plan --spec grids/deepseek.json --count 100 \
+  --out runs/deepseek-history-001 --max-cost 20
+uv run grid.py run runs/deepseek-history-001
+uv run grid.py export runs/deepseek-history-001 --out results/deepseek-history-001
+uv run bench.py report
+```
+
+This profile explicitly sends temperature 0.7 or 1.0, top-p 1, top-k 0,
+frequency penalty 0 and a 4,096 generated-token limit including reasoning.
+It pins a route with fallbacks disabled and requires parameter support.
+The original V3 anchor uses DeepInfra FP4 Flex; six subsequent releases use
+SiliconFlow FP8. Keep these serving strata separate. Metadata does not
+independently prove the actual backend weights or quantization.
+
+`non_reasoning` omits the reasoning field; `off` explicitly disables it;
+`required` and `on` enable it. V4 thinking calls also request high effort.
+The Pi `high` setting is recorded for thinking calls, but the frozen payload
+profile defines the effective OpenRouter control. Earlier enabled-only
+profiles do not claim a high compute budget. A short answer can legitimately
+report zero reasoning tokens even when reasoning was requested.
+
+The new v2 grid schema freezes the complete request profile per schedule row.
+`pi-profile.ts` applies these declared parameters before the separate
+`pi-audit.ts` observer records the effective request. Export replays the frozen
+verifier against every attempt, including exclusions, and checks the exact
+profile, requested model, allowed catalog alias, upstream, finish reason,
+and exposed reasoning usage. Unsupported controls or unexpected providers
+stop the grid. They never trigger silent substitutions or relaxed controls.
+
+Completed empty, malformed or truncated answers are terminal invalid trials
+and are not retried. Truncations have their own count in each v2 cell summary
+and an `invalid_reason` field in public attempts. Transport failures use the
+same bounded backoff controller. Costs use OpenRouter's response `usage.cost`
+when exposed, including failures that return usage. Missing costs are unknown
+and cannot enforce the ceiling. In-flight calls can slightly exceed $20.
+
+Both historical v1 exports and fixed-decoding v2 exports remain verifiable.
+Do not apply the new settings to old GPT-4o results: that grid used API default
+decoding. Preserve frozen source and create a new run after any source, model,
+profile or routing change.
+
+```sh
+uv run tests/test_openrouter_profiles.py
+# Requires installed Pi; calls only a loopback HTTP fixture.
+uv run tests/test_deepseek_grid.py
+```
