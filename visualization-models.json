@@ -1,0 +1,126 @@
+{
+  "schema": "random-number-display-metadata-v1",
+  "basis": "Display groups use the requested model names in grids/*.json. Class is a named model family/tier, not measured size, architecture or training. Release periods and inference settings come only from frozen exports. Unknown models stay unclassified.",
+  "models": {
+    "gpt-6.1-sol": {
+      "developer": "OpenAI",
+      "class": "Sol",
+      "version_order": 6.1
+    },
+    "gpt-6.1-terra": {
+      "developer": "OpenAI",
+      "class": "Terra",
+      "version_order": 6.1
+    },
+    "gpt-6-astra": {
+      "developer": "OpenAI",
+      "class": "Astra",
+      "version_order": 6.0
+    },
+    "gpt-6-sol": {
+      "developer": "OpenAI",
+      "class": "Sol",
+      "version_order": 6.0
+    },
+    "gpt-6-luna": {
+      "developer": "OpenAI",
+      "class": "Luna",
+      "version_order": 6.0
+    },
+    "gpt-5.6-sol": {
+      "developer": "OpenAI",
+      "class": "Sol",
+      "version_order": 5.6
+    },
+    "gpt-5.6-terra": {
+      "developer": "OpenAI",
+      "class": "Terra",
+      "version_order": 5.6
+    },
+    "gpt-5.6-luna": {
+      "developer": "OpenAI",
+      "class": "Luna",
+      "version_order": 5.6
+    },
+    "claude-opus-5-5": {
+      "developer": "Anthropic",
+      "class": "Opus",
+      "version_order": 5.5
+    },
+    "claude-sonnet-5-5": {
+      "developer": "Anthropic",
+      "class": "Sonnet",
+      "version_order": 5.5
+    },
+    "claude-haiku-5-5": {
+      "developer": "Anthropic",
+      "class": "Haiku",
+      "version_order": 5.5
+    },
+    "claude-fable-5-1": {
+      "developer": "Anthropic",
+      "class": "Fable",
+      "version_order": 5.1
+    },
+    "claude-opus-4-8": {
+      "developer": "Anthropic",
+      "class": "Opus",
+      "version_order": 4.8
+    },
+    "claude-sonnet-4-6": {
+      "developer": "Anthropic",
+      "class": "Sonnet",
+      "version_order": 4.6
+    },
+    "grok-4.5": {
+      "developer": "xAI",
+      "class": "Grok",
+      "version_order": 45
+    },
+    "grok-4.7": {
+      "developer": "xAI",
+      "class": "Grok",
+      "version_order": 47
+    },
+    "openai/gpt-4o": {
+      "developer": "OpenAI",
+      "class": "GPT-4o",
+      "version_order": 4
+    },
+    "deepseek/deepseek-chat": {
+      "developer": "DeepSeek",
+      "class": "V3",
+      "version_order": 0
+    },
+    "deepseek/deepseek-chat-v3-0324": {
+      "developer": "DeepSeek",
+      "class": "V3",
+      "version_order": 1
+    },
+    "deepseek/deepseek-r1-0528": {
+      "developer": "DeepSeek",
+      "class": "R1",
+      "version_order": 2
+    },
+    "deepseek/deepseek-chat-v3.1": {
+      "developer": "DeepSeek",
+      "class": "V3",
+      "version_order": 3
+    },
+    "deepseek/deepseek-v3.2": {
+      "developer": "DeepSeek",
+      "class": "V3",
+      "version_order": 4
+    },
+    "deepseek/deepseek-v4-pro-0813": {
+      "developer": "DeepSeek",
+      "class": "V4",
+      "version_order": 5
+    },
+    "deepseek/deepseek-v4.1-flash-1017": {
+      "developer": "DeepSeek",
+      "class": "V4",
+      "version_order": 6
+    }
+  }
+}

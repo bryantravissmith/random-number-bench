@@ -1,0 +1,4722 @@
+{
+  "schema": "random-number-scientific-plot-export-v1",
+  "generator_sha256": "f4eee0bfe766e4f13f1f38fd96d9e6e7f5fcc62d82ee0739530e0cae65ee1421",
+  "versions": {
+    "python": "3.12.13 (main, Jun 11 2026, 03:55:21) [Clang 22.1.3 ]",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4"
+  },
+  "verifier": {
+    "path": "grid_results.py",
+    "sha256": "895970f258773a18966e01bd4088d3ede6b3802475f10a700a5e2ef9b9cc32ea"
+  },
+  "axes": {
+    "answer_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "probability_domain": [
+      0,
+      1
+    ],
+    "tv_domain": [
+      0,
+      0.9
+    ]
+  },
+  "uniform_reference": {
+    "method": "multinomial uniform, central 95% sampling range; not model CI",
+    "draws_per_n": 200000,
+    "rng": "numpy.random.default_rng",
+    "seed": "20261101 + accepted_n",
+    "ranges_by_n": {
+      "99": [
+        0.06666666666666665,
+        0.18585858585858586
+      ],
+      "100": [
+        0.06000000000000001,
+        0.18000000000000002
+      ]
+    }
+  },
+  "sources": {
+    "2026-11-01-grid-claude-001@a3d7d496": {
+      "directory": "results/2026-11-01-grid-claude-001",
+      "schema": "random-number-public-grid-v1",
+      "batch_manifest_sha256": "a3d7d496392592933e581b82044c739454b817f55e978b84b202c82a7c2955c3",
+      "summary_sha256": "e673afc54422b499fd09c0a0337438df0f788efa7075dd74b7bf4d8467f3d631",
+      "protocol": {
+        "version": "random-number-bench-v1",
+        "range": [
+          1,
+          10
+        ],
+        "default_trials_per_condition": 1000,
+        "prompts": {
+          "baseline": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+          "meta": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+        }
+      },
+      "state": "complete"
+    }
+  },
+  "overview_pages": [
+    {
+      "stem": "overview-01-2026-11-01-grid-claude-001-a3d7d496-24282189-p001",
+      "cells": [
+        "2026-11-01-grid-claude-001@a3d7d496::claude-opus-5-5--low",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-opus-5-5--medium",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-opus-5-5--high",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-opus-5-5--xhigh",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-opus-5-5--max",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-5-5--low",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-5-5--medium",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-5-5--high",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-5-5--xhigh",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-5-5--max",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-haiku-5-5--low",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-haiku-5-5--medium",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-haiku-5-5--high",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-haiku-5-5--xhigh",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-haiku-5-5--max",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-fable-5-1--low"
+      ],
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      }
+    },
+    {
+      "stem": "overview-01-2026-11-01-grid-claude-001-a3d7d496-24282189-p002",
+      "cells": [
+        "2026-11-01-grid-claude-001@a3d7d496::claude-fable-5-1--medium",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-fable-5-1--high",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-fable-5-1--xhigh",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-fable-5-1--max",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-opus-4-8--low",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-opus-4-8--medium",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-opus-4-8--high",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-opus-4-8--xhigh",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-opus-4-8--max",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-4-6--low",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-4-6--medium",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-4-6--high",
+        "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-4-6--max"
+      ],
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      }
+    }
+  ],
+  "detail": {
+    "stem": "detail-2026-11-01-grid-claude-001-a3d7d496-24282189-claude-opus-5-5--max-626e0b0e",
+    "cell": "2026-11-01-grid-claude-001@a3d7d496::claude-opus-5-5--max"
+  },
+  "cells": [
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-opus-5-5--low",
+      "requested_model": "claude-opus-5-5",
+      "requested_effort": "low",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.01796,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 4,
+            "7": 96,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.015663303992,
+              0.098370714359
+            ],
+            "7": [
+              0.901629285641,
+              0.984336696008
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.86,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.01894,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-opus-5-5--medium",
+      "requested_model": "claude-opus-5-5",
+      "requested_effort": "medium",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.01796,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 99,
+          "physical_attempts": 100,
+          "excluded_attempts": 1,
+          "invalid_response_attempts": 1,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "invalid_response": 1,
+            "valid": 99
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 4,
+            "7": 95,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.037353212068
+            ],
+            "2": [
+              0.0,
+              0.037353212068
+            ],
+            "3": [
+              0.0,
+              0.037353212068
+            ],
+            "4": [
+              0.0,
+              0.037353212068
+            ],
+            "5": [
+              0.0,
+              0.037353212068
+            ],
+            "6": [
+              0.015822638994,
+              0.099320212503
+            ],
+            "7": [
+              0.900679787497,
+              0.984177361006
+            ],
+            "8": [
+              0.0,
+              0.037353212068
+            ],
+            "9": [
+              0.0,
+              0.037353212068
+            ],
+            "10": [
+              0.0,
+              0.037353212068
+            ]
+          },
+          "tv_to_uniform": 0.859595959596,
+          "model_valid_response_rate": 0.99,
+          "reported_cost": 0.01988,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-opus-5-5--high",
+      "requested_model": "claude-opus-5-5",
+      "requested_effort": "high",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.01796,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 10,
+            "7": 90,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.055229137061,
+              0.174365661505
+            ],
+            "7": [
+              0.825634338495,
+              0.944770862939
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.8,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.0192,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-opus-5-5--xhigh",
+      "requested_model": "claude-opus-5-5",
+      "requested_effort": "xhigh",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.01796,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 99,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.945513803821,
+              0.998232567936
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.89,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.01958,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-opus-5-5--max",
+      "requested_model": "claude-opus-5-5",
+      "requested_effort": "max",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 12,
+            "4": 80,
+            "5": 0,
+            "6": 8,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.06999406437,
+              0.198120994267
+            ],
+            "4": [
+              0.711170834407,
+              0.866633066669
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.041093461484,
+              0.149981077009
+            ],
+            "7": [
+              0.0,
+              0.036993498207
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.72,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.22234,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 40,
+            "4": 58,
+            "5": 0,
+            "6": 2,
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.309401286432,
+              0.497997413209
+            ],
+            "4": [
+              0.48206486703,
+              0.672016173256
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.00550196755,
+              0.070011790729
+            ],
+            "7": [
+              0.0,
+              0.036993498207
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.78,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.19718,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-5-5--low",
+      "requested_model": "claude-sonnet-5-5",
+      "requested_effort": "low",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.00902,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.00928,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-5-5--medium",
+      "requested_model": "claude-sonnet-5-5",
+      "requested_effort": "medium",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.00902,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.00928,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-5-5--high",
+      "requested_model": "claude-sonnet-5-5",
+      "requested_effort": "high",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.00902,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.00928,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-5-5--xhigh",
+      "requested_model": "claude-sonnet-5-5",
+      "requested_effort": "xhigh",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.00902,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.00928,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-5-5--max",
+      "requested_model": "claude-sonnet-5-5",
+      "requested_effort": "max",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 2,
+            "5": 0,
+            "6": 8,
+            "7": 89,
+            "8": 1,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.00550196755,
+              0.070011790729
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.041093461484,
+              0.149981077009
+            ],
+            "7": [
+              0.813687034969,
+              0.937458036429
+            ],
+            "8": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.79,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.01914,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 21,
+            "5": 1,
+            "6": 75,
+            "7": 0,
+            "8": 2,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "4": [
+              0.141656540619,
+              0.299799688341
+            ],
+            "5": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "6": [
+              0.656955364519,
+              0.824547886377
+            ],
+            "7": [
+              0.0,
+              0.036993498207
+            ],
+            "8": [
+              0.00550196755,
+              0.070011790729
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.76,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.20706,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-haiku-5-5--low",
+      "requested_model": "claude-haiku-5-5",
+      "requested_effort": "low",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.00073,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.000756,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-haiku-5-5--medium",
+      "requested_model": "claude-haiku-5-5",
+      "requested_effort": "medium",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.00073,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.000756,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-haiku-5-5--high",
+      "requested_model": "claude-haiku-5-5",
+      "requested_effort": "high",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.00073,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.0007775,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-haiku-5-5--xhigh",
+      "requested_model": "claude-haiku-5-5",
+      "requested_effort": "xhigh",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.00073,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.000774,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-haiku-5-5--max",
+      "requested_model": "claude-haiku-5-5",
+      "requested_effort": "max",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 99,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.945513803821,
+              0.998232567936
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.89,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.0009975,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 99,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.945513803821,
+              0.998232567936
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.89,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.003603,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-fable-5-1--low",
+      "requested_model": "claude-fable-5-1",
+      "requested_effort": "low",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.03095,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 99,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.945513803821,
+              0.998232567936
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.89,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.0316,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-fable-5-1--medium",
+      "requested_model": "claude-fable-5-1",
+      "requested_effort": "medium",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.03095,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 2,
+            "5": 0,
+            "6": 0,
+            "7": 97,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "4": [
+              0.00550196755,
+              0.070011790729
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.915480635709,
+              0.989745475976
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.87,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.0316,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-fable-5-1--high",
+      "requested_model": "claude-fable-5-1",
+      "requested_effort": "high",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.03095,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 1,
+            "7": 98,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "7": [
+              0.929988209271,
+              0.99449803245
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.88,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.0316,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-fable-5-1--xhigh",
+      "requested_model": "claude-fable-5-1",
+      "requested_effort": "xhigh",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.03375,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 6,
+            "4": 21,
+            "5": 0,
+            "6": 0,
+            "7": 73,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.027786123963,
+              0.124768154459
+            ],
+            "4": [
+              0.141656540619,
+              0.299799688341
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.635678832321,
+              0.807304158504
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.74,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.14575,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-fable-5-1--max",
+      "requested_model": "claude-fable-5-1",
+      "requested_effort": "max",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.05895,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 16,
+            "4": 49,
+            "5": 0,
+            "6": 1,
+            "7": 34,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.100952884888,
+              0.244202693893
+            ],
+            "4": [
+              0.394219989304,
+              0.58651988066
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "7": [
+              0.254615207973,
+              0.437222711453
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.69,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.3748,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-opus-4-8--low",
+      "requested_model": "claude-opus-4-8",
+      "requested_effort": "low",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.287,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.3,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-opus-4-8--medium",
+      "requested_model": "claude-opus-4-8",
+      "requested_effort": "medium",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.287,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.3,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-opus-4-8--high",
+      "requested_model": "claude-opus-4-8",
+      "requested_effort": "high",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.287,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.3,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-opus-4-8--xhigh",
+      "requested_model": "claude-opus-4-8",
+      "requested_effort": "xhigh",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.287,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.3,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-opus-4-8--max",
+      "requested_model": "claude-opus-4-8",
+      "requested_effort": "max",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.287,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 6,
+            "5": 0,
+            "6": 0,
+            "7": 94,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.027786123963,
+              0.124768154459
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.875231845541,
+              0.972213876037
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.84,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.382575,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-4-6--low",
+      "requested_model": "claude-sonnet-4-6",
+      "requested_effort": "low",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.1446,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.1503,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-4-6--medium",
+      "requested_model": "claude-sonnet-4-6",
+      "requested_effort": "medium",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.1446,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.1503,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-4-6--high",
+      "requested_model": "claude-sonnet-4-6",
+      "requested_effort": "high",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.1446,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.1503,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-claude-001@a3d7d496::claude-sonnet-4-6--max",
+      "requested_model": "claude-sonnet-4-6",
+      "requested_effort": "max",
+      "request_profile": null,
+      "context": {
+        "runner": "claude",
+        "runner_version": "2.1.296 (Claude Code)",
+        "provider": "anthropic",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.1446,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.1503,
+          "missing_cost_attempts": 0
+        }
+      }
+    }
+  ]
+}

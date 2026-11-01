@@ -33,3 +33,7 @@ jobs:
           python bench.py report
           python bench.py report --probes
           git diff --exit-code -- RESULTS.md PROBES.md
+      - name: Check scientific visualization exports
+        run: |
+          python -m pip install matplotlib==3.11.2 numpy==2.5.4
+          python tests/test_plot_results.py

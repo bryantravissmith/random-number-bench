@@ -1,0 +1,1258 @@
+{
+  "schema": "random-number-scientific-plot-export-v1",
+  "generator_sha256": "f4eee0bfe766e4f13f1f38fd96d9e6e7f5fcc62d82ee0739530e0cae65ee1421",
+  "versions": {
+    "python": "3.12.13 (main, Jun 11 2026, 03:55:21) [Clang 22.1.3 ]",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4"
+  },
+  "verifier": {
+    "path": "grid_results.py",
+    "sha256": "895970f258773a18966e01bd4088d3ede6b3802475f10a700a5e2ef9b9cc32ea"
+  },
+  "axes": {
+    "answer_order": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "probability_domain": [
+      0,
+      1
+    ],
+    "tv_domain": [
+      0,
+      0.9
+    ]
+  },
+  "uniform_reference": {
+    "method": "multinomial uniform, central 95% sampling range; not model CI",
+    "draws_per_n": 200000,
+    "rng": "numpy.random.default_rng",
+    "seed": "20261101 + accepted_n",
+    "ranges_by_n": {
+      "93": [
+        0.06989247311827956,
+        0.1881720430107527
+      ],
+      "99": [
+        0.06666666666666665,
+        0.18585858585858586
+      ],
+      "100": [
+        0.06000000000000001,
+        0.18000000000000002
+      ]
+    }
+  },
+  "sources": {
+    "2026-11-01-grid-pi-001@7046c366": {
+      "directory": "results/2026-11-01-grid-pi-001",
+      "schema": "random-number-public-grid-v1",
+      "batch_manifest_sha256": "7046c3664bdf9006b52e96f5eac86fbfb73263205e8c9a960f7cfaf76915d4ff",
+      "summary_sha256": "c4db873a00ef75456172afd2aa75b7060e99e539562f5071ad13e7579a966cd0",
+      "protocol": {
+        "version": "random-number-bench-v1",
+        "range": [
+          1,
+          10
+        ],
+        "default_trials_per_condition": 1000,
+        "prompts": {
+          "baseline": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+          "meta": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+        }
+      },
+      "state": "complete"
+    },
+    "2026-11-01-grid-grok-001@bfb7aca3": {
+      "directory": "results/2026-11-01-grid-grok-001",
+      "schema": "random-number-public-grid-v1",
+      "batch_manifest_sha256": "bfb7aca34b86d68d4aff8a0d66b54af7ef7a5021a89ea131b6588400ed08c414",
+      "summary_sha256": "b4f1c00d5f9035c002404f9941ac573236758bc62460b9e4c458e426a46dbcc2",
+      "protocol": {
+        "version": "random-number-bench-v1",
+        "range": [
+          1,
+          10
+        ],
+        "default_trials_per_condition": 1000,
+        "prompts": {
+          "baseline": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+          "meta": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+        }
+      },
+      "state": "complete"
+    }
+  },
+  "overview_pages": [
+    {
+      "stem": "overview-01-2026-11-01-grid-pi-001-7046c366-881d0986-p001",
+      "cells": [
+        "2026-11-01-grid-pi-001@7046c366::openai--gpt-4o--off"
+      ],
+      "context": {
+        "runner": "pi",
+        "runner_version": "1.3.0",
+        "provider": "openrouter",
+        "evidence_level": "pi_http_request",
+        "sampling_regime": "unspecified in v1",
+        "routing": {
+          "only": [
+            "openai"
+          ],
+          "allow_fallbacks": false
+        },
+        "precision": null,
+        "stratum": null
+      }
+    },
+    {
+      "stem": "overview-02-2026-11-01-grid-grok-001-bfb7aca3-6bf9a044-p001",
+      "cells": [
+        "2026-11-01-grid-grok-001@bfb7aca3::grok-4.5--low",
+        "2026-11-01-grid-grok-001@bfb7aca3::grok-4.5--medium",
+        "2026-11-01-grid-grok-001@bfb7aca3::grok-4.5--high",
+        "2026-11-01-grid-grok-001@bfb7aca3::grok-4.7--low",
+        "2026-11-01-grid-grok-001@bfb7aca3::grok-4.7--medium",
+        "2026-11-01-grid-grok-001@bfb7aca3::grok-4.7--high"
+      ],
+      "context": {
+        "runner": "grok",
+        "runner_version": "grok 1.0.70 (f50904eaee6c) [stable]",
+        "provider": "xai",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      }
+    }
+  ],
+  "detail": {
+    "stem": "detail-2026-11-01-grid-pi-001-7046c366-881d0986-openai--gpt-4o--off-fc6371e1",
+    "cell": "2026-11-01-grid-pi-001@7046c366::openai--gpt-4o--off"
+  },
+  "cells": [
+    {
+      "selector": "2026-11-01-grid-pi-001@7046c366::openai--gpt-4o--off",
+      "requested_model": "openai/gpt-4o",
+      "requested_effort": "off",
+      "request_profile": null,
+      "context": {
+        "runner": "pi",
+        "runner_version": "1.3.0",
+        "provider": "openrouter",
+        "evidence_level": "pi_http_request",
+        "sampling_regime": "unspecified in v1",
+        "routing": {
+          "only": [
+            "openai"
+          ],
+          "allow_fallbacks": false
+        },
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 5,
+            "3": 13,
+            "4": 19,
+            "5": 7,
+            "6": 6,
+            "7": 42,
+            "8": 7,
+            "9": 1,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.021543679154,
+              0.111750469232
+            ],
+            "3": [
+              0.077571674272,
+              0.209803514401
+            ],
+            "4": [
+              0.125147515098,
+              0.277788453791
+            ],
+            "5": [
+              0.034319261067,
+              0.137495147391
+            ],
+            "6": [
+              0.027786123963,
+              0.124768154459
+            ],
+            "7": [
+              0.327983826744,
+              0.51793513297
+            ],
+            "8": [
+              0.034319261067,
+              0.137495147391
+            ],
+            "9": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.44,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.01175,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 8,
+            "3": 16,
+            "4": 17,
+            "5": 12,
+            "6": 6,
+            "7": 27,
+            "8": 12,
+            "9": 2,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.041093461484,
+              0.149981077009
+            ],
+            "3": [
+              0.100952884888,
+              0.244202693893
+            ],
+            "4": [
+              0.108935661141,
+              0.255480047676
+            ],
+            "5": [
+              0.06999406437,
+              0.198120994267
+            ],
+            "6": [
+              0.027786123963,
+              0.124768154459
+            ],
+            "7": [
+              0.192695841496,
+              0.364321167679
+            ],
+            "8": [
+              0.06999406437,
+              0.198120994267
+            ],
+            "9": [
+              0.00550196755,
+              0.070011790729
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.34,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.01625,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-grok-001@bfb7aca3::grok-4.5--low",
+      "requested_model": "grok-4.5",
+      "requested_effort": "low",
+      "request_profile": null,
+      "context": {
+        "runner": "grok",
+        "runner_version": "grok 1.0.70 (f50904eaee6c) [stable]",
+        "provider": "xai",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.1729808,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.17289,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-grok-001@bfb7aca3::grok-4.5--medium",
+      "requested_model": "grok-4.5",
+      "requested_effort": "medium",
+      "request_profile": null,
+      "context": {
+        "runner": "grok",
+        "runner_version": "grok 1.0.70 (f50904eaee6c) [stable]",
+        "provider": "xai",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.194088,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 99,
+          "physical_attempts": 100,
+          "excluded_attempts": 1,
+          "invalid_response_attempts": 1,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "invalid_response": 1,
+            "valid": 99
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 99,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.037353212068
+            ],
+            "2": [
+              0.0,
+              0.037353212068
+            ],
+            "3": [
+              0.0,
+              0.037353212068
+            ],
+            "4": [
+              0.0,
+              0.037353212068
+            ],
+            "5": [
+              0.0,
+              0.037353212068
+            ],
+            "6": [
+              0.0,
+              0.037353212068
+            ],
+            "7": [
+              0.962646787932,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.037353212068
+            ],
+            "9": [
+              0.0,
+              0.037353212068
+            ],
+            "10": [
+              0.0,
+              0.037353212068
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 0.99,
+          "reported_cost": 0.2038612,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-grok-001@bfb7aca3::grok-4.5--high",
+      "requested_model": "grok-4.5",
+      "requested_effort": "high",
+      "request_profile": null,
+      "context": {
+        "runner": "grok",
+        "runner_version": "grok 1.0.70 (f50904eaee6c) [stable]",
+        "provider": "xai",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.1674476,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 93,
+          "physical_attempts": 100,
+          "excluded_attempts": 7,
+          "invalid_response_attempts": 7,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "invalid_response": 7,
+            "valid": 93
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 93,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.039667502612
+            ],
+            "2": [
+              0.0,
+              0.039667502612
+            ],
+            "3": [
+              0.0,
+              0.039667502612
+            ],
+            "4": [
+              0.0,
+              0.039667502612
+            ],
+            "5": [
+              0.0,
+              0.039667502612
+            ],
+            "6": [
+              0.0,
+              0.039667502612
+            ],
+            "7": [
+              0.960332497388,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.039667502612
+            ],
+            "9": [
+              0.0,
+              0.039667502612
+            ],
+            "10": [
+              0.0,
+              0.039667502612
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 0.93,
+          "reported_cost": 0.180294,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-grok-001@bfb7aca3::grok-4.7--low",
+      "requested_model": "grok-4.7",
+      "requested_effort": "low",
+      "request_profile": null,
+      "context": {
+        "runner": "grok",
+        "runner_version": "grok 1.0.70 (f50904eaee6c) [stable]",
+        "provider": "xai",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 7,
+            "5": 0,
+            "6": 0,
+            "7": 93,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.034319261067,
+              0.137495147391
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.862504852609,
+              0.965680738933
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.83,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.257074,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.281036,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-grok-001@bfb7aca3::grok-4.7--medium",
+      "requested_model": "grok-4.7",
+      "requested_effort": "medium",
+      "request_profile": null,
+      "context": {
+        "runner": "grok",
+        "runner_version": "grok 1.0.70 (f50904eaee6c) [stable]",
+        "provider": "xai",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 5,
+            "5": 0,
+            "6": 0,
+            "7": 95,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.021543679154,
+              0.111750469232
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.888249530768,
+              0.978456320846
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.85,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.278614,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.264434,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    {
+      "selector": "2026-11-01-grid-grok-001@bfb7aca3::grok-4.7--high",
+      "requested_model": "grok-4.7",
+      "requested_effort": "high",
+      "request_profile": null,
+      "context": {
+        "runner": "grok",
+        "runner_version": "grok 1.0.70 (f50904eaee6c) [stable]",
+        "provider": "xai",
+        "evidence_level": "cli_transcript",
+        "sampling_regime": "unspecified in v1",
+        "routing": null,
+        "precision": null,
+        "stratum": null
+      },
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 8,
+            "5": 0,
+            "6": 1,
+            "7": 91,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.041093461484,
+              0.149981077009
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "7": [
+              0.837737871473,
+              0.951927459997
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.81,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.285604,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 99,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.945513803821,
+              0.998232567936
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.89,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.262496,
+          "missing_cost_attempts": 0
+        }
+      }
+    }
+  ]
+}

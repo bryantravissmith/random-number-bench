@@ -93,3 +93,12 @@ uv run --python 3.12 tests/test_pi_http.py
 ```
 
 The suite covers process concurrency, 429/503, Retry-After, timeouts, invalid output, retry exhaustion, fatal errors, hidden retries, interrupted shutdown, resume, duplicate ownership, per-trial prompts, public export and tampering. Protocol and runner changes belong in new rounds; preserve historical evidence.
+
+## Compare models visually
+
+[Visualization design and reproduction](VISUALIZATION.md) describes the shared
+layout: fixed 1-10 heatmaps for both prompts, model/class/effort/temperature
+filters, TV dots, accepted/planned counts and selected-row Wilson intervals.
+Generate a portable explorer from completed, verified grid exports with
+`uv run visualize.py results/<grid-id> --out .lavish/distribution-explorer.html`.
+Keep runs, decoding settings and serving contexts separate.
