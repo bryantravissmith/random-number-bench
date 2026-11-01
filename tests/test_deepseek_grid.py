@@ -25,14 +25,17 @@ import grid_results
 class Handler(BaseHTTPRequestHandler):
     seen = []
     aliases = {}
+    request_lock = threading.Lock()
 
     def log_message(self, *_):
         pass
 
     def do_POST(self):
         payload = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
-        Handler.seen.append(payload)
-        if len(Handler.seen) == 1:
+        with Handler.request_lock:
+            Handler.seen.append(payload)
+            request_index = len(Handler.seen)
+        if request_index == 1:
             body = b'{"error":{"code":429,"message":"Rate limited"}}'
             self.send_response(429)
             self.send_header("Content-Type", "application/json")
@@ -66,7 +69,7 @@ class Handler(BaseHTTPRequestHandler):
                             "index": 0,
                             "delta": {},
                             "finish_reason": "length"
-                            if len(Handler.seen) == 2
+                            if request_index == 2
                             else "stop",
                         }
                     ],
@@ -153,13 +156,13 @@ class DeepSeekGridTest(unittest.TestCase):
                 )
                 self.assertEqual(done.returncode, 0, done.stdout + done.stderr)
                 rows = batch.records(target / "batch")
-                self.assertEqual(len(rows), 45)
-                self.assertEqual(sum(r["outcome"] == "valid" for r in rows), 43)
+                self.assertEqual(len(rows), 37)
+                self.assertEqual(sum(r["outcome"] == "valid" for r in rows), 35)
                 self.assertEqual(
                     sum(r.get("invalid_reason") == "truncated" for r in rows), 1
                 )
                 self.assertEqual(sum(r["outcome"] == "rate_limit" for r in rows), 1)
-                self.assertEqual(len(Handler.seen), 45)
+                self.assertEqual(len(Handler.seen), 37)
                 for request in Handler.seen:
                     self.assertIn(request["temperature"], (0.7, 1.0))
                     self.assertEqual(request["top_p"], 1)
@@ -174,7 +177,7 @@ class DeepSeekGridTest(unittest.TestCase):
                 grid_results.export(target, destination)
                 manifest, summary = grid_results.verify_public(destination)
                 self.assertEqual(manifest["schema"], grid_results.PROFILE_SCHEMA)
-                self.assertEqual(summary["totals"]["accepted_trials"], 43)
+                self.assertEqual(summary["totals"]["accepted_trials"], 35)
                 self.assertEqual(
                     sum(
                         c["conditions"][p]["truncated_response_attempts"]
@@ -183,7 +186,7 @@ class DeepSeekGridTest(unittest.TestCase):
                     ),
                     1,
                 )
-                self.assertEqual(len(summary["cells"]), 22)
+                self.assertEqual(len(summary["cells"]), 18)
                 report = "\n".join(grid_results.report_lines(destination))
                 self.assertIn("Temperature", report)
                 self.assertIn("historical_anchor", report)

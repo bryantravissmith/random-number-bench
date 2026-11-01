@@ -231,8 +231,50 @@ settings and evidence snapshots remain immutable. Only the new grid is scheduled
 for the measured `RESULTS.md` export; the pilot stays in `PROBES.md`.
 
 ```sh
-uv run grid.py plan --spec grids/deepseek.json --count 100 \
+uv run grid.py plan --spec grids/deepseek-2026-11-01-full.json --count 100 \
   --out runs/2026-11-01-deepseek-history-c16-001 --concurrency 16 \
   --timeout 180 --max-seconds 86400 --max-cost 19.9
 uv run grid.py run runs/2026-11-01-deepseek-history-c16-001
 ```
+
+## Post-run scope change
+
+Bryan requested that V3.1 be dropped after reviewing its empty-output failures.
+Future `grids/deepseek.json` runs exclude both V3.1 modes: six releases,
+18 model/mode/temperature cells and 3,600 trials at 100 per prompt. The original
+profile remains `grids/deepseek-2026-11-01-full.json`. Published evidence, counts
+and figures for the completed run remain unchanged; V3.1 is excluded from the
+substantive model comparison and will not be retried.
+
+## Observed model and mode pattern
+
+Excluding V3.1, thinking-on had higher empirical TV from uniform than thinking-off
+in all 12 matched comparisons: three hybrid models, two prompts and two
+temperatures. These are point estimates from one round, with 100 planned trials
+per cell, not twelve independent studies or a significance test.
+
+| Model | Thinking off: TV range | Thinking on: TV range |
+| --- | ---: | ---: |
+| V3.2 | 0.267-0.320 | 0.400-0.490 |
+| V4 Pro | 0.600-0.690 | 0.890 |
+| V4.1 Flash | 0.630-0.730 | 0.860-0.900 |
+
+Ranges span the two prompts and two temperatures; cells are not pooled. TV=0
+is an exactly uniform histogram and TV=0.90 is all answers in one bin. V4 Pro
+thinking-on returned 7 in 99/100 trials in each of its four cells. V4.1 Flash
+thinking-on returned 7 in 96-100/100 trials. The higher temperature and sampling
+meta-prompt did not remove that concentration in these settings.
+
+The historical pattern is not monotonic. R1-0528, which requires thinking, had
+TV 0.320-0.578, compared with 0.590-0.690 for the non-thinking March V3 release
+on the same named upstream/precision. This is a cross-release comparison with
+other changes, but it contradicts a universal claim that reasoning models must
+give more concentrated number answers. Original V3 was already highly
+concentrated and uses a different serving stratum, so it is a weaker history
+comparison.
+
+The evidence supports an association between the requested thinking mode and
+number concentration within the tested hybrid models. It does not isolate RL
+training, establish a general release trend, or measure semantic diversity of
+analytics hypotheses. The frozen [summary](../../results/2026-11-01-deepseek-history-c16-001/summary.json)
+and [per-bin intervals](../../RESULTS.md) remain the quantitative source.

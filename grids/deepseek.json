@@ -70,33 +70,6 @@
       ]
     },
     {
-      "model": "deepseek/deepseek-chat-v3.1",
-      "release_period": "2025-08",
-      "stratum": "matched_fp8",
-      "provider_tag": "siliconflow/fp8",
-      "expected_provider": "SiliconFlow",
-      "quantization": "fp8",
-      "accepted_models": [
-        "deepseek/deepseek-chat-v3.1"
-      ],
-      "modes": [
-        {
-          "mode": "off",
-          "thinking": "off",
-          "reasoning": {
-            "enabled": false
-          }
-        },
-        {
-          "mode": "on",
-          "thinking": "high",
-          "reasoning": {
-            "enabled": true
-          }
-        }
-      ]
-    },
-    {
       "model": "deepseek/deepseek-v3.2",
       "release_period": "2025-12",
       "stratum": "matched_fp8",

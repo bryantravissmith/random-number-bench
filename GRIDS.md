@@ -173,13 +173,16 @@ uv run tests/test_openrouter.py
 
 ## DeepSeek history with fixed decoding
 
-[grids/deepseek.json](grids/deepseek.json) expands seven releases into 22
+[grids/deepseek.json](grids/deepseek.json) expands six releases into 18
 model/mode/temperature cells. With both prompts and 100 trials per prompt this
-is 4,400 logical trials. See the [study proposal](studies/reasoning-history/DEEPSEEK_PROPOSAL.md)
+is 3,600 logical trials. V3.1 was removed from future runs at Bryan's request
+after its thinking condition returned no final answers. The original seven-release
+profile is preserved as [deepseek-2026-11-01-full.json](grids/deepseek-2026-11-01-full.json);
+use that file to reproduce the original 4,400-trial design. See the [study proposal](studies/reasoning-history/DEEPSEEK_PROPOSAL.md)
 for the hypotheses, historical serving exception and cost scenarios.
 
 ```sh
-# Separate 44-call validation run. Never pool this with measured results.
+# Separate 36-call validation run. Never pool this with measured results.
 uv run grid.py plan --spec grids/deepseek.json --count 1 \
   --out runs/deepseek-smoke-001 --max-cost 1 --max-seconds 3600
 uv run grid.py run runs/deepseek-smoke-001
@@ -202,7 +205,7 @@ apply. The controller can reduce concurrency on errors.
 This profile explicitly sends temperature 0.7 or 1.0, top-p 1, top-k 0,
 frequency penalty 0 and a 4,096 generated-token limit including reasoning.
 It pins a route with fallbacks disabled and requires parameter support.
-The original V3 anchor uses DeepInfra FP4 Flex; six subsequent releases use
+The original V3 anchor uses DeepInfra FP4 Flex; five subsequent releases use
 SiliconFlow FP8. Keep these serving strata separate. Metadata does not
 independently prove the actual backend weights or quantization.
 
