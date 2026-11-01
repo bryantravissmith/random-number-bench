@@ -1,8 +1,8 @@
 {
   "schema": "random-number-matrix-image-v1",
   "sources": {
-    "html_sha256": "dfc0c381ce3b6001513e419906cd6b969863244d6b2d2c371fa71a41a1c9511d",
-    "presentation_manifest_sha256": "4c17d15e530cab0a82b1198ace24574bec467d095dc0051571e42b8c69a985e0",
+    "html_sha256": "a5d96d7418110eb238e1be6530dfcdaf8f9b20a1a32b5778beed9b444a24781c",
+    "presentation_manifest_sha256": "5fd245127293be4b74405af350e75a4dd678981b5241e7590708443a13948597",
     "renderer_sha256": "6bbfd03f02417af9af08dacbddaed6aeba86d4ded19e3073729b98120fa5c10a"
   },
   "png_sha256": "b84d9aff99898b905cf558056445ba68b64a6f2ed3554e77bcfcce0c2556fae4",

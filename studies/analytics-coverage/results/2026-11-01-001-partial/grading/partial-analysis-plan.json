@@ -1,0 +1,9 @@
+{
+  "recorded_at": "2026-11-01T23:17:10.856238+00:00",
+  "status": "Written before reading the treatment key",
+  "scope": "Grade every schema-valid response in the stopped run using the original rubric. No replacements or additional inference.",
+  "denominators": "Show planned, attempted, terminal, schema-valid and useful separately. Missing unfinished trials do not count as failed or unuseful.",
+  "coverage": "Use completed-trial rarefaction at min(5, smallest completed cell) and conditional useful-only coverage at five when available. Retain descriptive mechanism frequencies and entropy; no unseen-support or population claim.",
+  "quality": "Diagnostic means and score-2 shares among every schema-valid answer, separately by case/effort. No pooled p-value.",
+  "grading": "Independent Grok grader and coordinator audit remain blind to effort until final grades and this plan are sealed."
+}

@@ -31,6 +31,70 @@ class AnalysisTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             analysis.coverage([5], 10, 11)
 
+    def test_partial_run_distinguishes_invalid_pending_and_unstarted(self):
+        study = {"cases": [{"id": "case"}], "efforts": ["low", "max"]}
+        schedule = [
+            {"trial": i, "cell": "case", "thinking": "low" if i <= 3 else "max"}
+            for i in range(1, 7)
+        ]
+        attempts = [
+            {
+                "trial": 1,
+                "attempt": 1,
+                "case": "case",
+                "effort": "low",
+                "outcome": "timeout",
+            },
+            {
+                "trial": 1,
+                "attempt": 2,
+                "case": "case",
+                "effort": "low",
+                "outcome": "valid",
+            },
+            {
+                "trial": 2,
+                "attempt": 1,
+                "case": "case",
+                "effort": "low",
+                "outcome": "invalid_response",
+            },
+            {
+                "trial": 4,
+                "attempt": 1,
+                "case": "case",
+                "effort": "max",
+                "outcome": "timeout",
+            },
+        ]
+        progress = analysis.completion_by_cell(study, schedule, attempts, 3)
+        self.assertEqual(
+            progress["case", "low"],
+            {
+                "planned": 3,
+                "attempted": 2,
+                "terminal": 2,
+                "pending_attempted": 0,
+                "not_attempted": 1,
+            },
+        )
+        self.assertEqual(
+            progress["case", "max"],
+            {
+                "planned": 3,
+                "attempted": 1,
+                "terminal": 0,
+                "pending_attempted": 1,
+                "not_attempted": 2,
+            },
+        )
+        # The observed invalid answer is a no-hit. The unstarted trial is not.
+        self.assertEqual(
+            analysis.coverage([1], progress["case", "low"]["terminal"], 1), 0.5
+        )
+        with self.assertRaises(ValueError):
+            analysis.completion_by_cell(study, schedule, attempts + [attempts[0]], 3)
+
     def test_invalid_grades_rejected(self):
         study = {"cases": [{"id": "case", "mechanisms": {"a": "A"}}]}
         blind = [{"id": "x", "case": "case"}]

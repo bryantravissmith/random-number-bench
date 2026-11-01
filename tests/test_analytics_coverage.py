@@ -5,6 +5,7 @@ import contextlib
 import io
 import json
 import os
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -111,6 +112,86 @@ else:
             with patch.dict(os.environ, env):
                 probe.plan(raw)
             for action, extra in [("run", []), ("export", ["--out", str(out)])]:
+                if action == "export":
+                    # Simulate a cutoff in this fake-CLI fixture, retaining the
+                    # original paths required by frozen argv verification.
+                    original_status = batch.read(raw / "status.json")
+                    parked = tmp / "unreached-fixture-trials"
+                    parked.mkdir()
+                    for folder in (raw / "attempts").iterdir():
+                        if int(folder.name) > 6:
+                            shutil.move(folder, parked / folder.name)
+                    batch.save(
+                        raw / "status.json",
+                        {
+                            "state": "stopped",
+                            "elapsed_seconds": 1800,
+                            "controller": {"stopped": "Fixture time limit"},
+                        },
+                    )
+                    partial = tmp / "partial"
+                    result = subprocess.run(
+                        [
+                            sys.executable,
+                            str(probe.HERE / "export_partial.py"),
+                            str(raw),
+                            "--out",
+                            str(partial),
+                        ],
+                        capture_output=True,
+                        text=True,
+                    )
+                    self.assertEqual(
+                        result.returncode, 0, result.stdout + result.stderr
+                    )
+                    self.assertEqual(
+                        batch.read(partial / "manifest.json")["state"], "stopped"
+                    )
+                    blind_partial = batch.read(raw / "blind-responses.json")
+                    self.assertEqual(len(blind_partial), 6)
+                    partial_grades = [
+                        {
+                            "id": r["id"],
+                            "mechanism": "checkout_regression"
+                            if r["case"] == "checkout"
+                            else "routing_quality",
+                            "other_label": "",
+                            "single_mechanism": True,
+                            "consistent": True,
+                            "diagnostic_score": 2,
+                            "reason": "Fixture grade.",
+                        }
+                        for r in blind_partial
+                    ]
+                    batch.save(raw / "grades.json", partial_grades)
+                    batch.save(raw / "audit.json", {"changes": []})
+                    analysis.packet(raw, raw / "grading-prompt.txt")
+                    analysis.freeze(
+                        raw,
+                        partial,
+                        raw / "grades.json",
+                        raw / "grades.json",
+                        raw / "audit.json",
+                        raw / "grading-prompt.txt",
+                    )
+                    with contextlib.redirect_stdout(io.StringIO()):
+                        analysis.report(partial)
+                    partial_summary = batch.read(partial / "summary.json")
+                    self.assertTrue(partial_summary["partial"])
+                    self.assertEqual(partial_summary["terminal_trials"], 6)
+                    self.assertEqual(partial_summary["missing_trials"], 34)
+                    self.assertTrue(
+                        all(
+                            c["coverage"]["5"] is None for c in partial_summary["cells"]
+                        )
+                    )
+                    # Restore the full fixture and then exercise the ordinary
+                    # complete-run export below. Real evidence is never altered.
+                    for folder in parked.iterdir():
+                        shutil.move(folder, raw / "attempts" / folder.name)
+                    batch.save(raw / "status.json", original_status)
+                    (raw / "blind-key.json").unlink()
+                    (raw / "blind-responses.json").unlink()
                 done = subprocess.run(
                     [
                         sys.executable,

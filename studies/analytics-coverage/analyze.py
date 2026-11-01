@@ -29,6 +29,48 @@ def coverage(counts, n, k):
     return sum(1 - math.comb(n - c, k) / math.comb(n, k) for c in counts)
 
 
+def completion_by_cell(study, schedule, attempts, max_attempts):
+    """Unfinished trials stay missing; only terminal trials enter observed yield."""
+    planned = {s["trial"]: s for s in schedule}
+    if len(planned) != len(schedule):
+        raise ValueError("Duplicate scheduled trial")
+    history = {}
+    for a in attempts:
+        s = planned[a["trial"]]
+        if a["case"] != s["cell"] or a["effort"] != s["thinking"]:
+            raise ValueError("Attempt assignment differs from schedule")
+        history.setdefault(a["trial"], []).append(a)
+    terminal = set()
+    for trial, rows in history.items():
+        rows.sort(key=lambda a: a["attempt"])
+        if [a["attempt"] for a in rows] != list(range(1, len(rows) + 1)):
+            raise ValueError("Duplicate or skipped physical attempt")
+        if (
+            rows[-1]["outcome"]
+            in {"valid", "invalid_response", "fatal_error", "protocol_error"}
+            or len(rows) >= max_attempts
+        ):
+            terminal.add(trial)
+    result = {}
+    for case in study["cases"]:
+        for effort in study["efforts"]:
+            ids = {
+                t
+                for t, s in planned.items()
+                if s["cell"] == case["id"] and s["thinking"] == effort
+            }
+            attempted = ids & set(history)
+            done = ids & terminal
+            result[case["id"], effort] = {
+                "planned": len(ids),
+                "attempted": len(attempted),
+                "terminal": len(done),
+                "pending_attempted": len(attempted - done),
+                "not_attempted": len(ids - attempted),
+            }
+    return result
+
+
 def packet(raw, out):
     study = read(raw / "snapshot/study.json")
     cases = [
@@ -97,13 +139,23 @@ def freeze(raw, public, grades, independent, audit, prompt):
     validate_grades(read(independent), blind, study)
     dest = public / "grading"
     dest.mkdir(exist_ok=False)
-    for src, name in [
+    sources = [
         (grades, "grades.json"),
         (independent, "independent-grades.json"),
         (audit, "audit.json"),
         (prompt, "prompt.txt"),
         (raw / "blind-responses.json", "blind-responses.json"),
-    ]:
+        (Path(__file__), "analyze.py"),
+    ]
+    for name in (
+        "partial-analysis-plan.json",
+        "grader-provenance.json",
+        "coordinator-initial-grades.json",
+        "coordinator-initial-audit.json",
+    ):
+        if (raw / name).exists():
+            sources.append((raw / name, name))
+    for src, name in sources:
         shutil.copyfile(src, dest / name)
     save(
         dest / "seal.json",
@@ -127,6 +179,13 @@ def report(root):
     for name, sha in seal["files_sha256"].items():
         if digest(grading / name) != sha:
             raise ValueError("Frozen grading changed: " + name)
+    if (
+        "analyze.py" in seal["files_sha256"]
+        and digest(Path(__file__)) != seal["files_sha256"]["analyze.py"]
+    ):
+        raise ValueError(
+            "Use this round's frozen grading/analyze.py to reproduce its report"
+        )
     study = read(root / "study.json")
     blind = read(grading / "blind-responses.json")
     grades = validate_grades(read(grading / "grades.json"), blind, study)
@@ -134,6 +193,16 @@ def report(root):
     if set(key) != set(grades):
         raise ValueError("Blind key IDs differ")
     attempts = read(root / "attempts.json")
+    if m["state"] not in {"complete", "stopped"}:
+        raise ValueError("Only complete or stopped evidence can be graded")
+    completion = completion_by_cell(
+        study, read(root / "schedule.json"), attempts, m["controls"]["max_attempts"]
+    )
+    if m["state"] == "complete" and any(
+        c["terminal"] != c["planned"] for c in completion.values()
+    ):
+        raise ValueError("A complete run has unfinished trials")
+    common_k = min(5, min(c["terminal"] for c in completion.values()))
     accepted = {
         (r["trial"], r["attempt"]): r for r in attempts if r["outcome"] == "valid"
     }
@@ -169,7 +238,8 @@ def report(root):
             ]
             useful = [r for r in rows if r["useful"]]
             counts = Counter(r["canonical_mechanism"] for r in useful)
-            n = study["repetitions"]
+            progress = completion[case["id"], effort]
+            n = progress["terminal"]
             u = len(useful)
             entropy = (
                 -sum((c / u) * math.log2(c / u) for c in counts.values()) if u else None
@@ -188,7 +258,7 @@ def report(root):
                 {
                     "case": case["id"],
                     "effort": effort,
-                    "planned": n,
+                    **progress,
                     "valid": len(rows),
                     "useful": u,
                     "diagnostic_mean": sum(r["diagnostic_score"] for r in rows)
@@ -199,8 +269,23 @@ def report(root):
                     "distinct": len(counts),
                     "mechanism_counts": dict(sorted(counts.items())),
                     "conditional_entropy_bits": entropy,
+                    "effective_useful_classes": 2**entropy
+                    if entropy is not None
+                    else None,
+                    "coverage_denominator": n,
                     "coverage": {
                         str(k): coverage(list(counts.values()), n, k)
+                        if k <= n
+                        else None
+                        for k in (1, 3, 5, 10)
+                    },
+                    "coverage_at_common_k": coverage(list(counts.values()), n, common_k)
+                    if common_k
+                    else None,
+                    "useful_only_coverage": {
+                        str(k): coverage(list(counts.values()), u, k)
+                        if k <= u
+                        else None
                         for k in (1, 3, 5, 10)
                     },
                     "author_class_matches": sum(
@@ -217,7 +302,14 @@ def report(root):
                 }
             )
     result = {
-        "schema": "analytics-coverage-summary-v1",
+        "schema": "analytics-coverage-summary-v2",
+        "state": m["state"],
+        "partial": m["state"] != "complete",
+        "common_completed_sample_size": common_k,
+        "planned_trials": sum(c["planned"] for c in cells),
+        "terminal_trials": sum(c["terminal"] for c in cells),
+        "valid_responses": len(joined),
+        "missing_trials": sum(c["planned"] - c["terminal"] for c in cells),
         "cells": cells,
         "outcomes": dict(Counter(r["outcome"] for r in attempts)),
         "analysis_source_sha256": digest(Path(__file__)),
@@ -227,23 +319,45 @@ def report(root):
     }
     save(root / "summary.json", result)
     lines = [
-        "# Analytics coverage pilot",
+        "# Analytics coverage pilot"
+        + (" - partial results" if result["partial"] else ""),
         "",
-        "Generated by `analyze.py report`. Requested Claude Opus 5.5 effort, CLI defaults. Ten planned calls per cell.",
+        "Generated by the frozen `grading/analyze.py report`. Requested Claude Opus 5.5 effort, CLI defaults.",
         "",
-        "| Case | Effort | Schema-valid | Useful | Diagnostic mean (0-2) | Score 2 | Distinct useful classes | Coverage @5 | Over 100 words |",
-        "|---|---|---:|---:|---:|---:|---:|---:|---:|",
+        f"State: **{m['state']}**. {result['terminal_trials']}/{result['planned_trials']} planned trials finished; {result['valid_responses']} schema-valid responses graded. {result['missing_trials']} unfinished trials remain missing, not failures or unuseful answers.",
+        "",
+        "## Completion and diagnostic quality",
+        "",
+        "| Case | Effort | Completed / planned | Valid / completed | Useful / completed | Diagnostic mean (0-2) | Score 2 / valid | Over 100 words |",
+        "|---|---|---:|---:|---:|---:|---:|---:|",
     ]
     for c in cells:
         mean = (
             f"{c['diagnostic_mean']:.2f}" if c["diagnostic_mean"] is not None else "n/a"
         )
         lines.append(
-            f"| {c['case']} | {c['effort']} | {c['valid']}/10 | {c['useful']}/10 | {mean} | {c['score_2']}/{c['valid']} | {c['distinct']} | {c['coverage']['5']:.2f} | {c['over_100_words']} |"
+            f"| {c['case']} | {c['effort']} | {c['terminal']}/{c['planned']} | {c['valid']}/{c['terminal']} | {c['useful']}/{c['terminal']} | {mean} | {c['score_2']}/{c['valid']} | {c['over_100_words']} |"
         )
     lines += [
         "",
-        "Coverage @5 is the exact expected number of distinct useful classes in five draws without replacement from these ten observed trials. Invalid and unuseful calls are empty slots. It does not estimate unseen alternatives.",
+        "## Diversity of useful first hypotheses",
+        "",
+        f"| Case | Effort | Distinct useful classes | Effective useful classes | Coverage @{common_k} completed | Coverage @5 useful only |",
+        "|---|---|---:|---:|---:|---:|",
+    ]
+
+    def number(value):
+        return f"{value:.2f}" if value is not None else "n/a"
+
+    for c in cells:
+        lines.append(
+            f"| {c['case']} | {c['effort']} | {c['distinct']} | {number(c['effective_useful_classes'])} | {number(c['coverage_at_common_k'])} | {number(c['useful_only_coverage']['5'])} |"
+        )
+    lines += [
+        "",
+        f"Coverage @{common_k} completed is the exact expected number of distinct useful classes in {common_k} draws without replacement from each cell's completed trials. Invalid and unuseful completed calls are empty slots; unfinished calls are excluded. The common sample size is min(5, the smallest completed cell). No extrapolation to unobserved trials is made.",
+        "",
+        "Useful-only coverage removes yield differences and requires at least five useful answers; otherwise it is n/a. Effective useful classes is 2 raised to observed Shannon entropy among useful answers. These are descriptive summaries, not estimates of unseen alternatives.",
         "",
         "## Useful mechanism counts",
         "",
@@ -257,6 +371,14 @@ def report(root):
         "",
         "## Limits",
         "",
+        *(
+            [
+                "This is a post-hoc analysis of the responses available when a frozen time limit stopped the run. Completion can depend on effort, latency or answer content, so the partial cells are not guaranteed comparable. The original ten-planned-trial coverage curve is not reported as if unfinished calls had been observed.",
+                "",
+            ]
+            if result["partial"]
+            else []
+        ),
         study["grading"]["limits"],
         "",
         study["execution"]["sampling"],

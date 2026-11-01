@@ -1,0 +1,16 @@
+{
+  "frozen_at": "2026-11-01T23:20:38.235303+00:00",
+  "note": "Grades and audit frozen before reading the treatment key for analysis.",
+  "files_sha256": {
+    "audit.json": "c6e6e743014a7baca190b33c1d42964e392db0f365daed71d19e5e9d19452539",
+    "blind-responses.json": "1667319fa5d489b78799bb4e6497e7eefb0218023cf5c58f0cb482acffaea6d2",
+    "grades.json": "663fc5cf32cc3089af0bd1b898d2d8a12454a008f37142862ec76772762d924d",
+    "grader-provenance.json": "d0027f8d34640025e5698e7ab0b3fb67c732f544258d630e5adaa60b7b660deb",
+    "prompt.txt": "fd23f2015a653ee652c0b450f2de41f75b36bc861b6e6c6cb8ad8b817ea78bae",
+    "independent-grades.json": "663fc5cf32cc3089af0bd1b898d2d8a12454a008f37142862ec76772762d924d",
+    "partial-analysis-plan.json": "5110e2edff5e57876983a7c85bfb4f39b10500bf8ec1e14ac96b726c3c2d3133",
+    "analyze.py": "923f0ebf0eb249170a33c38222b9776eedf7e4d29078a227aa586058e4062404",
+    "coordinator-initial-grades.json": "ac4d803038e9ef1dde6b3446eb1a057a9641c8a6feea2bdbe69d551083e32601",
+    "coordinator-initial-audit.json": "212c42299212fc7ac0d6011e30f6d363e46333de054bf787cdd64cf8b049b6a0"
+  }
+}

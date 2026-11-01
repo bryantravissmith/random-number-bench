@@ -1,0 +1,402 @@
+[
+  {
+    "trial": 1,
+    "block": 1,
+    "cell": "checkout",
+    "condition": "max",
+    "condition_trial": 1,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 2,
+    "block": 1,
+    "cell": "checkout",
+    "condition": "low",
+    "condition_trial": 1,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 3,
+    "block": 1,
+    "cell": "support",
+    "condition": "low",
+    "condition_trial": 1,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 4,
+    "block": 1,
+    "cell": "support",
+    "condition": "max",
+    "condition_trial": 1,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 5,
+    "block": 2,
+    "cell": "support",
+    "condition": "max",
+    "condition_trial": 2,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 6,
+    "block": 2,
+    "cell": "support",
+    "condition": "low",
+    "condition_trial": 2,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 7,
+    "block": 2,
+    "cell": "checkout",
+    "condition": "max",
+    "condition_trial": 2,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 8,
+    "block": 2,
+    "cell": "checkout",
+    "condition": "low",
+    "condition_trial": 2,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 9,
+    "block": 3,
+    "cell": "checkout",
+    "condition": "low",
+    "condition_trial": 3,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 10,
+    "block": 3,
+    "cell": "checkout",
+    "condition": "max",
+    "condition_trial": 3,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 11,
+    "block": 3,
+    "cell": "support",
+    "condition": "max",
+    "condition_trial": 3,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 12,
+    "block": 3,
+    "cell": "support",
+    "condition": "low",
+    "condition_trial": 3,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 13,
+    "block": 4,
+    "cell": "support",
+    "condition": "max",
+    "condition_trial": 4,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 14,
+    "block": 4,
+    "cell": "support",
+    "condition": "low",
+    "condition_trial": 4,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 15,
+    "block": 4,
+    "cell": "checkout",
+    "condition": "max",
+    "condition_trial": 4,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 16,
+    "block": 4,
+    "cell": "checkout",
+    "condition": "low",
+    "condition_trial": 4,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 17,
+    "block": 5,
+    "cell": "support",
+    "condition": "max",
+    "condition_trial": 5,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 18,
+    "block": 5,
+    "cell": "support",
+    "condition": "low",
+    "condition_trial": 5,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 19,
+    "block": 5,
+    "cell": "checkout",
+    "condition": "low",
+    "condition_trial": 5,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 20,
+    "block": 5,
+    "cell": "checkout",
+    "condition": "max",
+    "condition_trial": 5,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 21,
+    "block": 6,
+    "cell": "support",
+    "condition": "low",
+    "condition_trial": 6,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 22,
+    "block": 6,
+    "cell": "support",
+    "condition": "max",
+    "condition_trial": 6,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 23,
+    "block": 6,
+    "cell": "checkout",
+    "condition": "low",
+    "condition_trial": 6,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 24,
+    "block": 6,
+    "cell": "checkout",
+    "condition": "max",
+    "condition_trial": 6,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 25,
+    "block": 7,
+    "cell": "support",
+    "condition": "max",
+    "condition_trial": 7,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 26,
+    "block": 7,
+    "cell": "support",
+    "condition": "low",
+    "condition_trial": 7,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 27,
+    "block": 7,
+    "cell": "checkout",
+    "condition": "low",
+    "condition_trial": 7,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 28,
+    "block": 7,
+    "cell": "checkout",
+    "condition": "max",
+    "condition_trial": 7,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 29,
+    "block": 8,
+    "cell": "checkout",
+    "condition": "low",
+    "condition_trial": 8,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 30,
+    "block": 8,
+    "cell": "checkout",
+    "condition": "max",
+    "condition_trial": 8,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 31,
+    "block": 8,
+    "cell": "support",
+    "condition": "max",
+    "condition_trial": 8,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 32,
+    "block": 8,
+    "cell": "support",
+    "condition": "low",
+    "condition_trial": 8,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 33,
+    "block": 9,
+    "cell": "checkout",
+    "condition": "max",
+    "condition_trial": 9,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 34,
+    "block": 9,
+    "cell": "checkout",
+    "condition": "low",
+    "condition_trial": 9,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 35,
+    "block": 9,
+    "cell": "support",
+    "condition": "low",
+    "condition_trial": 9,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 36,
+    "block": 9,
+    "cell": "support",
+    "condition": "max",
+    "condition_trial": 9,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 37,
+    "block": 10,
+    "cell": "support",
+    "condition": "low",
+    "condition_trial": 10,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 38,
+    "block": 10,
+    "cell": "support",
+    "condition": "max",
+    "condition_trial": 10,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "A support team's average customer satisfaction fell from 4.3 to 3.9 on an unchanged five-point question. The number of resolved tickets stayed near 10,000 per month, while median recorded resolution time fell from 24 to 18 hours. Technical issues rose from 40% to 60% of resolved tickets. The team introduced automated routing and a new survey invitation email in the same week. Survey response rate fell from 20% to 10%. Staffing headcount and support opening hours were unchanged. Satisfaction within issue type, response propensity, ticket reopenings and conversation quality have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 39,
+    "block": 10,
+    "cell": "checkout",
+    "condition": "low",
+    "condition_trial": 10,
+    "model": "claude-opus-5-5",
+    "thinking": "low",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  },
+  {
+    "trial": 40,
+    "block": 10,
+    "cell": "checkout",
+    "condition": "max",
+    "condition_trial": 10,
+    "model": "claude-opus-5-5",
+    "thinking": "max",
+    "prompt": "An online retailer's weekly sessions stayed at 200,000, but completed paid orders fell from 20,000 to 16,000. Its payment processor independently confirms the same order decline. Mobile share of sessions rose from 40% to 60%, and paid-ad share rose from 30% to 50%. A new paid campaign and a checkout UI release both began at the start of the affected week. An analytics-tag update happened that day too. Prices, promotions, inventory availability and the definition of a completed order were unchanged. Device-by-channel conversion, checkout-funnel events and error logs have not yet been examined.\n\nPropose one useful causal hypothesis to investigate next, consistent with the supplied facts. Give one diagnostic test and the result you would expect if your hypothesis is true. Be specific about the data comparison. The facts may permit several explanations; do not claim a cause is established. Give exactly one hypothesis, not a list or alternatives. Use at most 100 words total. Reply only with a JSON object containing three nonempty string fields: hypothesis, test, expected_if_true. Do not use tools or external information."
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "schema": "analytics-coverage-public-v1",
+  "state": "stopped",
+  "partial": true,
+  "stop_reason": "Batch wall-time limit reached",
+  "finished_at": "2026-11-01T22:09:10.155559+00:00",
+  "elapsed_seconds": 1800.2706336659612,
+  "analysis_note": "Post-hoc grading of a stopped run requested by the user. Unfinished trials are missing, not failed or unuseful answers. No inference was resumed or replaced.",
+  "model": "claude-opus-5-5",
+  "runner_version": "2.1.296 (Claude Code)",
+  "evidence_level": "cli_transcript",
+  "auth_type": "oauth",
+  "controls": {
+    "concurrency": 4,
+    "timeout": 180,
+    "max_attempts": 3,
+    "max_seconds": 1800,
+    "max_cost": 20
+  },
+  "sampling": "No temperature/top_p/seed override; Pi verifies payload defaults, native CLI backend defaults are opaque",
+  "system_prompt": "You are a helpful assistant.",
+  "cwd": "/",
+  "raw_manifest_sha256": "25a7260cc9d2bcbddf6d1c156728dfd3547a68fe373d910f7fe85b1768a42103",
+  "source_sha256": {
+    "batch.py": "97e8622d83e5245ce258b0cfd7b36fec2a55399ef7b6d7407a1dcf160ebf0ceb",
+    "pi-audit.ts": "880f391e9ff4284a9d166b017b57dbe8f4efb41406dace8be3ccd20ad64f69f1",
+    "verify.py": "4277b038ac923b89d08a45a83bc18ed1af7f5cd181d235d9896e2ff13749f94b",
+    "cli_runners.py": "415cbb3db454f5ceab3003647b38c9ec321b9638ef2d972d5a230c07fbe94274",
+    "probe.py": "2388a91739b8ee79944cddc239908fa5a75198620a82aba3550e1a94ba1773a0",
+    "study.json": "a4ea6220820e0a9074bfba8b6ba5622b3c35ac951b39faf7fd690ce2731e36b3"
+  },
+  "outcomes": {
+    "timeout": 4,
+    "valid": 22,
+    "invalid_response": 1
+  },
+  "files_sha256": {
+    "study.json": "a4ea6220820e0a9074bfba8b6ba5622b3c35ac951b39faf7fd690ce2731e36b3",
+    "attempts.json": "8211beeadca31363a35bed0866d85f69607c36d6f625d89f3619a70f797f4a45",
+    "schedule.json": "7982e811b2067cf32bfbc48413ecf43ff0582b2643ac1c020512beffe4620378",
+    "posthoc/export_partial.py": "7d5a28c14613386ca8cb2e57a8e8eefcb6be01248b51d1226adc5a3b9a7cfd13",
+    "source/study.json": "a4ea6220820e0a9074bfba8b6ba5622b3c35ac951b39faf7fd690ce2731e36b3",
+    "source/cli_runners.py": "415cbb3db454f5ceab3003647b38c9ec321b9638ef2d972d5a230c07fbe94274",
+    "source/pi-audit.ts": "880f391e9ff4284a9d166b017b57dbe8f4efb41406dace8be3ccd20ad64f69f1",
+    "source/batch.py": "97e8622d83e5245ce258b0cfd7b36fec2a55399ef7b6d7407a1dcf160ebf0ceb",
+    "source/probe.py": "2388a91739b8ee79944cddc239908fa5a75198620a82aba3550e1a94ba1773a0",
+    "source/verify.py": "4277b038ac923b89d08a45a83bc18ed1af7f5cd181d235d9896e2ff13749f94b"
+  }
+}

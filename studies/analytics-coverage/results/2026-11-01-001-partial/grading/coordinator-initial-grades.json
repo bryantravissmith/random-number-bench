@@ -1,0 +1,200 @@
+[
+  {
+    "id": "62bd6c0baf0993eb00c35d72",
+    "mechanism": "response_selection",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One invitation-driven response-selection mechanism is nominated. Random old/new invitation assignment with current or identical routing predicts response-rate and satisfaction differences while controlling the concurrent routing change."
+  },
+  {
+    "id": "a6618adc3eb56583a6b41ce6",
+    "mechanism": "issue_composition",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One issue-mix mechanism is nominated. Comparing within-type means over time and standardizing the mix supplies a directional prediction and a control against within-type deterioration. This is a helpful diagnostic contrast, not proof of complete causal identification."
+  },
+  {
+    "id": "c1ec30854eafd00084c44f92",
+    "mechanism": "checkout_regression",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One mobile checkout defect is nominated. The before/after device comparison within channel predicts a mobile-specific decline with desktop as a control, helping distinguish regression from traffic composition."
+  },
+  {
+    "id": "d7e530a4b81c0c03dc1b428d",
+    "mechanism": "response_selection",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One invitation-driven response-selection mechanism is nominated. Random old/new invitation assignment with current or identical routing predicts response-rate and satisfaction differences while controlling the concurrent routing change."
+  },
+  {
+    "id": "9c00a891b4c672b513359fc1",
+    "mechanism": "response_selection",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One invitation-driven response-selection mechanism is nominated. Random old/new invitation assignment with current or identical routing predicts response-rate and satisfaction differences while controlling the concurrent routing change."
+  },
+  {
+    "id": "6be95027d402edba9e22b4c7",
+    "mechanism": "response_selection",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One invitation-driven response-selection mechanism is nominated. Random old/new invitation assignment with current or identical routing predicts response-rate and satisfaction differences while controlling the concurrent routing change."
+  },
+  {
+    "id": "588d3e14a36aa021f0603fbb",
+    "mechanism": "checkout_regression",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One mobile checkout defect is nominated. The before/after device comparison within channel predicts a mobile-specific decline with desktop as a control, helping distinguish regression from traffic composition."
+  },
+  {
+    "id": "349785a151b4ddf785072020",
+    "mechanism": "issue_composition",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One issue-mix mechanism is nominated. Comparing within-type means over time and standardizing the mix supplies a directional prediction and a control against within-type deterioration. This is a helpful diagnostic contrast, not proof of complete causal identification."
+  },
+  {
+    "id": "b838134ffba37d4306d9d0d9",
+    "mechanism": "checkout_regression",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One mobile checkout defect is nominated. The before/after device comparison within channel predicts a mobile-specific decline with desktop as a control, helping distinguish regression from traffic composition."
+  },
+  {
+    "id": "0383b421e64d1a5b47e99ad5",
+    "mechanism": "checkout_regression",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One mobile checkout defect is nominated. The before/after device comparison within channel predicts a mobile-specific decline with desktop as a control, helping distinguish regression from traffic composition."
+  },
+  {
+    "id": "1da6cb632eae507db60ff60e",
+    "mechanism": "checkout_regression",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One mobile checkout defect is nominated. The before/after device comparison within channel predicts a mobile-specific decline with desktop as a control, helping distinguish regression from traffic composition."
+  },
+  {
+    "id": "deb14494bf22e1fe59549014",
+    "mechanism": "checkout_regression",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One mobile checkout defect is nominated. The before/after device comparison within channel predicts a mobile-specific decline with desktop as a control, helping distinguish regression from traffic composition."
+  },
+  {
+    "id": "84f81280d339d08b47bd0695",
+    "mechanism": "checkout_regression",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One mobile checkout defect is nominated. The before/after device comparison within channel predicts a mobile-specific decline with desktop as a control, helping distinguish regression from traffic composition."
+  },
+  {
+    "id": "cc4226abf1e40002582b81f4",
+    "mechanism": "response_selection",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One invitation-driven response-selection mechanism is nominated. Random old/new invitation assignment with current or identical routing predicts response-rate and satisfaction differences while controlling the concurrent routing change."
+  },
+  {
+    "id": "545e1b1f9efd58b27729a9d2",
+    "mechanism": "checkout_regression",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One mobile checkout defect is nominated. The before/after device comparison within channel predicts a mobile-specific decline with desktop as a control, helping distinguish regression from traffic composition."
+  },
+  {
+    "id": "68dc6ffe7c3159d5400d8e66",
+    "mechanism": "issue_composition",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One issue-mix mechanism is nominated. Comparing within-type means over time and standardizing the mix supplies a directional prediction and a control against within-type deterioration. This is a helpful diagnostic contrast, not proof of complete causal identification."
+  },
+  {
+    "id": "a0be78974211b5668dc627fe",
+    "mechanism": "issue_composition",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One issue-mix mechanism is nominated. Comparing within-type means over time and standardizing the mix supplies a directional prediction and a control against within-type deterioration. This is a helpful diagnostic contrast, not proof of complete causal identification."
+  },
+  {
+    "id": "74774987648cebf087b1b86c",
+    "mechanism": "checkout_regression",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One mobile checkout defect is nominated. The before/after device comparison within channel predicts a mobile-specific decline with desktop as a control, helping distinguish regression from traffic composition."
+  },
+  {
+    "id": "a4d45478d055665cf4748fd1",
+    "mechanism": "checkout_regression",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One mobile checkout defect is nominated. The before/after device comparison within channel predicts a mobile-specific decline with desktop as a control, helping distinguish regression from traffic composition."
+  },
+  {
+    "id": "2676d95189a54edb01e2bd59",
+    "mechanism": "response_selection",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One invitation-driven response-selection mechanism is nominated. Random old/new invitation assignment with current or identical routing predicts response-rate and satisfaction differences while controlling the concurrent routing change."
+  },
+  {
+    "id": "6e353b025fff31b1d6481321",
+    "mechanism": "issue_composition",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One issue-mix mechanism is nominated. Comparing within-type means over time and standardizing the mix supplies a directional prediction and a control against within-type deterioration. This is a helpful diagnostic contrast, not proof of complete causal identification."
+  },
+  {
+    "id": "4e38f78faa1cf3379dccae35",
+    "mechanism": "issue_composition",
+    "other_label": "",
+    "single_mechanism": true,
+    "consistent": true,
+    "diagnostic_score": 2,
+    "reason": "One issue-mix mechanism is nominated. Comparing within-type means over time and standardizing the mix supplies a directional prediction and a control against within-type deterioration. This is a helpful diagnostic contrast, not proof of complete causal identification."
+  }
+]

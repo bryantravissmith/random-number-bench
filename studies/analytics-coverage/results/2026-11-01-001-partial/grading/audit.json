@@ -1,0 +1,17 @@
+{
+  "audited_at": "2026-11-01T23:20:28.701376+00:00",
+  "treatment_key_read": false,
+  "reviewed_responses": 22,
+  "initial_coordinator_grades_recorded_before_independent_grades_read": true,
+  "categorical_agreement": 22,
+  "dimensions": [
+    "mechanism",
+    "other_label",
+    "single_mechanism",
+    "consistent",
+    "diagnostic_score"
+  ],
+  "changes": [],
+  "interpretation": "Both graders applied the frozen rubric: score 2 requires a directional prediction and a helpful contrast/control, not complete causal identification. All 22 valid answers satisfy usefulness and score 2, so the rubric is at ceiling.",
+  "caveat": "The issue-composition diagnostics use resolved-ticket mixture weights. Quantitative reconstruction of respondent CSAT additionally requires respondent-mixture and response-propensity checks. Their within-type versus aggregate contrast still helps distinguish mix from within-type deterioration under the frozen broad rubric."
+}

@@ -49,7 +49,7 @@ operational-attempt and (where recorded) truncation counts. Completed n=0 cells
 show hatched n/a; absent completed cells show a dash without claiming unsupported
 capability. V3.1 is excluded by default and can be revealed as a labeled archive
 at the end. Its original evidence is unchanged. The active Codex grid and the
-stopped, ungraded analytics pilot are outside this completed-grid snapshot.
+separately graded, stopped analytics pilot are outside this completed-grid snapshot.
 
 ## Reproduce the checked-in presentation
 
