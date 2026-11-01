@@ -170,7 +170,7 @@ def main():
     p.add_argument("result", type=Path)
     p = actions.add_parser("report")
     p.add_argument(
-        "--probes", action="store_true", help="Report exploratory probes separately"
+        "--probes", action="store_true", help="Report local exploratory runs (ignored by Git)"
     )
     p = actions.add_parser(
         "check", help="Check native CLI subscription login without inference"

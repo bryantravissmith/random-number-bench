@@ -7,3 +7,12 @@ __pycache__/
 .env.*
 .DS_Store
 .lavish/
+
+# Exploratory outputs and working plans stay local.
+probes/
+PROBES.md
+PROBE_NOTES.md
+studies/
+PLAN.md
+*_PROPOSAL.md
+REVIEW.md

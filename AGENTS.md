@@ -8,3 +8,4 @@
 - Never manually edit generated result JSON, JSONL or RESULTS.md. Rebuild with the exporter.
 - Check offline tests before changing execution or evidence handling.
 - Never use the em dash or add agent co-authors to commits.
+- Keep exploratory probe exports, planning drafts, catalog snapshots and review notes local under ignored paths. Publish the harness, reproducible configurations, measured results and user documentation.

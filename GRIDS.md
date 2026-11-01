@@ -154,7 +154,9 @@ all-identical responses.
 
 ## Publish and verify
 
-After export, commit the new `results/<id>/` folder and regenerate `RESULTS.md`.
+After a measured run is exported, commit its `results/<id>/` folder and
+regenerate `RESULTS.md`. Smoke checks, exploratory probes and planning notes
+stay in ignored local paths; they are not published benchmark results.
 Never edit generated result JSON, JSONL or reports by hand. Full raw evidence
 stays under ignored `runs/`; the public export contains allowlisted records,
 hashes, schedules and frozen source. Keep the raw run locally for audit.
@@ -181,15 +183,15 @@ model/mode/temperature cells. With both prompts and 100 trials per prompt this
 is 3,600 logical trials. V3.1 was removed from future runs at Bryan's request
 after its thinking condition returned no final answers. The original seven-release
 profile is preserved as [deepseek-2026-11-01-full.json](grids/deepseek-2026-11-01-full.json);
-use that file to reproduce the original 4,400-trial design. See the [study proposal](studies/reasoning-history/DEEPSEEK_PROPOSAL.md)
-for the hypotheses, historical serving exception and cost scenarios.
+use that file to reproduce the original 4,400-trial design. The serving strata
+and frozen sampling controls are documented below.
 
 ```sh
 # Separate 36-call validation run. Never pool this with measured results.
 uv run grid.py plan --spec grids/deepseek.json --count 1 \
   --out runs/deepseek-smoke-001 --max-cost 1 --max-seconds 3600
 uv run grid.py run runs/deepseek-smoke-001
-uv run grid.py export runs/deepseek-smoke-001 --out probes/deepseek-smoke-001
+uv run grid.py export runs/deepseek-smoke-001 --out runs/exports/deepseek-smoke-001
 
 # After verifying the smoke, freeze a separate measured grid.
 uv run grid.py plan --spec grids/deepseek.json --count 100 \

@@ -389,7 +389,7 @@ def report(results, output, *, probes=False):
         "",
         *(
             [
-                "Small exploratory rounds, kept separate from the 1,000-trial benchmark. See [design and interpretation](PROBE_NOTES.md).",
+                "Local exploratory rounds, excluded from published benchmark results.",
                 "",
             ]
             if probes

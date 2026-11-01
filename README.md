@@ -4,7 +4,7 @@ What distribution do you get when you ask an LLM for a random integer from 1 to 
 
 This benchmark runs fresh sessions for each of two fixed prompts, records every attempt, and compares the accepted answers with a uniform distribution. Single-model rounds default to **1,000 trials per prompt**; the model/effort grids use **100 per prompt per cell**. Each repeat gets its own immutable result directory.
 
-**[Single comparison matrix](reports/comparison.html)** (download and open the HTML) · **[Recorded results](RESULTS.md)** · [50-trial effort probes](PROBES.md) · [Protocol](PROTOCOL.md) · [Public evidence format](EVIDENCE.md)
+**[Single comparison matrix](reports/comparison.html)** (download and open the HTML) · **[Recorded results](RESULTS.md)** · [Protocol](PROTOCOL.md) · [Public evidence format](EVIDENCE.md)
 
 [![Scannable matrix comparing model families, versions and efforts for both prompts](reports/comparison.png)](reports/comparison.png)
 
@@ -16,9 +16,7 @@ Codex, Claude, Grok and Pi/OpenRouter. Plan with `grid.py plan --spec grids/code
 The generated `RESULTS.md` keeps every cell separate and includes pointwise
 95% Wilson confidence intervals for the answer proportions.
 
-[Reasoning and release-history study](studies/reasoning-history/PLAN.md): compares
-historical versions, thinking modes and training stages separately. The first
-[DeepSeek grid](results/2026-11-01-deepseek-history-c16-001) is complete, with
+The [DeepSeek history grid](results/2026-11-01-deepseek-history-c16-001) is complete, with
 3,993 accepted answers from 4,400 planned trials. V3.1 thinking produced 400
 empty final answers under its pinned serving profile, so that condition has no
 estimated number distribution. [Scientific figures](figures/2026-11-01-deepseek-history)
@@ -36,8 +34,8 @@ keep missing answers and serving differences visible.
 
 The matrix shows 15 models and 54 settings from the four completed grids.
 V3.1 is excluded from the main comparison at the author's request; a reveal
-control shows its archived settings and missing responses. Historical rounds,
-smoke checks and the superseded DeepSeek pilot remain separate in their reports.
+control shows its archived settings and missing responses. Measured historical
+rounds remain separate in RESULTS.md. Exploratory runs and smoke checks stay local.
 All published counts retain invalid responses as exclusions without replacement.
 
 ## The two conditions
@@ -85,7 +83,7 @@ The two conditions are interleaved in randomized adjacent pairs under one shared
 
 After reviewing a public export, commit its `results/<id>/` directory and the regenerated `RESULTS.md`. The local `runs/` directory is ignored. No recurring schedule or automatic publication is installed. CI runs offline tests and checks published records; it makes no inference calls.
 
-Exploratory 50-trial rounds live separately in `probes/<id>/`. Generate their report with `uv run bench.py report --probes`; see [probe design and interpretation](PROBE_NOTES.md). Reports show the thinking/effort setting as well as the model. For a subscription-backed thinking-off comparison, the Claude adapter supports `--model claude-haiku-4-5-20251001 --thinking off`; see [the validated profile](CLI_RUNNERS.md#non-reasoning-comparisons).
+For a subscription-backed thinking-off comparison, the Claude adapter supports `--model claude-haiku-4-5-20251001 --thinking off`; see [the validated profile](CLI_RUNNERS.md#non-reasoning-comparisons).
 
 ## Errors and rate limits
 
