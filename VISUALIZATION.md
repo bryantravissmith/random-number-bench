@@ -42,6 +42,8 @@ contrasts and historical trends do not isolate the causal effect of RL.
 uv run visualize.py \
   results/2026-11-01-grid-pi-001 \
   results/2026-11-01-grid-grok-001 \
+  results/2026-11-01-grid-claude-001 \
+  results/2026-11-01-deepseek-history-c16-001 \
   --out .lavish/distribution-explorer.html
 ```
 

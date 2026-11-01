@@ -16,10 +16,13 @@ Codex, Claude, Grok and Pi/OpenRouter. Plan with `grid.py plan --spec grids/code
 The generated `RESULTS.md` keeps every cell separate and includes pointwise
 95% Wilson confidence intervals for the answer proportions.
 
-[Reasoning and release-history study](studies/reasoning-history/PLAN.md): the
-next hypothesis compares historical versions, thinking modes and training
-stages separately. It includes candidate families and a reproducible catalog
-capture, with no historical-study inference run yet.
+[Reasoning and release-history study](studies/reasoning-history/PLAN.md): compares
+historical versions, thinking modes and training stages separately. The first
+[DeepSeek grid](results/2026-11-01-deepseek-history-c16-001) is complete, with
+3,993 accepted answers from 4,400 planned trials. V3.1 thinking produced 400
+empty final answers under its pinned serving profile, so that condition has no
+estimated number distribution. [Scientific figures](figures/2026-11-01-deepseek-history)
+keep missing answers and serving differences visible.
 
 The completed Claude Opus 5.5 subscription round returned `7` in all 1,000 baseline trials. The meta-prompt produced 958 sevens, 37 sixes, three fours and one three; one prose response was excluded. The two earlier stopped Claude rounds remain separate in the report. These are descriptive results under the recorded CLI settings.
 

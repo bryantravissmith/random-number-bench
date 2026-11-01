@@ -1,13 +1,16 @@
 # Did reasoning training concentrate random-number answers?
 
-Study proposed on 2026-11-01. This is a hypothesis and candidate registry, not
-a finding or a launched historical grid. The existing 100-trial grids continue
-under their original frozen protocol and provider defaults.
+Study proposed on 2026-11-01. This remains an exploratory hypothesis and
+candidate registry. The first DeepSeek grid completed on the same date;
+native CLI grids retain their original frozen protocols and provider defaults.
 
 Selected first family: **DeepSeek**. See the [full seven-release grid
 proposal](DEEPSEEK_PROPOSAL.md), covering 4,400 planned trials with two prompts
-and two temperatures. That proposal is still for review; no DeepSeek grid has
-been launched.
+and two temperatures. The [verified export](../../results/2026-11-01-deepseek-history-c16-001)
+contains 3,993 accepted answers, 407 invalid final responses and 27 timeout
+attempts. All 4,400 logical trials finished. Four hundred invalid responses
+were empty V3.1 thinking outputs; no distribution is estimated for those cells.
+The historical proposal below its status note is retained as provenance.
 
 ## Hypothesis
 

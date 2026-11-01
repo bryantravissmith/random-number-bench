@@ -1,7 +1,21 @@
 # DeepSeek release-history grid proposal
 
-Proposed 2026-11-01. Status: design for review, not launched. The existing
-Claude/Codex grids continue independently under their frozen settings.
+Proposed 2026-11-01. **Completed 2026-11-01 at 22:03 UTC.** The measured
+[16-concurrency-ceiling run](../../results/2026-11-01-deepseek-history-c16-001)
+finished all 4,400 logical trials in 91.7 minutes: 3,993 valid integers,
+407 invalid final responses and 27 timeout attempts. Reported API cost was
+$0.956; timeout charges without usage are unknown. The separate smoke and
+superseded four-concurrency pilot remain unpooled.
+
+All 400 V3.1 thinking trials returned empty final answers under the pinned
+SiliconFlow FP8 profile. Those cells are n=0, not uniform or concentrated
+distributions. The seven other invalid outputs were code, prose or a fenced
+number. Preserve them; a repaired serving configuration requires a separate
+validation and fresh round. See [results with intervals](../../RESULTS.md) and
+[figures](../../figures/2026-11-01-deepseek-history).
+
+The original proposal follows for provenance; its future-tense preflight
+instructions describe the plan at proposal time.
 
 ## Question and prediction
 
