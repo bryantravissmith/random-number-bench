@@ -65,6 +65,22 @@ its existing grok.com OIDC login, which the guard recognizes as OAuth. No login
 changes or API-key fallbacks were needed. Claude and Grok exposed cost estimates;
 Codex and AGY did not. All four returned `7` in the final two-call smoke checks.
 
+## Non-reasoning comparisons
+
+As checked on 2026-11-01, the local Codex subscription catalog does not list
+GPT-4o or GPT-4.1. Pi lists them as non-reasoning models in its general catalog,
+which does not establish subscription access. A GPT-4o comparison requires an
+API-access decision and a separately validated profile that omits reasoning
+parameters. No API-backed benchmark was started as part of this change.
+
+OpenAI lists GPT-4o and GPT-4.1 for API shutdown on January 14, 2027. Original
+GPT-4 and GPT-4 Turbo shut down on October 23, 2026. See the official
+[deprecation schedule](https://developers.openai.com/api/docs/deprecations),
+[GPT-4o model page](https://developers.openai.com/api/docs/models/gpt-4o) and
+[Codex model guidance](https://learn.chatgpt.com/docs/models). A future comparison
+should pin a still-available snapshot, preserve the exact two prompts, record
+reasoning as not applicable, and keep API and CLI runs separate.
+
 ## Sources
 
 Installed CLI help and authentication commands are the source of the launch flags in `cli_runners.py`. Codex documents [non-interactive execution](https://learn.chatgpt.com/docs/non-interactive-mode) and [CLI authentication](https://learn.chatgpt.com/docs/auth?surface=cli). Freeze the installed version for every round: CLI formats and defaults can change.

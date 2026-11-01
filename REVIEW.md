@@ -52,7 +52,8 @@ exports; no partial answer was silently promoted into the distribution.
   an empty final result but nonempty intermediate text. This is now a terminal
   invalid response, with no number and no retry. Identity, model, tools and
   malformed-structure errors still stop the controller.
-- Round 003 is a new precommitted 1,000-trial-per-prompt round with those fixes.
+- Round 003 completed 1,000 trials per prompt with those fixes. Baseline accepted
+  all 1,000; meta accepted 999 and excluded one prose response without retry.
   The two stopped rounds are not pooled into it.
 
 The native CLI tests cover credential rejection, exact prompt/command provenance,
@@ -65,5 +66,10 @@ tests continue to pass.
 Native recovery was also tested with a deliberately orphaned live child process.
 Resume now refuses to start duplicate work until that child exits, and recovered
 attempts retain the correct runner/evidence label. This recovery fix was made
-after round 003 was frozen; round 003 runs continuously from its recorded source
-snapshot and does not exercise recovery. Later rounds freeze the updated code.
+after round 003 was frozen; round 003 ran continuously from its recorded source
+snapshot and did not exercise recovery. Later rounds freeze the updated code.
+
+The export-time verifier also compares reparsed session/model identifiers and
+usage metadata against the saved attempt. Tampering tests cover those fields,
+so changing a derived session ID cannot conceal reuse. This strengthens the
+independent exporter without changing any model call or recorded result.

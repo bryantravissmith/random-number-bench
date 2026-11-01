@@ -6,6 +6,8 @@ This benchmark runs **1,000 fresh sessions for each of two fixed prompts**, reco
 
 **[Recorded results](RESULTS.md)** · [Protocol](PROTOCOL.md) · [Public evidence format](EVIDENCE.md)
 
+The completed Claude Opus 5.5 subscription round returned `7` in all 1,000 baseline trials. The meta-prompt produced 958 sevens, 37 sixes, three fours and one three; one prose response was excluded. The two earlier stopped Claude rounds remain separate in the report. These are descriptive results under the recorded CLI settings.
+
 ## The two conditions
 
 **Baseline**

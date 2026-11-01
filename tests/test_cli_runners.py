@@ -488,6 +488,9 @@ class RunnerFixtureTest(unittest.TestCase):
         result = {**cr.parse(folder, config, 0), "returncode": 0}
         for tamper in (
             {"number": 8},
+            {"session_id": "forged-session"},
+            {"observed_model": "other-model"},
+            {"usage": {"cost": {"total": 999}}},
             {"response": "8"},
             {"outcome": "invalid_response"},
             {"http_statuses": [200]},

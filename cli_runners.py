@@ -285,12 +285,12 @@ def _model_listed(model, text):
 # ---------------------------------------------------------------------------
 
 
-def environment(runner, base=None, folder=None):
+def environment(runner, base=None):
     """Copy of ``base`` (default ``os.environ``) safe for a runner launch.
 
     Rejects API-key, base-URL and cloud-provider routes, clears nested Claude
     identity, applies telemetry-off settings. HOME and CODEX_HOME are never
-    changed. ``folder`` adds attempt-scoped settings (AGY system prompt file).
+    changed.
     """
     _check_runner(runner)
     source = dict(os.environ if base is None else base)
@@ -307,13 +307,7 @@ def environment(runner, base=None, folder=None):
     }
     env.update(COMMON_SAFE_ENV)
     env.update(SAFE_ENV[runner])
-    env.update(attempt_environment(runner, folder))
     return env
-
-
-def attempt_environment(runner, folder):
-    """Attempt-scoped, secret-free variables recorded in cli-request.json."""
-    return {}
 
 
 def _claude_auth(binary, env):
@@ -646,8 +640,8 @@ def command(config, folder, binary=None):
         evidence_level=EVIDENCE_LEVEL,
         binary=binary,
         command=argv,
-        environment_overrides=attempt_environment(runner, folder),
-        session_policy="fresh session, one model turn, no tools, no resume, no fallback",
+        environment_overrides={},
+        session_policy="fresh CLI process/conversation, one supplied prompt, no resume or fallback; tools disabled/denied",
         created_at=now(),
     )
     save(folder / REQUEST_FILE, request)
@@ -1151,9 +1145,7 @@ def verify_attempt(folder, config, result):
     expected = _argv(config, folder, request.get("binary"))
     if request.get("command") != expected:
         raise RunnerError("cli-request.json command does not match the frozen config")
-    if request.get("environment_overrides") != attempt_environment(
-        config["runner"], folder
-    ):
+    if request.get("environment_overrides") != {}:
         raise RunnerError("cli-request.json environment overrides mismatch")
     if result.get("command") is not None and result["command"] != expected:
         raise RunnerError("Recorded result command differs from cli-request.json")
@@ -1167,7 +1159,15 @@ def verify_attempt(folder, config, result):
         timed_out=outcome == "timeout",
         interrupted=outcome == "interrupted",
     )
-    for key in ("outcome", "number", "response"):
+    for key in (
+        "outcome",
+        "number",
+        "response",
+        "session_id",
+        "response_id",
+        "observed_model",
+        "usage",
+    ):
         if again[key] != result.get(key):
             raise RunnerError(
                 f"Reparse {key} mismatch: {again[key]!r} != {result.get(key)!r}"
