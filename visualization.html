@@ -1,25 +1,472 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Random Number Bench | Distribution explorer</title>
-<style>
-@font-face{font-family:Geist;src:url('GEIST_FONT')}@font-face{font-family:GeistSerif;src:url('SERIF_FONT')}:root{--paper:#f7f8f5;--panel:white;--ink:#202722;--muted:#616963;--line:#dce3da;--green:#1d7545;--dark:#163125;--soft:#ecf2eb;--mint:#bceccb}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 Geist,system-ui,sans-serif}.wrap{max-width:1680px;padding:0 28px;margin:auto}header{padding:18px 0}.top{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.brand{font-weight:700}.small{font-size:12px}.muted{color:var(--muted)}.hero{background:var(--dark);color:white;padding:38px 0}.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint)}h1,h2{font-family:GeistSerif,Georgia,serif;font-weight:400;letter-spacing:-.025em;line-height:1.15}h1{font-size:clamp(34px,4vw,52px);margin:12px 0}h2{font-size:30px;margin:0 0 12px}h3{font-size:17px;margin:0 0 12px}p{margin:0 0 14px}.hero p{color:#c0d2c4;max-width:900px;font-size:17px}.controls{display:grid;grid-template-columns:repeat(5,minmax(0,1fr)) auto;gap:14px;align-items:end;padding:24px 0}.controls>*{min-width:0}label{font-size:12px;font-weight:650}select,button{font:inherit;border:1px solid var(--line);background:var(--panel);border-radius:7px;color:var(--ink);padding:9px 10px}select{display:block;width:100%;margin-top:6px;text-overflow:ellipsis}button{cursor:pointer}button:hover{border-color:var(--green)}:focus-visible{outline:3px solid #64af80;outline-offset:3px}.legend{display:flex;gap:25px;flex-wrap:wrap;align-items:center;padding:15px 0;border-block:1px solid var(--line)}.scale{min-width:260px;max-width:380px;flex:1}.gradient{height:12px;border-radius:3px;margin:6px 0}.ticks{position:relative;height:20px;font-size:11px}.ticks span{position:absolute;transform:translateX(-50%)}.ticks span:first-child{left:0;transform:none}.ticks span:nth-child(2){left:10%}.ticks span:nth-child(3){left:50%}.ticks span:last-child{right:0;transform:none}.legend p{margin:0;flex:2;min-width:240px}.group{padding:28px 0 8px}.group h3{overflow-wrap:anywhere}.facets,.details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.facets>*,.details>*{min-width:0}.table-scroll{overflow:auto;max-height:680px;border:1px solid var(--line);border-radius:9px;background:var(--panel)}table{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;font-variant-numeric:tabular-nums}th{position:sticky;top:0;background:var(--soft);font-size:12px;z-index:2}th,td{padding:9px 2px;text-align:center;border-bottom:1px solid var(--line)}th.identity,td.identity{width:225px;text-align:left;position:sticky;left:0;background:var(--panel);z-index:1;padding:10px}th.identity{background:var(--soft);z-index:3}.identity button{padding:0;border:0;background:none;text-align:left;max-width:100%;font-size:12px;font-weight:650;overflow-wrap:anywhere}.settings{font-size:11px;color:var(--muted);margin-top:3px}.bin{font-size:12px;width:31px}.stat{width:68px;font-size:11px}.selected .identity{box-shadow:inset 4px 0 var(--green);background:#edf6ee}.empty{background:repeating-linear-gradient(45deg,#eee,#eee 3px,#fff 3px,#fff 7px)}.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px}#detail{margin:32px 0;border-top:2px solid var(--green);padding-top:25px}#detail-title{overflow-wrap:anywhere}.details svg{width:100%;height:auto;display:block}.metrics{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;margin:8px 0 0}.metrics span{background:var(--soft);padding:5px 8px;border-radius:5px}details{margin:18px 0;font-size:13px}summary{cursor:pointer;font-weight:650}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}a{color:var(--green)}footer{padding:25px 0 45px;border-top:1px solid var(--line);font-size:13px}#empty{padding:30px}.note{padding:15px 0;font-size:13px;color:var(--muted)}.exact{min-width:620px}.exact th,.exact td{padding:8px}.exact th:first-child{width:85px}@media(max-width:1300px){.facets{grid-template-columns:minmax(0,1fr)}.facets table{min-width:680px}.controls{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:700px){.wrap{padding:0 16px}.controls{grid-template-columns:repeat(2,minmax(0,1fr))}.details{grid-template-columns:minmax(0,1fr)}.hero{padding:25px 0}.panel{padding:14px}h2{font-size:25px}}
-</style></head><body><header><div class="wrap top"><div class="brand">Agents &amp; Insights / Random Number Bench</div><div class="small muted">Verified completed grids · Portable comparison view</div></div></header><div class="hero"><div class="wrap"><div class="eyebrow">One view across models and settings</div><h1>Which numbers do models choose?</h1><p>Compare the same ten answers across model classes, versions and requested effort. Both prompts stay visible. Every setting retains its run, serving context and denominator.</p></div></div><main class="wrap"><div class="controls" id="filters"></div><div class="legend"><div class="scale"><strong class="small">Share of accepted answers</strong><div class="gradient" id="gradient"></div><div class="ticks"><span>0%</span><span>10%</span><span>50%</span><span>100%</span></div></div><p class="small muted">The color scale is always 0-100%; 10% is uniform. Select any model row for 95% Wilson intervals below. TV measures distance from uniform: 0 is an exactly uniform histogram, 0.90 is maximum concentration. TV values here are point estimates.</p></div><p class="note" id="inventory"></p><div id="groups"></div><div id="empty" hidden>No completed settings match these filters.</div><section id="detail" aria-live="polite"></section><footer><h3>How to compare</h3><p>Compare versions within a model class while holding prompt, temperature and serving context fixed. Effort labels are requested controls within a model, not a shared compute scale across developers. Model class is a display grouping from requested names; it is not a measured parameter count or training classification.</p><p>Intervals describe each fixed answer among accepted trials under a stable, independent-trial assumption. They are pointwise, not simultaneous. Invalid answers and operational failures can affect which trials are accepted. A uniform-looking histogram does not establish independent random draws.</p><p>Finite uniform samples normally have nonzero TV. At n=100, the expected empirical TV is about 0.119; at n=1,000, about 0.038. Keep different sample sizes and independent rounds separate.</p><p><a href="https://hci.stanford.edu/publications/2010/crowd-perception/heer-chi2010.pdf">Position for precise comparisons</a> · <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0199239">Cividis color research</a> · <a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm">Wilson intervals</a> · <a href="https://github.com/bryantravissmith/random-number-bench">Repository and protocol</a></p></footer></main>
-<script>
-const DATA=/* BENCH_DATA */;
-const rows=DATA.rows, nums=Array.from({length:10},(_,i)=>String(i+1));
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const pct=p=>p>0&&p<.001?'<0.1':Number((p*100).toFixed(1)).toString();
-const names={baseline:'Baseline',meta:'Sampling meta-prompt'};
-let selected=rows[0]?.id, visible=rows;
-const fields=[['developer','Developer'],['class','Model class'],['model','Model / version'],['effort','Requested effort'],['temperature','Temperature']];
-for(const [key,label] of fields){const values=[...new Set(rows.map(r=>r[key]))];if(key==='effort')values.sort((a,b)=>['off','minimal','low','medium','high','xhigh','max'].indexOf(a)-['off','minimal','low','medium','high','xhigh','max'].indexOf(b));const e=document.createElement('label');e.innerHTML=esc(label)+`<select id="filter-${key}" name="${key}" data-field="${key}" aria-label="${label}"><option value="">All</option>${values.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('')}</select>`;document.querySelector('#filters').append(e)}
-const download=document.createElement('button');download.textContent='Download CSV';download.onclick=downloadCSV;document.querySelector('#filters').append(download);
-document.querySelector('#gradient').style.background=`linear-gradient(to right,${DATA.palette.filter((_,i)=>i%10===0).join(',')})`;
-document.querySelectorAll('select').forEach(s=>s.addEventListener('change',render));
-function tvmark(tv,prompt){if(tv===null)return 'n/a';const x=4+tv/.9*54,color=prompt==='baseline'?'#0072B2':'#D55E00';return `<svg viewBox="0 0 64 16" width="64" height="16" aria-hidden="true"><line x1="4" x2="58" y1="8" y2="8" stroke="#b8c1b8"/>${prompt==='baseline'?`<circle cx="${x}" cy="8" r="3" fill="${color}"/>`:`<rect x="${x-3}" y="5" width="6" height="6" fill="${color}"/>`}</svg><br>${tv.toFixed(3)}`}
-function rowLabel(r){return `${r.effort} · ${r.mode} · T ${r.temperature}`}
-function table(group,prompt){return `<div><h3>${names[prompt]}</h3><div class="table-scroll"><table aria-label="${names[prompt]} answer shares in percent"><thead><tr><th scope="col" class="identity">Model / settings</th>${nums.map(n=>`<th scope="col" class="bin">${n}</th>`).join('')}<th scope="col" class="stat">Valid / plan<br>Excl.</th><th scope="col" class="stat">TV<br>0 - .90</th></tr></thead><tbody>${group.map(r=>{const c=r.conditions[prompt],n=c.accepted_trials;return `<tr class="${selected===r.id?'selected':''}"><th scope="row" class="identity"><button data-row="${esc(r.id)}" aria-pressed="${selected===r.id}">${esc(r.model)}</button><div class="settings">${esc(rowLabel(r))}</div></th>${nums.map(num=>{const p=n?c.counts[num]/n:null;return `<td class="bin ${p===null?'empty':''}" style="${p===null?'':`background:${DATA.palette[Math.round(p*100)]};color:${p<.48?'white':'#111'}`}" title="${c.counts[num]} / ${n} accepted">${p===null?'n/a':pct(p)}</td>`}).join('')}<td class="stat">${n}/${c.planned_trials}<br><span class="muted">${c.excluded_attempts} excl.</span></td><td class="stat">${tvmark(c.tv_to_uniform,prompt)}</td></tr>`}).join('')}</tbody></table></div></div>`}
-function render(){visible=rows.filter(r=>fields.every(([key])=>{const v=document.querySelector(`[data-field="${key}"]`).value;return !v||v===r[key]}));if(!visible.some(r=>r.id===selected))selected=visible[0]?.id;const groups=new Map;for(const r of visible){if(!groups.has(r.group))groups.set(r.group,[]);groups.get(r.group).push(r)}document.querySelector('#inventory').textContent=`${visible.length} of ${rows.length} completed settings · ${groups.size} run / serving groups · baseline and meta remain separate`;document.querySelector('#groups').innerHTML=[...groups.values()].map(g=>{const r=g[0];return `<section class="group"><h3>${esc(r.developer)} · ${esc(r.run)}</h3><p class="small muted">${esc(r.runner)} ${esc(r.runner_version)} → ${esc(r.provider)} → ${esc(r.upstream)} · ${esc(r.precision)} · ${esc(r.stratum)} · ${esc(r.protocol)}</p><div class="facets">${table(g,'baseline')}${table(g,'meta')}</div></section>`}).join('');document.querySelector('#empty').hidden=visible.length>0;document.querySelectorAll('[data-row]').forEach(b=>b.addEventListener('click',()=>{selected=b.dataset.row;render();document.querySelector('#detail').scrollIntoView({behavior:'smooth',block:'start'});document.querySelector('#detail-title').focus({preventScroll:true})}));document.querySelectorAll('.facets').forEach(f=>{const panes=[...f.querySelectorAll('.table-scroll')];panes.forEach(p=>p.addEventListener('scroll',()=>panes.forEach(q=>{if(q!==p&&Math.abs(q.scrollTop-p.scrollTop)>1)q.scrollTop=p.scrollTop}),{passive:true}))});renderDetail()}
-function chart(c,prompt){const n=c.accepted_trials;if(!n)return '<p>No accepted answers. Probabilities and intervals are unavailable.</p>';const color=prompt==='baseline'?'#0072B2':'#D55E00';let svg=`<svg viewBox="0 0 600 280" role="img" aria-label="${names[prompt]} shares and pointwise 95 percent Wilson intervals"><title>${names[prompt]} with ${n} accepted answers</title>`;for(const p of [0,.1,.25,.5,.75,1]){const y=225-p*200;svg+=`<line x1="50" x2="580" y1="${y}" y2="${y}" stroke="${p===.1?'#555':'#e5e9e4'}" ${p===.1?'stroke-dasharray="5 4"':''}/><text x="42" y="${y+4}" text-anchor="end" fill="#616963" font-size="11">${pct(p)}%</text>`}nums.forEach((num,i)=>{const p=c.counts[num]/n,[lo,hi]=c.wilson_intervals[num],x=75+i*54,y=225-p*200,ylo=225-lo*200,yhi=225-hi*200;svg+=`<g><title>Answer ${num}: ${c.counts[num]}/${n}, ${pct(p)}%, 95% interval ${(lo*100).toFixed(1)}-${(hi*100).toFixed(1)}%</title><line x1="${x}" x2="${x}" y1="${ylo}" y2="${yhi}" stroke="${color}" stroke-width="2"/><path d="M${x-4} ${ylo}h8 M${x-4} ${yhi}h8" stroke="${color}"/>${prompt==='baseline'?`<circle cx="${x}" cy="${y}" r="4" fill="${color}"/>`:`<rect x="${x-4}" y="${y-4}" width="8" height="8" fill="${color}"/>`}<text x="${x}" y="247" text-anchor="middle" font-size="12" fill="#202722">${num}</text></g>`});return svg+'<text x="315" y="270" text-anchor="middle" font-size="12" fill="#616963">Answer</text></svg>'}
-function renderDetail(){const r=visible.find(r=>r.id===selected);const panel=document.querySelector('#detail');if(!r){panel.innerHTML='';return}panel.innerHTML=`<div class="eyebrow" style="color:var(--green)">Selected setting</div><h2 id="detail-title" tabindex="-1">${esc(r.model)}</h2><p class="muted">${esc(rowLabel(r))} · ${esc(r.run)}</p><div class="details">${['baseline','meta'].map(p=>{const c=r.conditions[p];return `<div class="panel"><h3>${names[p]}</h3>${chart(c,p)}<div class="metrics"><span>Accepted ${c.accepted_trials}/${c.planned_trials}</span><span>Invalid ${c.invalid_response_attempts}</span><span>Operational attempts ${c.operational_exclusions}</span><span>TV ${c.tv_to_uniform===null?'n/a':c.tv_to_uniform.toFixed(3)}</span></div></div>`}).join('')}</div><p class="note">Dots and whiskers show shares and pointwise 95% Wilson intervals. Dashed line = 10%. Operational exclusions count physical attempts, which can be retried; they are not mutually exclusive with accepted logical trials.</p><details><summary>Exact counts and interval endpoints</summary><div class="table-scroll"><table class="exact"><thead><tr><th>Answer</th><th>Baseline count / n</th><th>95% interval</th><th>Meta count / n</th><th>95% interval</th></tr></thead><tbody>${nums.map(num=>`<tr><th>${num}</th>${['baseline','meta'].map(p=>{const c=r.conditions[p],b=c.wilson_intervals[num];return `<td>${c.counts[num]} / ${c.accepted_trials}</td><td>${b?b.map(v=>(100*v).toFixed(2)+'%').join(' to '):'n/a'}</td>`}).join('')}</tr>`).join('')}</tbody></table></div></details><details><summary>Frozen parameters and provenance</summary><pre>${esc(JSON.stringify({run:r.run,cell:r.cell,protocol:r.protocol,runner:r.runner,runner_version:r.runner_version,requested_model:r.model,requested_effort:r.effort,profile:r.profile,decoding_note:r.profile?'Explicit frozen controls':'Default decoding; temperature not recorded'},null,2))}</pre>${r.evidence?`<a href="${esc(r.evidence)}">Public evidence package</a>`:''}</details>`}
-function downloadCSV(){const columns=['run','developer','class','model','effort','mode','temperature','runner','upstream','precision','stratum','prompt','answer','count','accepted','planned','invalid','operational_attempts','share','ci_low','ci_high','tv'];const out=[columns];for(const r of visible)for(const prompt of ['baseline','meta'])for(const number of nums){const c=r.conditions[prompt],b=c.wilson_intervals[number];out.push([r.run,r.developer,r.class,r.model,r.effort,r.mode,r.temperature,r.runner,r.upstream,r.precision,r.stratum,prompt,number,c.counts[number],c.accepted_trials,c.planned_trials,c.invalid_response_attempts,c.operational_exclusions,c.accepted_trials?c.counts[number]/c.accepted_trials:'',b?.[0]??'',b?.[1]??'',c.tv_to_uniform??''])}const blob=new Blob([out.map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n')],{type:'text/csv'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='random-number-bench-filtered.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-render();
-</script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Random Number Bench | Model × effort</title>
+    <style>
+      @font-face {
+        font-family: Geist;
+        src: url("GEIST_FONT");
+      }
+      @font-face {
+        font-family: GeistSerif;
+        src: url("SERIF_FONT");
+      }
+      :root {
+        --paper: #f7f8f5;
+        --ink: #202722;
+        --muted: #616963;
+        --line: #dce3da;
+        --green: #1d7545;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font:
+          14px/1.45 Geist,
+          system-ui,
+          sans-serif;
+      }
+      main {
+        max-width: 1480px;
+        margin: auto;
+        padding: 24px 28px;
+      }
+      header {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      h1 {
+        font:
+          400 clamp(27px, 3vw, 39px) / 1.15 GeistSerif,
+          Georgia,
+          serif;
+        letter-spacing: -0.025em;
+        margin: 4px 0 8px;
+      }
+      h2 {
+        font:
+          400 26px Georgia,
+          serif;
+        margin: 8px 0;
+      }
+      h3 {
+        margin: 12px 0 6px;
+        font-size: 16px;
+      }
+      p {
+        margin: 6px 0;
+      }
+      .eyebrow {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--green);
+      }
+      .muted,
+      .note {
+        color: var(--muted);
+      }
+      .note {
+        font-size: 12px;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+      .plain {
+        border: 1px solid var(--line);
+        background: white;
+        padding: 7px 12px;
+        border-radius: 5px;
+        white-space: nowrap;
+      }
+      .legend {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        margin: 17px 0 12px;
+        font-size: 12px;
+      }
+      .scale {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      #gradient {
+        width: 150px;
+        height: 12px;
+        border-radius: 2px;
+      }
+      .key {
+        font-weight: 650;
+      }
+      .table-scroll {
+        overflow-x: auto;
+        max-width: 100%;
+        border: 1px solid var(--line);
+        background: white;
+        border-radius: 5px;
+      }
+      table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+        font-variant-numeric: tabular-nums;
+      }
+      #matrix {
+        min-width: 1050px;
+        table-layout: fixed;
+      }
+      th {
+        text-align: left;
+        font-weight: 550;
+      }
+      thead th {
+        background: #edf2ec;
+        padding: 6px 8px;
+        font-size: 12px;
+        vertical-align: bottom;
+        border-bottom: 1px solid var(--line);
+      }
+      thead th.effort {
+        text-align: center;
+        border-left: 1px solid #dae3d8;
+      }
+      thead .pair-label {
+        display: flex;
+        justify-content: space-around;
+        font-size: 10px;
+        color: var(--muted);
+        font-weight: 400;
+        margin-top: 2px;
+      }
+      th.family {
+        width: 70px;
+        padding-left: 12px;
+      }
+      th.version {
+        width: 200px;
+      }
+      th.temp {
+        width: 48px;
+      }
+      tbody td,
+      tbody th {
+        border-bottom: 1px solid #edf0eb;
+        height: 34px;
+        padding: 3px 8px;
+      }
+      tbody th.version {
+        font-size: 13px;
+        font-weight: 550;
+      }
+      tbody td.family {
+        font-size: 11px;
+        color: var(--muted);
+        padding-left: 12px;
+      }
+      tbody td.temp {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .model-start td,
+      .model-start th {
+        border-top: 1px solid #cdd8ca;
+      }
+      .model-repeat {
+        color: var(--muted);
+        font-weight: 400 !important;
+      }
+      .section th {
+        padding: 7px 12px;
+        background: #e6ede3;
+        border-bottom: 1px solid #cdd8ca;
+        font-size: 12px;
+        height: auto;
+      }
+      .context {
+        font-weight: 400;
+        color: var(--muted);
+        margin-left: 10px;
+        font-size: 11px;
+      }
+      td.slot {
+        padding: 2px;
+        border-left: 1px solid #edf0eb;
+      }
+      .pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2px;
+        min-width: 0;
+      }
+      .score {
+        border: 0;
+        min-width: 0;
+        border-radius: 2px;
+        padding: 4px 1px;
+        font-size: 13px;
+        font-weight: 650;
+        line-height: 21px;
+      }
+      .score:hover,
+      .score:focus-visible {
+        outline: 2px solid var(--green);
+        outline-offset: 1px;
+        position: relative;
+        z-index: 1;
+      }
+      .score sup {
+        font-size: 9px;
+        line-height: 0;
+      }
+      .missing {
+        text-align: center;
+        color: #b1b8b0;
+        font-size: 12px;
+        background: #fafbf9;
+      }
+      .no-data {
+        background: repeating-linear-gradient(
+          135deg,
+          #e5e8e3 0 3px,
+          #f8f9f7 3px 7px
+        );
+        color: #626962;
+      }
+      .excluded th {
+        background: #fff3dc;
+      }
+      .footer {
+        margin-top: 10px;
+        display: grid;
+        gap: 5px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .footer p {
+        margin: 0;
+      }
+      details {
+        margin-top: 8px;
+      }
+      summary {
+        cursor: pointer;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      .controls {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      .controls label {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
+      a {
+        color: var(--green);
+      }
+      dialog {
+        width: min(1000px, 94vw);
+        max-height: 90vh;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 20px;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      dialog::backdrop {
+        background: #17251d80;
+      }
+      .close {
+        float: right;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+      .details {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 16px;
+      }
+      .panel {
+        min-width: 0;
+      }
+      .panel svg {
+        width: 100%;
+        height: auto;
+      }
+      .metrics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        font-size: 11px;
+      }
+      .metrics span {
+        background: #e8eee6;
+        padding: 3px 5px;
+        border-radius: 3px;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        font-size: 11px;
+      }
+      .exact {
+        min-width: 650px;
+        font-size: 12px;
+      }
+      .exact td,
+      .exact th {
+        padding: 5px;
+      }
+      @media (max-width: 700px) {
+        main {
+          padding: 16px 12px;
+        }
+        header {
+          display: block;
+        }
+        header button {
+          margin-top: 10px;
+        }
+        .legend {
+          gap: 10px;
+        }
+        .details {
+          grid-template-columns: minmax(0, 1fr);
+        }
+        .context {
+          display: block;
+          margin: 2px 0 0;
+        }
+      }
+      @media print {
+        main {
+          padding: 0;
+        }
+        .plain,
+        .controls,
+        details {
+          display: none;
+        }
+        .table-scroll {
+          overflow: visible;
+        }
+        #matrix {
+          min-width: 0;
+        }
+        .score {
+          print-color-adjust: exact;
+        }
+        tr {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <div class="eyebrow">Agents &amp; Insights · Random Number Bench</div>
+          <h1>How many answers does each model effectively use?</h1>
+          <p class="muted">
+            One matrix. Families and versions down the rows; requested effort
+            across the columns.
+          </p>
+        </div>
+        <button class="plain" id="download">Download data</button>
+      </header>
+      <div class="legend">
+        <div class="scale">
+          <span class="key">1 · concentrated</span><span id="gradient"></span
+          ><span class="key">10 · evenly spread</span>
+        </div>
+        <span
+          >Each pair: <b>B</b> baseline · <b>M</b> sampling meta-prompt</span
+        >
+        <span
+          ><span id="sample-size"></span> · click a value for counts + 95%
+          CIs</span
+        >
+      </div>
+      <div
+        class="table-scroll"
+        tabindex="0"
+        aria-label="All model families, versions and effort settings; scroll horizontally on narrow screens"
+      >
+        <table
+          id="matrix"
+          aria-label="Effective answer count by model, temperature, effort and prompt"
+        ></table>
+      </div>
+      <div class="footer">
+        <p id="inventory"></p>
+        <p>
+          <b>Read across</b> to compare settings within a model;
+          <b>read down</b> to compare versions. Effort labels are categories,
+          not equal compute across providers. DeepSeek On is a frozen reasoning
+          profile, shown separately from native CLI High.
+        </p>
+        <p>
+          <b>Effective answers = 2<sup>H</sup></b
+          >, where H is observed Shannon entropy. 1 means one repeated answer;
+          10 means a perfectly even histogram. These are descriptive point
+          estimates, not quality scores or counts of useful ideas. Finite
+          samples usually fall below 10 even for uniform draws.
+        </p>
+        <p>
+          Dash = no completed cell in this snapshot, not a claim of unsupported
+          capability. n/a = a completed cell with no valid answers. * = fewer
+          than 100 accepted answers; click for denominators. Default temperature
+          is unknown. Serving differences remain labeled and unpooled.
+        </p>
+        <details>
+          <summary>Scope, exclusions and reproduction</summary>
+          <div id="scope"></div>
+          <p>
+            Generated from verified public evidence. Rebuild with
+            <code
+              >uv run visualize.py --spec reports/comparison.json --out
+              reports/comparison.html</code
+            >. Family names organize the display; they do not establish shared
+            ancestry or parameter counts.
+          </p>
+          <div class="controls">
+            <label
+              ><input type="checkbox" id="reveal-excluded" />Show excluded V3.1
+              archive</label
+            ><a
+              href="https://github.com/bryantravissmith/random-number-bench/blob/main/RESULTS.md"
+              >All counts and intervals</a
+            >
+          </div>
+        </details>
+      </div>
+    </main>
+    <dialog id="detail-dialog" aria-labelledby="detail-title">
+      <button class="plain close" id="close-detail">Close</button>
+      <div id="detail"></div>
+    </dialog>
+    <script>
+      const DATA = /* BENCH_DATA */;
+      /* BENCH_SCRIPT */
+    </script>
+  </body>
+</html>

@@ -186,7 +186,7 @@ listing does not establish live account access or parameter behavior.
 - [Original V3 endpoints](https://openrouter.ai/api/v1/models/deepseek/deepseek-chat/endpoints)
 - [Provider routing and fallbacks](https://openrouter.ai/docs/guides/routing/provider-selection)
 
-The requested action here is a proposal. No DeepSeek inference has been launched.
+At proposal time, no DeepSeek inference had been launched. The execution record below documents the subsequently authorized smoke and measured runs.
 
 ## Execution record
 

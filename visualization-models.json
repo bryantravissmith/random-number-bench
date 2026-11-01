@@ -5,122 +5,146 @@
     "gpt-6.1-sol": {
       "developer": "OpenAI",
       "class": "Sol",
-      "version_order": 6.1
+      "version_order": 6.1,
+      "label": "GPT-6.1-sol"
     },
     "gpt-6.1-terra": {
       "developer": "OpenAI",
       "class": "Terra",
-      "version_order": 6.1
+      "version_order": 6.1,
+      "label": "GPT-6.1-terra"
     },
     "gpt-6-astra": {
       "developer": "OpenAI",
       "class": "Astra",
-      "version_order": 6.0
+      "version_order": 6.0,
+      "label": "GPT-6-astra"
     },
     "gpt-6-sol": {
       "developer": "OpenAI",
       "class": "Sol",
-      "version_order": 6.0
+      "version_order": 6.0,
+      "label": "GPT-6-sol"
     },
     "gpt-6-luna": {
       "developer": "OpenAI",
       "class": "Luna",
-      "version_order": 6.0
+      "version_order": 6.0,
+      "label": "GPT-6-luna"
     },
     "gpt-5.6-sol": {
       "developer": "OpenAI",
       "class": "Sol",
-      "version_order": 5.6
+      "version_order": 5.6,
+      "label": "GPT-5.6-sol"
     },
     "gpt-5.6-terra": {
       "developer": "OpenAI",
       "class": "Terra",
-      "version_order": 5.6
+      "version_order": 5.6,
+      "label": "GPT-5.6-terra"
     },
     "gpt-5.6-luna": {
       "developer": "OpenAI",
       "class": "Luna",
-      "version_order": 5.6
+      "version_order": 5.6,
+      "label": "GPT-5.6-luna"
     },
     "claude-opus-5-5": {
       "developer": "Anthropic",
       "class": "Opus",
-      "version_order": 5.5
+      "version_order": 5.5,
+      "label": "Opus 5.5"
     },
     "claude-sonnet-5-5": {
       "developer": "Anthropic",
       "class": "Sonnet",
-      "version_order": 5.5
+      "version_order": 5.5,
+      "label": "Sonnet 5.5"
     },
     "claude-haiku-5-5": {
       "developer": "Anthropic",
       "class": "Haiku",
-      "version_order": 5.5
+      "version_order": 5.5,
+      "label": "Haiku 5.5"
     },
     "claude-fable-5-1": {
       "developer": "Anthropic",
       "class": "Fable",
-      "version_order": 5.1
+      "version_order": 5.1,
+      "label": "Fable 5.1"
     },
     "claude-opus-4-8": {
       "developer": "Anthropic",
       "class": "Opus",
-      "version_order": 4.8
+      "version_order": 4.8,
+      "label": "Opus 4.8"
     },
     "claude-sonnet-4-6": {
       "developer": "Anthropic",
       "class": "Sonnet",
-      "version_order": 4.6
+      "version_order": 4.6,
+      "label": "Sonnet 4.6"
     },
     "grok-4.5": {
       "developer": "xAI",
       "class": "Grok",
-      "version_order": 45
+      "version_order": 45,
+      "label": "Grok 4.5"
     },
     "grok-4.7": {
       "developer": "xAI",
       "class": "Grok",
-      "version_order": 47
+      "version_order": 47,
+      "label": "Grok 4.7"
     },
     "openai/gpt-4o": {
       "developer": "OpenAI",
       "class": "GPT-4o",
-      "version_order": 4
+      "version_order": 4,
+      "label": "GPT-4o"
     },
     "deepseek/deepseek-chat": {
       "developer": "DeepSeek",
       "class": "V3",
-      "version_order": 0
+      "version_order": 0,
+      "label": "V3 (2024-12)"
     },
     "deepseek/deepseek-chat-v3-0324": {
       "developer": "DeepSeek",
       "class": "V3",
-      "version_order": 1
+      "version_order": 1,
+      "label": "V3-0324"
     },
     "deepseek/deepseek-r1-0528": {
       "developer": "DeepSeek",
       "class": "R1",
-      "version_order": 2
+      "version_order": 2,
+      "label": "R1-0528"
     },
     "deepseek/deepseek-chat-v3.1": {
       "developer": "DeepSeek",
       "class": "V3",
-      "version_order": 3
+      "version_order": 3,
+      "label": "V3.1"
     },
     "deepseek/deepseek-v3.2": {
       "developer": "DeepSeek",
       "class": "V3",
-      "version_order": 4
+      "version_order": 4,
+      "label": "V3.2"
     },
     "deepseek/deepseek-v4-pro-0813": {
       "developer": "DeepSeek",
       "class": "V4",
-      "version_order": 5
+      "version_order": 5,
+      "label": "V4 Pro 0813"
     },
     "deepseek/deepseek-v4.1-flash-1017": {
       "developer": "DeepSeek",
       "class": "V4",
-      "version_order": 6
+      "version_order": 6,
+      "label": "V4.1 Flash 1017"
     }
   }
 }

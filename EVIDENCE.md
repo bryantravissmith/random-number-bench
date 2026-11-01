@@ -24,6 +24,12 @@ pinned as the upstream and fallback disabled. Accepted rows preserve the
 returned model alias, upstream name and supplied system fingerprints. These
 fields do not independently identify an immutable model snapshot.
 
+Fixed-decoding DeepSeek grids use the v2 evidence format with explicit temperature,
+reasoning mode, sampling controls, upstream routing, quantization, allowed returned
+model aliases and truncation counts. The public verifier checks the request profile
+and per-cell denominators. Serving identity remains a recorded response claim, not
+an independent attestation of backend weights. See [GRIDS.md](GRIDS.md).
+
 Runner, runner version, evidence level and observed response model (when exposed) are preserved. The legacy field `pi_reported_cost` also stores native runner estimates; `reported_cost_known` distinguishes unknown values from reported zeroes.
 
 Local paths and identifiers are replaced by SHA-256 hashes. Headers, credentials, environment values, full commands and free-form error text are omitted. A working-directory hash preserves comparability without publishing the local path embedded in the system prompt. Invalid-response free text stays in raw logs; its category and evidence hashes remain public.

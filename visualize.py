@@ -8,7 +8,9 @@ import argparse
 import base64
 import hashlib
 import json
+import math
 from pathlib import Path
+import re
 
 import matplotlib
 
@@ -19,6 +21,16 @@ EFFORTS = {
     v: i
     for i, v in enumerate(("off", "minimal", "low", "medium", "high", "xhigh", "max"))
 }
+
+
+def diversity(condition):
+    """Observed entropy and its effective count; no population correction/CI."""
+    n = condition["accepted_trials"]
+    if n == 0:
+        return {"entropy_bits": None, "effective_answers": None}
+    probabilities = [v / n for v in condition["counts"].values() if v]
+    entropy = -sum(p * math.log2(p) for p in probabilities)
+    return {"entropy_bits": entropy, "effective_answers": min(10.0, 2**entropy)}
 
 
 def build_rows(paths):
@@ -62,6 +74,7 @@ def build_rows(paths):
                     "developer": meta["developer"],
                     "class": meta["class"],
                     "model": model,
+                    "label": meta.get("label", model),
                     "version_order": meta["version_order"],
                     "effort": cell["thinking"],
                     "mode": mode,
@@ -99,6 +112,7 @@ def build_rows(paths):
                     "protocol": manifest["grid"]["protocol"]["version"],
                     "profile": profile or None,
                     "conditions": cell["conditions"],
+                    "metrics": {k: diversity(v) for k, v in cell["conditions"].items()},
                     "evidence": f"https://github.com/bryantravissmith/random-number-bench/tree/main/results/{path.name}"
                     if path.parent.name == "results"
                     else None,
@@ -109,9 +123,9 @@ def build_rows(paths):
     return sorted(
         rows,
         key=lambda r: (
-            r["group"],
             r["developer"],
             r["class"],
+            r["group"],
             r["version_order"],
             r["model"],
             EFFORTS.get(r["effort"], 99),
@@ -122,23 +136,42 @@ def build_rows(paths):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("results", nargs="+", type=Path)
+    parser.add_argument("results", nargs="*", type=Path)
+    parser.add_argument("--spec", type=Path, help="Checked-in presentation scope")
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument(
+        "--check", action="store_true", help="Verify generated files match"
+    )
+    parser.add_argument(
+        "--embed-fonts", action="store_true", help="Embed optional local fonts"
+    )
     args = parser.parse_args()
+    scope = {}
+    if args.spec:
+        if args.results:
+            parser.error("Use either --spec or explicit results")
+        scope = json.loads(args.spec.read_text())
+        args.results = [ROOT / p for p in scope["exports"]]
+    if not args.results:
+        parser.error("Provide completed exports or --spec")
     if not __debug__:
         raise ValueError("Do not run with Python -O: verification requires assertions")
     if any(args.out.resolve().is_relative_to(p.resolve()) for p in args.results):
         raise ValueError("Output must be outside immutable input exports")
     rows = build_rows(args.results)
+    excluded = scope.get("excluded_models", {})
+    for row in rows:
+        row["exclusion_reason"] = excluded.get(row["model"])
     template = (ROOT / "visualization.html").read_text()
     palette = [
         matplotlib.colors.to_hex(matplotlib.colormaps["cividis"](i / 100))
         for i in range(101)
     ]
-    data = json.dumps({"rows": rows, "palette": palette}, allow_nan=False).replace(
-        "<", "\\u003c"
-    )
+    data = json.dumps(
+        {"rows": rows, "palette": palette, "scope": scope}, allow_nan=False
+    ).replace("<", "\\u003c")
     html = template.replace("/* BENCH_DATA */", data)
+    html = html.replace("/* BENCH_SCRIPT */", (ROOT / "visualization.js").read_text())
     # Embed the project's optional fonts when present; the file also works with
     # portable system/serif fallbacks and never fetches external scripts.
     for token, file in (
@@ -149,11 +182,61 @@ def main():
         html = html.replace(
             token,
             "data:font/woff2;base64," + base64.b64encode(font.read_bytes()).decode()
-            if font.exists()
+            if args.embed_fonts and font.exists()
             else "",
         )
+    html = re.sub(
+        r"(?m)^[ \t]*@font-face\s*\{[^}]*src:\s*url\([\"']{2}\)[^}]*\}\n?",
+        "",
+        html,
+    )
+    sources = [
+        ROOT / name
+        for name in (
+            "visualize.py",
+            "visualization.html",
+            "visualization.js",
+            "visualization-models.json",
+        )
+    ]
+    if args.spec:
+        sources.append(args.spec.resolve())
+    provenance = {
+        "schema": "random-number-presentation-v1",
+        "sources_sha256": {
+            (
+                str(p.relative_to(ROOT))
+                if p.is_relative_to(ROOT)
+                else "external-scope.json"
+            ): hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in sources
+        },
+        "exports": [
+            {
+                "run": p.name,
+                "manifest_sha256": hashlib.sha256(
+                    (p / "manifest.json").read_bytes()
+                ).hexdigest(),
+            }
+            for p in args.results
+        ],
+        "html_sha256": hashlib.sha256(html.encode()).hexdigest(),
+        "embed_local_fonts": args.embed_fonts,
+        "settings": len(rows),
+        "default_visible_settings": sum(not r["exclusion_reason"] for r in rows),
+    }
+    manifest_path = args.out.with_name(args.out.stem + "-manifest.json")
+    manifest_text = json.dumps(provenance, indent=2) + "\n"
+    if args.check:
+        if args.out.read_text() != html or manifest_path.read_text() != manifest_text:
+            raise ValueError(
+                "Presentation is stale; regenerate with the same command without --check"
+            )
+        print(f"Verified presentation and {len(rows)} settings: {args.out}")
+        return
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(html)
+    manifest_path.write_text(manifest_text)
     print(f"Wrote {len(rows)} verified settings to {args.out}")
 
 

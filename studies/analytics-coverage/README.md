@@ -6,6 +6,13 @@ Opus 5.5 through the subscription CLI. Forty planned calls. This is a pilot of
 repeated top-hypothesis generation, not a test of every alternative a model can
 represent internally.
 
+**Execution status, 2026-11-01:** the initial pilot stopped at the frozen
+30-minute limit with 23/40 terminal trials, 22 schema-valid responses, one invalid
+response and four timeout attempts (27 physical attempts total). Frozen native
+verification passed. It has not been graded or exported as a completed study.
+The local evidence remains preserved under `runs/analytics-coverage-2026-11-01-001`.
+No useful-coverage or diagnostic-quality conclusion is available from this pilot.
+
 The frozen [study definition](study.json) contains the exact prompts and grading
 contract. Models see only case observations and the response instruction. The
 mechanism codebook, author stories and grading rubric are never supplied during
@@ -100,7 +107,7 @@ and the grading prompt with the public round. Model grading is not human
 validation, and prose style may still suggest effort despite metadata blinding.
 
 For the initial pilot, Grok 4.7 independently reviewed the design before calls
-and grades blinded responses. See [review and decisions](design-review.md).
+was designated to grade blinded responses after completion; that grading has not run. See [review and decisions](design-review.md).
 The root coordinator audits grading before unblinding.
 
 ## Offline checks

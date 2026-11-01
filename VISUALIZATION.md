@@ -1,64 +1,80 @@
-# A consistent view of random-number distributions
+# One matrix for family, version and effort
 
-Use two aligned probability heatmaps, one per prompt, with answers 1-10 fixed
-as columns and model/settings as rows. Put a TV dot beside each row and show
-the selected setting's ten probabilities with pointwise 95% Wilson intervals.
-This format scales to many models without changing what color or position means.
+The primary presentation is a single [comparison matrix](reports/comparison.html).
+Download and open the HTML in a browser. It shows every included model together:
+no filters or view switching are required to compare the three dimensions.
 
-## Read the same layout everywhere
-
-| Element | Fixed meaning |
+| Position | Meaning |
 | --- | --- |
-| Columns 1-10 | The answer categories, including observed zero counts |
-| Heatmap | Share among accepted answers; linear cividis scale from 0 to 100% |
-| Baseline / meta facets | The same two protocol prompts, always separate |
-| Row | One immutable run, model, mode, requested effort and temperature |
-| TV position | Distance from uniform on a fixed 0-0.90 axis; point estimate |
-| Detail dots and whiskers | Fixed-bin probabilities and pointwise 95% Wilson intervals |
-| Denominators | Accepted / planned logical trials; exclusions shown separately |
+| Row groups | Developer and separately recorded serving context / immutable run |
+| Left labels | Named family, requested model/version, temperature |
+| Columns | Requested native effort, or explicitly separate Off / On profile modes |
+| Paired values | Baseline first (B), sampling meta-prompt second (M) |
+| Color and number | Observed effective answer count, on a fixed 1-10 scale |
+| Click a value | Ten-bin probabilities, pointwise 95% Wilson intervals, TV and provenance |
 
-Group by immutable run and serving context first. Within each context, order
-by developer, named model class, version, requested effort and temperature.
-The display registry [visualization-models.json](visualization-models.json)
-records named classes such as Opus, Sonnet, Sol and Terra. These are display
-groups from requested model names, not measured parameter counts or a claim
-about training. Unknown models remain unclassified until the registry is
-reviewed. The frozen result package remains the authority for experiment settings.
+Read across for an effort contrast within a model; read down for model/version
+contrasts. Every comparison retains its actual setting and sample. The diagram
+never pools runs, temperatures, models or prompts and never sorts by outcome.
+DeepSeek's pinned On/required profile is separate from native CLI High. Effort
+labels do not mean equal compute across providers, and disabling thinking does
+not undo reasoning training. Family labels are display groups from requested
+names, not claims of common ancestry, size or architecture. V4 Pro and Flash
+remain explicitly named as different products.
 
-Filter to one class to compare versions across effort levels. Keep the same
-prompt, temperature, upstream and precision when interpreting a trend. Do not
-average effort settings or developers, sort into a global leaderboard, or treat
-"high" as equal compute across developers. Keep independent repeated rounds
-separate. Default decoding is unknown, not temperature zero or one.
+The original DeepSeek V3 FP4/DeepInfra anchor has its own labeled serving block;
+the later SiliconFlow FP8 cells form another. Default temperature is unknown.
+Requested model IDs and accepted returned aliases are available in each cell's
+frozen-parameter detail; neither establishes immutable backend weights.
 
-The original DeepSeek V3 FP4/DeepInfra anchor gets a different serving block
-from the six SiliconFlow FP8 releases. A history plot must preserve that break.
-Thinking disabled on an RL-trained model does not undo its training, so mode
-contrasts and historical trends do not isolate the causal effect of RL.
+## What the colors measure
 
-## Generate an interactive explorer
+For a cell and prompt with accepted count n, let `p_i = count_i / n` across the
+ten fixed answer categories. Shannon entropy is `H = -sum(p_i * log2(p_i))`,
+ignoring zero terms. **Effective answer count is `2^H`.** One means all accepted
+answers were identical; ten means an exactly even empirical histogram. Four
+means the same entropy as four equally frequent answers, even if more than four
+bins were observed. It is not a count of unique values, semantic alternatives,
+reasoning strategies or useful hypotheses.
+
+These are descriptive plug-in point estimates with finite-sample downward bias.
+Do not interpret distance from ten as bias-corrected, or derive an entropy CI
+from separate Wilson endpoints. The original benchmark's primary statistic, TV,
+remains in RESULTS.md and cell detail. Identical entropy can hide different
+number distributions, so inspect the fixed-bin counts before interpreting a
+particular model preference.
+
+Asterisks mark acceptance shortfalls. Click for accepted/planned, invalid,
+operational-attempt and (where recorded) truncation counts. Completed n=0 cells
+show hatched n/a; absent completed cells show a dash without claiming unsupported
+capability. V3.1 is excluded by default and can be revealed as a labeled archive
+at the end. Its original evidence is unchanged. The active Codex grid and the
+stopped, ungraded analytics pilot are outside this completed-grid snapshot.
+
+## Reproduce the checked-in presentation
 
 ```sh
-uv run visualize.py \
-  results/2026-11-01-grid-pi-001 \
-  results/2026-11-01-grid-grok-001 \
-  results/2026-11-01-grid-claude-001 \
-  results/2026-11-01-deepseek-history-c16-001 \
-  --out .lavish/distribution-explorer.html
+uv run visualize.py --spec reports/comparison.json --out reports/comparison.html
+uv run visualize.py --spec reports/comparison.json --out reports/comparison.html --check
 ```
 
-Open the HTML directly or use `lavish-axi .lavish/distribution-explorer.html`
-for collaborative review. It has developer, class, version, effort and
-temperature filters, linked detail plots, exact interval tables, frozen
-parameters and filtered CSV download. It works offline with no external
-JavaScript. Optional local project fonts are embedded when available; otherwise
-portable font fallbacks are used. No model calls are made.
+The scope file enumerates the exact public exports and exclusions. The generator
+verifies each package before loading it and accepts only completed v1/v2 grids.
+The HTML and `comparison-manifest.json` are generated artifacts; edit the
+scope, registry, `visualize.py`, `visualization.html` or `visualization.js`, then
+rebuild. The sidecar records input and source hashes. CI checks for staleness.
+No model calls are made. The HTML includes its data and script and works offline.
+It uses the existing Agents & Insights paper/forest-green style with portable
+system and serif fonts; `--embed-fonts` optionally embeds local brand fonts.
 
-The generator verifies each public evidence package before loading it and
-accepts only completed v1/v2 grids. Supply result directories explicitly.
-Smoke checks, exploratory probes and historical separate-batch rounds should
-have separate views. A completed smoke is still a validation experiment,
-not a measured grid. Never add live partial results to the scientific comparison.
+For another completed round, add its export to a new scope or pass explicit
+result directories. Repeated runs remain separate blocks even for identical
+model settings. Smoke checks, probes and separate historical batches belong in
+separate views. Do not append active partial results to this matrix.
+
+For local collaborative review, run `lavish-axi reports/comparison.html`.
+The CSV download contains every displayed cell's exact counts, CIs, entropy,
+TV, denominators, settings and exclusion label. It does not contain raw logs.
 
 ## Generate scientific figures
 
@@ -77,8 +93,9 @@ metadata and source hashes in `plot_manifest.json`.
 `plot_results.py` writes paginated PNG and SVG figures from verified grids.
 Each page retains run and serving context. It also writes a selected-cell
 interval figure and a provenance file. See its `--help` for explicit paths,
-page size and detail selection. The static figure and interactive explorer
-share answer order, fixed scales, prompt identities and denominator rules.
+page size and detail selection. The static heatmaps retain the same prompt identities, answer order and
+denominator rules as the matrix detail. Their probability colors encode a
+different quantity from the primary matrix's effective-answer-count colors.
 
 ## Uncertainty and missingness
 
@@ -90,7 +107,7 @@ These intervals are conditional on accepted answers and assume stable,
 independent trials. They are pointwise for fixed answer categories, not
 simultaneous bands for every bin or row. Overlap is not an equivalence test.
 A fixed-bin Wilson interval is not automatically valid for a data-selected
-modal share. TV currently has no confidence interval. Do not derive one by
+modal share. TV and effective answer count currently have no confidence intervals. Do not derive one by
 combining the bin intervals or use a degenerate empirical bootstrap for an
 all-identical sample.
 

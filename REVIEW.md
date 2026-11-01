@@ -73,3 +73,28 @@ The export-time verifier also compares reparsed session/model identifiers and
 usage metadata against the saved attempt. Tampering tests cover those fields,
 so changing a derived session ID cannot conceal reuse. This strengthens the
 independent exporter without changing any model call or recorded result.
+
+
+## 2026-11-01 presentation and publication cleanup
+
+Grok 4.7 performed a read-only methodology review through the External Model
+Orchestrator before the final presentation revision. It identified five risks:
+V3.1 default inclusion, mixing On profiles with native effort flags, treating
+named families as ancestry, undefined effective-answer-count estimates, and
+mixing operational retries with invalid logical responses. The coordinator
+checked these findings against the frozen exports.
+
+The final presentation is one model-by-effort matrix, requested by Bryan,
+with paired prompt values. It hides V3.1 by default, reveals it in an archive
+block, keeps DeepSeek On separate from native High, preserves temperature and
+serving strata, defines `2^H` per cell/prompt, and shows no invented score CI.
+Cell details retain fixed-bin Wilson intervals and separate validity, operational
+and truncation counts. Display families carry no ancestry claim. The reviewer
+examined the earlier presentation, not the final rewritten matrix; browser QA
+and generated-artifact checks cover that revision.
+
+The four completed grid exports remain unchanged. Codex is still running and
+excluded from this snapshot. The analytics pilot's frozen verifier passed for
+27 physical attempts, but the run stopped after 23/40 terminal trials. It is
+incomplete and ungraded; documentation no longer implies a completed diversity
+finding. No new benchmark inference was performed for this cleanup.

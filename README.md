@@ -4,11 +4,13 @@ What distribution do you get when you ask an LLM for a random integer from 1 to 
 
 This benchmark runs fresh sessions for each of two fixed prompts, records every attempt, and compares the accepted answers with a uniform distribution. Single-model rounds default to **1,000 trials per prompt**; the model/effort grids use **100 per prompt per cell**. Each repeat gets its own immutable result directory.
 
-**[Recorded results](RESULTS.md)** · [50-trial effort probes](PROBES.md) · [Protocol](PROTOCOL.md) · [Public evidence format](EVIDENCE.md)
+**[Single comparison matrix](reports/comparison.html)** (download and open the HTML) · **[Recorded results](RESULTS.md)** · [50-trial effort probes](PROBES.md) · [Protocol](PROTOCOL.md) · [Public evidence format](EVIDENCE.md)
 
 [Analytics coverage pilot](studies/analytics-coverage/README.md): a separate
-40-call study of useful hypothesis coverage and diagnostic quality at requested
-low versus max effort. Its semantic grades are kept separate from integer results.
+40-call study of repeated first-hypothesis coverage at requested low versus max
+effort. The first run stopped at its 30-minute limit: 23 terminal trials, 22
+schema-valid responses. It is incomplete and ungraded, so it supports no finding
+about useful hypothesis diversity or diagnostic quality.
 
 **[Run a reproducible model/effort grid](GRIDS.md).** Checked-in profiles cover
 Codex, Claude, Grok and Pi/OpenRouter. Plan with `grid.py plan --spec grids/codex.json --count 100 --out runs/my-grid`, then use `grid.py run`,
@@ -24,7 +26,21 @@ empty final answers under its pinned serving profile, so that condition has no
 estimated number distribution. [Scientific figures](figures/2026-11-01-deepseek-history)
 keep missing answers and serving differences visible.
 
-The completed Claude Opus 5.5 subscription round returned `7` in all 1,000 baseline trials. The meta-prompt produced 958 sevens, 37 sixes, three fours and one three; one prose response was excluded. The two earlier stopped Claude rounds remain separate in the report. These are descriptive results under the recorded CLI settings.
+## Published grid snapshot
+
+| Grid | Planned trials | Accepted | State |
+| --- | ---: | ---: | --- |
+| Claude | 5,800 | 5,799 | Complete |
+| Grok | 1,200 | 1,192 | Complete |
+| GPT-4o via Pi/OpenRouter | 200 | 200 | Complete |
+| DeepSeek history | 4,400 | 3,993 | Complete; V3.1 retained in archive |
+| Codex | 8,000 | Pending | Running at the 2026-11-01 snapshot; omitted from comparison |
+
+The matrix shows 15 models and 54 settings from the four completed grids.
+V3.1 is excluded from the main comparison at the author's request; a reveal
+control shows its archived settings and missing responses. Historical rounds,
+smoke checks and the superseded DeepSeek pilot remain separate in their reports.
+All published counts retain invalid responses as exclusions without replacement.
 
 ## The two conditions
 
@@ -36,7 +52,7 @@ The completed Claude Opus 5.5 subscription round returned `7` in all 1,000 basel
 
 > Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.
 
-Within each round both prompts use the same model, reasoning setting, runner and working directory. New rounds use the neutral working directory `/`; Pi appends `<cwd>\n/\n</cwd>` to the system preamble. Each trial starts a fresh conversation. No external random value, temperature override or seed override is supplied. Tools are disabled or denied, and observed tool use excludes an attempt. The scheduling seed only controls condition order.
+Within each round both prompts use the same model, reasoning setting, runner and working directory. New rounds use the neutral working directory `/`; Pi appends `<cwd>\n/\n</cwd>` to the system preamble. Each trial starts a fresh conversation. No external random value or model seed is supplied. Standard CLI grids use default decoding. The DeepSeek fixed-decoding grid explicitly freezes temperatures 0.7 and 1.0 and its other controls; keep those strata separate. Tools are disabled or denied, and observed tool use excludes an attempt. The scheduling seed only controls condition order.
 
 Pi remains the default. Native `claude`, `codex`, `grok` and `agy` runners are additional options that use existing subscription/account logins. Native CLI calls carry their own system context and expose less request detail than Pi. Treat the runner as part of the experimental condition. See [CLI setup and evidence limits](CLI_RUNNERS.md).
 
@@ -65,7 +81,7 @@ uv run --python 3.12 bench.py verify-public results/round-001
 uv run --python 3.12 bench.py report
 ```
 
-Repeat with `round-002`, `round-003`, and so on. Add `--model` or `--thinking` to `plan` to choose settings. Use `--runner claude --model claude-opus-5-5` for Claude Code, or `--runner codex`, `--runner grok`, `--runner agy`. Pi audits OpenAI Responses and the validated OpenRouter GPT-4o profile. `--count` changes trials **per condition** and is useful for engineering smoke checks; the benchmark default is 1,000 each. Preserve smoke checks separately from measured rounds. Time, metadata-cost, attempt and timeout limits can be set before freezing with `--max-seconds`, `--max-cost`, `--max-attempts` and `--timeout`.
+Repeat with `round-002`, `round-003`, and so on. Add `--model` or `--thinking` to `plan` to choose settings. Use `--runner claude --model claude-opus-5-5` for Claude Code, or `--runner codex`, `--runner grok`, `--runner agy`. Pi audits OpenAI Responses, the validated OpenRouter GPT-4o profile, and the fixed OpenRouter DeepSeek profiles described in [GRIDS.md](GRIDS.md). `--count` changes trials **per condition** and is useful for engineering smoke checks; the benchmark default is 1,000 each. Preserve smoke checks separately from measured rounds. Time, metadata-cost, attempt and timeout limits can be set before freezing with `--max-seconds`, `--max-cost`, `--max-attempts` and `--timeout`.
 
 The two conditions are interleaved in randomized adjacent pairs under one shared controller. Every trial starts a new runner process and conversation. Ctrl-C pauses the round; the same `run` command resumes it using frozen source without repeating completed trials. Exports refuse to overwrite an existing result directory.
 
@@ -76,7 +92,7 @@ Exploratory 50-trial rounds live separately in `probes/<id>/`. Generate their re
 ## Errors and rate limits
 
 - A 429, transient provider error or timeout pauses new launches and halves concurrency, down to one. Existing requests drain.
-- Backoff starts at 15 seconds, doubles with repeated trouble, adds jitter, and respects longer `Retry-After` hints. Twenty healthy completions increase concurrency by one, up to four.
+- Backoff starts at 15 seconds, doubles with repeated trouble, adds jitter, and respects longer `Retry-After` hints. Twenty healthy completions increase concurrency by one, up to the frozen concurrency ceiling (four by default).
 - Each logical trial allows at most three physical attempts. Retries use a fresh conversation with the **same prompt**. Pi's hidden retries and cache warming are disabled. Native CLI internal HTTP retries are not visible; their attempts count CLI processes, not audited HTTP calls.
 - Failed attempts never contribute a number. Completed invalid responses are retained and never retried. Counts, valid-response rate and operational failures are reported separately.
 - Authentication, billing/quota and protocol errors stop the batch. A persistent-error circuit, two-hour active-run limit and 10 USD runner-metadata limit (where reported) also stop it. Limits apply across resumes; in-flight requests can exceed a ceiling slightly. Missing costs display as `n/a` and cannot enforce a cost ceiling. These are reported estimates, not subscription charges.
@@ -103,9 +119,20 @@ The suite covers process concurrency, 429/503, Retry-After, timeouts, invalid ou
 
 ## Compare models visually
 
-[Visualization design and reproduction](VISUALIZATION.md) describes the shared
-layout: fixed 1-10 heatmaps for both prompts, model/class/effort/temperature
-filters, TV dots, accepted/planned counts and selected-row Wilson intervals.
-Generate a portable explorer from completed, verified grid exports with
-`uv run visualize.py results/<grid-id> --out .lavish/distribution-explorer.html`.
-Keep runs, decoding settings and serving contexts separate.
+Use one [model-by-effort matrix](reports/comparison.html): families and model
+versions are rows, effort categories are columns, and every cell pairs baseline
+with meta-prompt. A fixed 1-10 color scale shows effective answer count, `2^H`.
+Click a value for the full ten-bin distribution, TV, denominators and pointwise
+95% Wilson intervals. DeepSeek On stays separate from native CLI High; temperatures,
+serving contexts and independent runs are never pooled.
+
+```sh
+uv run visualize.py --spec reports/comparison.json --out reports/comparison.html
+uv run visualize.py --spec reports/comparison.json --out reports/comparison.html --check
+```
+
+Open the generated HTML in a browser. GitHub's file viewer displays source;
+download the file to use the interactive chart. It works offline without a server.
+The checked-in scope lists the exact evidence packages, and the generated sidecar
+records source and export hashes. See [VISUALIZATION.md](VISUALIZATION.md) for the
+metric definition, limitations and separate publication figure commands.

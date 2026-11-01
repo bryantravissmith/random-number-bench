@@ -1,0 +1,18 @@
+{
+  "schema": "random-number-presentation-scope-v1",
+  "snapshot_date": "2026-11-01",
+  "exports": [
+    "results/2026-11-01-grid-claude-001",
+    "results/2026-11-01-grid-grok-001",
+    "results/2026-11-01-grid-pi-001",
+    "results/2026-11-01-deepseek-history-c16-001"
+  ],
+  "excluded_models": {
+    "deepseek/deepseek-chat-v3.1": "Excluded from the substantive comparison at Bryan's request after all 400 thinking trials returned empty final answers. Both modes remain in the archived evidence."
+  },
+  "notes": [
+    "Codex's 8,000-trial grid was still running at this publication snapshot and is not included.",
+    "The separate analytics pilot stopped at its 30-minute limit: 23/40 terminal trials, 22 schema-valid answers. It is incomplete and ungraded.",
+    "V3.1 is hidden by default at the author's request; reveal it to inspect the failure counts."
+  ]
+}
