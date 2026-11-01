@@ -6,6 +6,10 @@ This benchmark runs fresh sessions for each of two fixed prompts, records every 
 
 **[Recorded results](RESULTS.md)** · [50-trial effort probes](PROBES.md) · [Protocol](PROTOCOL.md) · [Public evidence format](EVIDENCE.md)
 
+[Analytics coverage pilot](studies/analytics-coverage/README.md): a separate
+40-call study of useful hypothesis coverage and diagnostic quality at requested
+low versus max effort. Its semantic grades are kept separate from integer results.
+
 **[Run a reproducible model/effort grid](GRIDS.md).** Checked-in profiles cover
 Codex, Claude, Grok and Pi/OpenRouter. Plan with `grid.py plan --spec grids/codex.json --count 100 --out runs/my-grid`, then use `grid.py run`,
 `grid.py status` and `grid.py export`. Each cell gets 100 trials for each prompt.
