@@ -76,6 +76,29 @@ For local collaborative review, run `lavish-axi reports/comparison.html`.
 The CSV download contains every displayed cell's exact counts, CIs, entropy,
 TV, denominators, settings and exclusion label. It does not contain raw logs.
 
+## Refresh the README and results image
+
+Both documents embed [comparison.png](reports/comparison.png), a high-resolution
+capture of this same matrix. Refresh the HTML first, then capture it headlessly:
+
+```sh
+# One-time browser installation; skip if using an installed Chrome below.
+uv run --python 3.12 --with playwright==1.64.1 python -m playwright install chromium
+uv run snapshot_matrix.py
+# Alternatively: uv run snapshot_matrix.py --browser chrome
+uv run --python 3.12 bench.py report
+```
+
+The capture uses a 1,600-pixel desktop viewport at 2x resolution, includes all
+rows, and omits interactive controls. It makes no network requests or model
+calls. `comparison-image.json` records source/image hashes and renderer versions.
+CI runs `python snapshot_matrix.py --check` to reject a missing, modified or
+stale image without installing a browser. Pixel rendering can differ with the
+browser version and system fonts; this checks provenance, not pixel equality
+across operating systems. Commit the PNG and its sidecar whenever the matrix
+changes. RESULTS.md gets the image through `public_results.py`; never edit the
+generated report manually.
+
 ## Generate scientific figures
 
 ```sh

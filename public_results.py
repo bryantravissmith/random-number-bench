@@ -465,4 +465,14 @@ def report(results, output, *, probes=False):
         for folder in grid_folders:
             sections.extend(grid_results.report_lines(folder))
         lines = lines[:4] + sections + ["", "## Historical rounds", ""] + lines[4:]
+    if not probes and (output.parent / "reports/comparison.png").is_file():
+        lines[4:4] = [
+            "[![Scannable matrix comparing model families, versions and efforts for both prompts](reports/comparison.png)](reports/comparison.png)",
+            "",
+            "Completed-grid snapshot: effective answer count from 1 (concentrated) to 10 (evenly spread). "
+            "[Full-resolution image](reports/comparison.png) · "
+            "[Interactive matrix](reports/comparison.html) (download and open) · "
+            "[Scope and interpretation](VISUALIZATION.md). Historical rounds and excluded settings remain in the tables below.",
+            "",
+        ]
     output.write_text("\n".join(lines + histogram + details) + "\n")

@@ -41,3 +41,4 @@ jobs:
           python tests/test_plot_results.py
           python tests/test_visualize.py
           python visualize.py --spec reports/comparison.json --out reports/comparison.html --check
+          python snapshot_matrix.py --check

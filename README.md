@@ -6,6 +6,10 @@ This benchmark runs fresh sessions for each of two fixed prompts, records every 
 
 **[Single comparison matrix](reports/comparison.html)** (download and open the HTML) · **[Recorded results](RESULTS.md)** · [50-trial effort probes](PROBES.md) · [Protocol](PROTOCOL.md) · [Public evidence format](EVIDENCE.md)
 
+[![Scannable matrix comparing model families, versions and efforts for both prompts](reports/comparison.png)](reports/comparison.png)
+
+Completed-grid snapshot: effective answer count from **1 (concentrated)** to **10 (evenly spread)**. [View full-resolution image](reports/comparison.png), or download and open the [interactive matrix](reports/comparison.html) for counts and 95% CIs.
+
 [Analytics coverage pilot](studies/analytics-coverage/README.md): a separate
 40-call study of repeated first-hypothesis coverage at requested low versus max
 effort. The first run stopped at its 30-minute limit: 23 terminal trials, 22
