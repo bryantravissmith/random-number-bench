@@ -37,8 +37,10 @@ def plan(args):
     default_provider, default_model = RUNNER_DEFAULTS[args.runner]
     args.model = args.model or default_model
     provider = args.provider or default_provider
-    if args.runner == "pi" and provider != "openai":
-        raise ValueError("The Pi adapter currently audits OpenAI Responses only")
+    if args.runner == "pi" and provider not in ("openai", "openrouter"):
+        raise ValueError(
+            "The Pi adapter audits OpenAI Responses and OpenRouter Chat Completions"
+        )
     seed = args.order_seed if args.order_seed is not None else secrets.randbits(64)
     rng = random.Random(seed)
     schedule = []

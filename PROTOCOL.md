@@ -2,9 +2,16 @@
 
 The canonical prompts and range are in [protocol.json](protocol.json).
 
-One round contains 1,000 logical baseline trials and 1,000 logical sampling-meta trials. Freeze the complete trial schedule, exact prompts, model/provider/reasoning, runner name/version and runner/observer/verifier source before the first request. The system preamble is `You are a helpful assistant.` New rounds use the neutral directory `/`, so Pi appends exactly `\n\n<cwd>\n/\n</cwd>` to that preamble. Historical runs used one shared private directory, recorded as a hash. The directory is identical for both conditions in each round.
+One standard round contains 1,000 logical baseline trials and 1,000 logical sampling-meta trials. Smaller rounds and model/effort grids record their planned counts explicitly. Freeze the complete trial schedule, exact prompts, model/provider/reasoning, runner name/version and runner/observer/verifier source before the first request. The system preamble is `You are a helpful assistant.` New rounds use the neutral directory `/`, so Pi appends exactly `\n\n<cwd>\n/\n</cwd>` to that preamble. Historical runs used one shared private directory, recorded as a hash. The directory is identical for both conditions in each round.
 
 Future rounds randomize order inside 1,000 adjacent baseline/meta pairs. A scheduling seed is recorded. It is not sent to the model. Four requests can overlap across conditions; one controller handles all backoff. Output order is descriptive and is not treated as a serial independence test.
+
+Model/effort grids use complete replication blocks. Each block contains every
+cell once in shuffled order, with a randomly ordered adjacent baseline/meta
+pair for each cell. All cells in a service share one concurrency and backoff
+controller. Grid results stay separate by model, requested effort, prompt and
+run. The canonical prompt text is unchanged. See [GRIDS.md](GRIDS.md) for the
+checked-in profiles, frozen schedule, command sequence and interval method.
 
 For Pi, no tools, MCP, user extensions, skills, prompt templates, project context files or themes are available. Only the explicit audit observer runs. Provider retries, cache warming, compaction and telemetry are disabled in isolated settings. Native CLIs disable or deny tools and suppress custom context where supported; their built-in prompts and internal HTTP retries are opaque. See [the per-runner controls](CLI_RUNNERS.md). Sampling overrides are absent. Existing credentials are used locally and are not copied into evidence.
 

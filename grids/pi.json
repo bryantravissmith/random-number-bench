@@ -1,0 +1,11 @@
+{
+  "runner": "pi",
+  "models": [
+    {
+      "model": "openai/gpt-4o",
+      "efforts": [
+        "off"
+      ]
+    }
+  ]
+}

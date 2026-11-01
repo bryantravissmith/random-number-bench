@@ -5,6 +5,8 @@ import json
 import os
 import re
 import shutil
+import subprocess
+import sys
 import tempfile
 from collections import Counter
 from contextlib import ExitStack
@@ -114,6 +116,25 @@ def export(sources, destination, protocol, schedule, design, seed):
         _export(sources, destination, protocol, schedule, design, seed)
 
 
+def verify_raw(root):
+    """Use the verifier frozen with a run, including its original parser rules."""
+    manifest = read(root / "manifest.json")
+    for name, sha in manifest["source_sha256"].items():
+        path = (root / "snapshot" / name).resolve()
+        if (
+            not path.is_relative_to((root / "snapshot").resolve())
+            or digest(path) != sha
+        ):
+            raise ValueError("Frozen source changed before raw verification")
+    done = subprocess.run(
+        [sys.executable, str(root / "snapshot/verify.py"), str(root)],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    return json.loads(done.stdout)
+
+
 def _export(sources, destination, protocol, schedule, design, seed):
     destination = destination.resolve()
     if destination.exists():
@@ -134,7 +155,7 @@ def _export(sources, destination, protocol, schedule, design, seed):
         )
         if set(manifest["source_sha256"]) != expected_files:
             raise ValueError("Unexpected source snapshot files")
-        checks[label] = verify.verify(root)
+        checks[label] = verify_raw(root)
         manifests[label] = manifest
         config = manifest["config"]
         if config["system_prompt"] != "You are a helpful assistant.":
@@ -269,6 +290,10 @@ def _export(sources, destination, protocol, schedule, design, seed):
 def verify_public(root):
     root = root.resolve()
     manifest = read(root / "manifest.json")
+    if manifest.get("schema") == "random-number-public-grid-v1":
+        import grid_results
+
+        return grid_results.verify_public(root)
     required = {"attempts.jsonl", "summary.json"}
     for label, source in manifest["sources"].items():
         if label not in {"baseline", "meta", "shared"} or set(
@@ -375,6 +400,7 @@ def report(results, output, *, probes=False):
         "| --- | --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |",
     ]
     details = []
+    grid_folders = []
     histogram = [
         "",
         "## Answer counts",
@@ -386,6 +412,12 @@ def report(results, output, *, probes=False):
     ]
     for folder in sorted(results.iterdir() if results.exists() else []):
         if not (folder / "manifest.json").exists():
+            continue
+        if (
+            read(folder / "manifest.json").get("schema")
+            == "random-number-public-grid-v1"
+        ):
+            grid_folders.append(folder)
             continue
         meta, summary = verify_public(folder)
         relative = Path(os.path.relpath(folder, output.parent)).as_posix()
@@ -418,4 +450,16 @@ def report(results, output, *, probes=False):
             "",
             f"Design: {meta['design']}. [Protocol and provenance]({relative}/manifest.json).",
         ]
+    if grid_folders:
+        import grid_results
+
+        sections = [
+            "## Model and effort grids",
+            "",
+            "Each model/effort/prompt cell remains separate. Confidence intervals describe the answer proportions among accepted trials.",
+            "",
+        ]
+        for folder in grid_folders:
+            sections.extend(grid_results.report_lines(folder))
+        lines = lines[:4] + sections + ["", "## Historical rounds", ""] + lines[4:]
     output.write_text("\n".join(lines + histogram + details) + "\n")

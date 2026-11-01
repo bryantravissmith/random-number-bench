@@ -1,0 +1,21 @@
+{
+  "runner": "grok",
+  "models": [
+    {
+      "model": "grok-4.5",
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    {
+      "model": "grok-4.7",
+      "efforts": [
+        "low",
+        "medium",
+        "high"
+      ]
+    }
+  ]
+}

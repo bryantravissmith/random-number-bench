@@ -175,6 +175,17 @@ def expected_input(config):
     ]
 
 
+def trial_config(manifest, trial):
+    """Only the frozen prompt, model and effort may vary inside a service grid."""
+    entry = manifest["schedule"][trial - 1]
+    if entry["trial"] != trial:
+        raise ValueError("Schedule trial identity mismatch")
+    return {
+        **manifest["config"],
+        **{key: entry[key] for key in ("prompt", "model", "thinking") if key in entry},
+    }
+
+
 def parse_attempt(folder, config, returncode, timed_out=False, interrupted=False):
     """Fail closed: a valid-looking digit from an errored request never counts."""
     if config.get("runner", "pi") != "pi":
@@ -284,6 +295,65 @@ def parse_attempt(folder, config, returncode, timed_out=False, interrupted=False
                     issues.append("Effective provider input mismatch")
                 if payload.get("reasoning", {}).get("effort") != config["thinking"]:
                     issues.append("Effective provider reasoning mismatch")
+            elif config["provider"] == "openrouter":
+                expected = [
+                    {
+                        "role": "system",
+                        "content": config["system_prompt"]
+                        + "\n\n"
+                        + expected_system(config)["cwd"],
+                    },
+                    {
+                        "role": "user",
+                        "content": [{"type": "text", "text": config["prompt"]}],
+                    },
+                ]
+                if payload.get("messages") != expected:
+                    issues.append("Effective OpenRouter messages mismatch")
+                if config["thinking"] != "off" or any(
+                    k in payload for k in ("reasoning", "reasoning_effort")
+                ):
+                    issues.append(
+                        "Unexpected reasoning parameter for non-reasoning profile"
+                    )
+                if payload.get("provider") != config["openrouter_routing"]:
+                    issues.append("OpenRouter provider pin or fallback policy mismatch")
+                metadata = [e for e in audit if e.get("type") == "provider_metadata"]
+                if not metadata or any(e.get("error") for e in metadata):
+                    issues.append("Missing or errored OpenRouter response metadata")
+                models = {e["model"] for e in metadata if e.get("model")}
+                providers = {e["provider"] for e in metadata if e.get("provider")}
+                ids = {e["id"] for e in metadata if e.get("id")}
+                if (
+                    models != {config["model"]}
+                    or providers != {"OpenAI"}
+                    or len(ids) != 1
+                ):
+                    issues.append(
+                        "OpenRouter response model/provider/identity mismatch"
+                    )
+                result["observed_model"] = (
+                    next(iter(models)) if len(models) == 1 else None
+                )
+                result["upstream_provider"] = (
+                    next(iter(providers)) if len(providers) == 1 else None
+                )
+                result["system_fingerprints"] = sorted(
+                    {
+                        e["system_fingerprint"]
+                        for e in metadata
+                        if e.get("system_fingerprint")
+                    }
+                )
+                if any(
+                    (e.get("usage") or {})
+                    .get("completion_tokens_details", {})
+                    .get("reasoning_tokens", 0)
+                    for e in metadata
+                ):
+                    issues.append("Non-reasoning profile reported reasoning tokens")
+            else:
+                issues.append("Unsupported audited Pi provider")
         if issues:
             result.update(outcome="protocol_error", error="; ".join(issues))
             return result
@@ -439,6 +509,9 @@ def locked(batch):
 
 
 class PiEnvironment:
+    def __init__(self, manifest=None):
+        self.manifest = manifest
+
     def __enter__(self):
         self.tmp = tempfile.TemporaryDirectory(prefix="random-number-pi-")
         path = Path(self.tmp.name)
@@ -452,6 +525,23 @@ class PiEnvironment:
             (path / "auth.json").symlink_to(auth.resolve())
         if (source / "models.json").exists():
             shutil.copyfile(source / "models.json", path / "models.json")
+            (path / "models.json").chmod(0o600)
+        if self.manifest and self.manifest["config"]["provider"] == "openrouter":
+            models = (
+                read(path / "models.json") if (path / "models.json").exists() else {}
+            )
+            provider = models.setdefault("providers", {}).setdefault("openrouter", {})
+            overrides = provider.setdefault("modelOverrides", {})
+            selected = {
+                entry.get("model", self.manifest["config"]["model"])
+                for entry in self.manifest["schedule"]
+            }
+            for model in selected:
+                compat = overrides.setdefault(model, {}).setdefault("compat", {})
+                compat["openRouterRouting"] = self.manifest["config"][
+                    "openrouter_routing"
+                ]
+            save(path / "models.json", models)
             (path / "models.json").chmod(0o600)
         save(path / "settings.json", SETTINGS)
         self.env = {
@@ -486,10 +576,7 @@ async def terminate(process):
 async def attempt(batch, manifest, environment, trial, attempt_no, limit, generation):
     scheduled = manifest["schedule"][trial - 1]
     assert scheduled["trial"] == trial
-    config = {
-        **manifest["config"],
-        "prompt": scheduled.get("prompt", manifest["config"]["prompt"]),
-    }
+    config = trial_config(manifest, trial)
     folder = batch / "attempts" / f"{trial:05d}" / f"{attempt_no:02d}"
     folder.mkdir(parents=True, exist_ok=False)
     command = [
@@ -524,7 +611,8 @@ async def attempt(batch, manifest, environment, trial, attempt_no, limit, genera
     if config.get("runner", "pi") != "pi":
         import cli_runners
 
-        command = cli_runners.command(config, folder)
+        binary = manifest["runner_metadata"]["binary"]
+        command = cli_runners.command(config, folder, binary=binary)
     start = {
         "trial": trial,
         "attempt": attempt_no,
@@ -638,12 +726,7 @@ def recover_unfinished(batch, manifest):
                     raise RuntimeError(
                         f"Unfinished attempt PID {pid} is still alive; refusing duplicate work"
                     )
-        config = {
-            **manifest["config"],
-            "prompt": manifest["schedule"][start["trial"] - 1].get(
-                "prompt", manifest["config"]["prompt"]
-            ),
-        }
+        config = trial_config(manifest, start["trial"])
         recovered = parse_attempt(folder, config, None, interrupted=True)
         save(
             folder / "result.json",
@@ -748,6 +831,24 @@ async def execute(batch, manifest, env):
                 and time.time() >= ctl.state["cooldown_until"]
             )
             while can_launch and pending and len(tasks) < ctl.state["limit"]:
+                if config.get("runner", "pi") != "pi":
+                    import cli_runners
+
+                    # Stop before allocating an attempt if the installed CLI
+                    # changed. Existing calls drain and remain verifiable.
+                    metadata = manifest["runner_metadata"]
+                    try:
+                        unchanged = (
+                            cli_runners.sha256_file(metadata["binary"])
+                            == metadata["binary_sha256"]
+                        )
+                    except OSError:
+                        unchanged = False
+                    if not unchanged:
+                        ctl.state["stopped"] = (
+                            "CLI executable changed; a new plan requires a new version"
+                        )
+                        break
                 trial = pending.pop(0)
                 attempts[trial] = attempts.get(trial, 0) + 1
                 task = asyncio.create_task(
@@ -886,6 +987,36 @@ def plan(args):
     }
     config.update(prompt=args.prompt, system_prompt=SYSTEM, cwd=str(args.cwd.resolve()))
     config["runner"] = args.runner
+    if args.runner == "pi" and args.provider == "openrouter":
+        if args.thinking != "off":
+            raise ValueError("The OpenRouter profile currently requires thinking off")
+        config["openrouter_routing"] = {"only": ["openai"], "allow_fallbacks": False}
+    schedule = getattr(args, "trial_schedule", None) or [
+        {
+            "trial": i,
+            "block": (i - 1) // 100 + 1,
+            **({"prompt": args.trial_prompts[i - 1]} if args.trial_prompts else {}),
+        }
+        for i in range(1, args.count + 1)
+    ]
+    if [row.get("trial") for row in schedule] != list(range(1, args.count + 1)):
+        raise ValueError("Trial schedule must cover exactly the planned trials")
+    for row in schedule:
+        if set(row) - {
+            "trial",
+            "block",
+            "prompt",
+            "model",
+            "thinking",
+            "cell",
+            "condition",
+            "condition_trial",
+        }:
+            raise ValueError("Unexpected per-trial override")
+        if "prompt" in row and (
+            not isinstance(row["prompt"], str) or not row["prompt"].strip()
+        ):
+            raise ValueError("Invalid per-trial prompt")
     command = (
         json.loads(args.pi_command) if args.pi_command else [shutil.which("pi") or "pi"]
     )
@@ -898,9 +1029,15 @@ def plan(args):
         import cli_runners
 
         cli_runners.validate_config(config)
+        for row in schedule:
+            cli_runners.validate_config(
+                trial_config({"config": config, "schedule": schedule}, row["trial"])
+            )
         runner_metadata = cli_runners.preflight(args.runner, args.model)
         version = runner_metadata["version"]
     files = ["batch.py", "pi-audit.ts", "verify.py"]
+    if getattr(args, "grid_spec", None):
+        files.append("grid.py")
     if args.runner != "pi":
         files.append("cli_runners.py")
     for name in files:
@@ -918,20 +1055,15 @@ def plan(args):
         if args.runner == "pi"
         else {"stored_auth_type": runner_metadata["auth_type"]},
         "source_sha256": {name: digest(ROOT / name) for name in files},
-        "schedule": [
-            {
-                "trial": i,
-                "block": (i - 1) // 100 + 1,
-                **({"prompt": args.trial_prompts[i - 1]} if args.trial_prompts else {}),
-            }
-            for i in range(1, args.count + 1)
-        ],
+        "schedule": schedule,
         "prompt_policy": "Frozen per-trial prompts"
-        if args.trial_prompts
+        if args.trial_prompts or getattr(args, "trial_schedule", None)
         else "One fixed prompt",
         "sampling": "No temperature/top_p/seed override; Pi verifies payload defaults, native CLI backend defaults are opaque",
         "error_policy": "Transport failures excluded; bounded retries within logical trial; invalid answers never retried",
     }
+    if getattr(args, "grid_spec", None):
+        manifest["grid"] = args.grid_spec
     save(batch / "manifest.json", manifest)
     print(
         json.dumps(
@@ -1072,7 +1204,7 @@ def main():
             raise RuntimeError(
                 "Provider model configuration or credential class changed since planning"
             )
-        with PiEnvironment() as environment:
+        with PiEnvironment(manifest) as environment:
             return asyncio.run(execute(batch, manifest, environment.env))
 
 

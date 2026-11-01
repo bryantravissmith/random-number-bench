@@ -2,9 +2,20 @@
 
 What distribution do you get when you ask an LLM for a random integer from 1 to 10?
 
-This benchmark runs **1,000 fresh sessions for each of two fixed prompts**, records every attempt, and compares the accepted answers with a uniform distribution. Each repeat gets its own immutable result directory.
+This benchmark runs fresh sessions for each of two fixed prompts, records every attempt, and compares the accepted answers with a uniform distribution. Single-model rounds default to **1,000 trials per prompt**; the model/effort grids use **100 per prompt per cell**. Each repeat gets its own immutable result directory.
 
 **[Recorded results](RESULTS.md)** · [50-trial effort probes](PROBES.md) · [Protocol](PROTOCOL.md) · [Public evidence format](EVIDENCE.md)
+
+**[Run a reproducible model/effort grid](GRIDS.md).** Checked-in profiles cover
+Codex, Claude, Grok and Pi/OpenRouter. Plan with `grid.py plan --spec grids/codex.json --count 100 --out runs/my-grid`, then use `grid.py run`,
+`grid.py status` and `grid.py export`. Each cell gets 100 trials for each prompt.
+The generated `RESULTS.md` keeps every cell separate and includes pointwise
+95% Wilson confidence intervals for the answer proportions.
+
+[Reasoning and release-history study](studies/reasoning-history/PLAN.md): the
+next hypothesis compares historical versions, thinking modes and training
+stages separately. It includes candidate families and a reproducible catalog
+capture, with no historical-study inference run yet.
 
 The completed Claude Opus 5.5 subscription round returned `7` in all 1,000 baseline trials. The meta-prompt produced 958 sevens, 37 sixes, three fours and one three; one prose response was excluded. The two earlier stopped Claude rounds remain separate in the report. These are descriptive results under the recorded CLI settings.
 
@@ -24,7 +35,7 @@ Pi remains the default. Native `claude`, `codex`, `grok` and `agy` runners are a
 
 ## Run another round
 
-Requires macOS or Linux, Python 3.12+, [uv](https://docs.astral.sh/uv/) and the selected CLI. Pi additionally requires Node.js 22.19+. To use [Pi](https://github.com/earendil-works/pi): The runner uses POSIX file locks and process groups.
+Requires macOS or Linux, Python 3.12+, [uv](https://docs.astral.sh/uv/) and the selected CLI. The runner uses POSIX file locks and process groups. [Pi](https://github.com/earendil-works/pi) additionally requires Node.js 22.19+:
 
 ```sh
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent@1.3.0
@@ -47,7 +58,7 @@ uv run --python 3.12 bench.py verify-public results/round-001
 uv run --python 3.12 bench.py report
 ```
 
-Repeat with `round-002`, `round-003`, and so on. Add `--model` or `--thinking` to `plan` to choose settings. Use `--runner claude --model claude-opus-5-5` for Claude Code, or `--runner codex`, `--runner grok`, `--runner agy`. Pi currently audits OpenAI Responses only. `--count` changes trials **per condition** and is useful for engineering smoke checks; the benchmark default is 1,000 each. Preserve smoke checks separately from measured rounds. Time, metadata-cost, attempt and timeout limits can be set before freezing with `--max-seconds`, `--max-cost`, `--max-attempts` and `--timeout`.
+Repeat with `round-002`, `round-003`, and so on. Add `--model` or `--thinking` to `plan` to choose settings. Use `--runner claude --model claude-opus-5-5` for Claude Code, or `--runner codex`, `--runner grok`, `--runner agy`. Pi audits OpenAI Responses and the validated OpenRouter GPT-4o profile. `--count` changes trials **per condition** and is useful for engineering smoke checks; the benchmark default is 1,000 each. Preserve smoke checks separately from measured rounds. Time, metadata-cost, attempt and timeout limits can be set before freezing with `--max-seconds`, `--max-cost`, `--max-attempts` and `--timeout`.
 
 The two conditions are interleaved in randomized adjacent pairs under one shared controller. Every trial starts a new runner process and conversation. Ctrl-C pauses the round; the same `run` command resumes it using frozen source without repeating completed trials. Exports refuse to overwrite an existing result directory.
 

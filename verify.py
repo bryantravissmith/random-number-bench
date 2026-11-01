@@ -42,6 +42,7 @@ def jsonl(path):
 
 
 def verify(root):
+    root = root.resolve()
     manifest = load(root / "manifest.json")
     base_config = manifest["config"]
     assert [entry["trial"] for entry in manifest["schedule"]] == list(
@@ -64,7 +65,11 @@ def verify(root):
         scheduled = manifest["schedule"][result["trial"] - 1]
         config = {
             **base_config,
-            "prompt": scheduled.get("prompt", base_config["prompt"]),
+            **{
+                key: scheduled[key]
+                for key in ("prompt", "model", "thinking")
+                if key in scheduled
+            },
         }
         assert 1 <= result["attempt"] <= config["max_attempts"]
         files = {
@@ -78,15 +83,17 @@ def verify(root):
         for relative, sha in result["evidence_sha256"].items():
             actual = hashlib.sha256((path.parent / relative).read_bytes()).hexdigest()
             assert actual == sha, f"Changed evidence: {path.parent / relative}"
+        if config.get("runner", "pi") != "pi":
+            import cli_runners
+
+            # Reparse exclusions too, so edited outcomes cannot hide answers.
+            cli_runners.verify_attempt(path.parent, config, result)
         if result["outcome"] != "valid":
             assert result["number"] is None, "Error attempt contributed a number"
             continue
         assert result["trial"] not in trials, "Duplicate counted trial"
         trials.add(result["trial"])
         if config.get("runner", "pi") != "pi":
-            import cli_runners
-
-            cli_runners.verify_attempt(path.parent, config, result)
             session = result.get("session_id")
             if session:
                 assert session not in sessions, "Reused CLI session"
@@ -147,6 +154,36 @@ def verify(root):
                     },
                 ],
             )
+        elif config["provider"] == "openrouter":
+            assert config["thinking"] == "off"
+            assert not any(k in payload for k in ("reasoning", "reasoning_effort"))
+            assert payload["messages"] == [
+                {
+                    "role": "system",
+                    "content": config["system_prompt"]
+                    + f"\n\n<cwd>\n{config['cwd']}\n</cwd>",
+                },
+                {
+                    "role": "user",
+                    "content": [{"type": "text", "text": config["prompt"]}],
+                },
+            ]
+            assert payload["provider"] == config["openrouter_routing"]
+            metadata = [e for e in audit if e.get("type") == "provider_metadata"]
+            assert metadata and not any(e.get("error") for e in metadata)
+            assert {e["model"] for e in metadata if e.get("model")} == {config["model"]}
+            assert {e["provider"] for e in metadata if e.get("provider")} == {"OpenAI"}
+            assert len({e["id"] for e in metadata if e.get("id")}) == 1
+            assert result.get("upstream_provider") == "OpenAI"
+            assert result.get("observed_model") == config["model"]
+            assert not any(
+                (e.get("usage") or {})
+                .get("completion_tokens_details", {})
+                .get("reasoning_tokens", 0)
+                for e in metadata
+            )
+        else:
+            raise ValueError("Unsupported audited Pi provider")
         counts[number] += 1
     check_attempt_history(history, base_config["max_attempts"])
     report = load(root / "summary.json")

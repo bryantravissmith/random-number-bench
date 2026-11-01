@@ -54,7 +54,7 @@ class BatchTest(unittest.TestCase):
             "--max-backoff",
             ".1",
             "--timeout",
-            ".3",
+            "2",
             "--recovery-successes",
             "4",
             "--circuit-errors",

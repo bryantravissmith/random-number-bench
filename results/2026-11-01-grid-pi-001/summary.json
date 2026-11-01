@@ -1,0 +1,175 @@
+{
+  "schema": "random-number-public-grid-v1",
+  "interval_method": "wilson_score_pointwise",
+  "confidence": 0.95,
+  "totals": {
+    "planned_trials": 200,
+    "attempted_trials": 200,
+    "physical_attempts": 200,
+    "accepted_trials": 200,
+    "excluded_attempts": 0,
+    "outcomes": {
+      "valid": 200
+    },
+    "counts": {
+      "1": 0,
+      "2": 13,
+      "3": 29,
+      "4": 36,
+      "5": 19,
+      "6": 12,
+      "7": 69,
+      "8": 19,
+      "9": 3,
+      "10": 0
+    }
+  },
+  "cells": {
+    "openai--gpt-4o--off": {
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 5,
+            "3": 13,
+            "4": 19,
+            "5": 7,
+            "6": 6,
+            "7": 42,
+            "8": 7,
+            "9": 1,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.021543679154,
+              0.111750469232
+            ],
+            "3": [
+              0.077571674272,
+              0.209803514401
+            ],
+            "4": [
+              0.125147515098,
+              0.277788453791
+            ],
+            "5": [
+              0.034319261067,
+              0.137495147391
+            ],
+            "6": [
+              0.027786123963,
+              0.124768154459
+            ],
+            "7": [
+              0.327983826744,
+              0.51793513297
+            ],
+            "8": [
+              0.034319261067,
+              0.137495147391
+            ],
+            "9": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.44,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.01175,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 8,
+            "3": 16,
+            "4": 17,
+            "5": 12,
+            "6": 6,
+            "7": 27,
+            "8": 12,
+            "9": 2,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.041093461484,
+              0.149981077009
+            ],
+            "3": [
+              0.100952884888,
+              0.244202693893
+            ],
+            "4": [
+              0.108935661141,
+              0.255480047676
+            ],
+            "5": [
+              0.06999406437,
+              0.198120994267
+            ],
+            "6": [
+              0.027786123963,
+              0.124768154459
+            ],
+            "7": [
+              0.192695841496,
+              0.364321167679
+            ],
+            "8": [
+              0.06999406437,
+              0.198120994267
+            ],
+            "9": [
+              0.00550196755,
+              0.070011790729
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.34,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.01625,
+          "missing_cost_attempts": 0
+        }
+      }
+    }
+  }
+}

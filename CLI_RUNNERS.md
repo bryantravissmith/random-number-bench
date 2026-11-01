@@ -4,7 +4,7 @@ Pi remains the default (`--runner pi`). Native CLIs are additional options. Inst
 
 | Runner | Default model | Authentication | Evidence |
 | --- | --- | --- | --- |
-| `pi` | `gpt-6.1-sol` | Existing Pi provider login | Native session plus audited OpenAI HTTP request |
+| `pi` | `gpt-6.1-sol` | Existing Pi provider login; OpenRouter credits for GPT-4o | Native session plus audited HTTP request |
 | `claude` | `claude-opus-5-5` | Claude Code first-party subscription OAuth | Native CLI transcript |
 | `codex` | `gpt-6.1-sol` | Codex ChatGPT login | Native CLI transcript |
 | `grok` | `grok-4.7` | Grok OAuth login | Native CLI transcript |
@@ -103,18 +103,25 @@ confirmed absent before those runs. Native transcripts establish the requested
 CLI controls and reported token usage, not a complete backend request payload.
 
 As checked on 2026-11-01, the local Codex subscription catalog does not list
-GPT-4o or GPT-4.1. Pi lists them as non-reasoning models in its general catalog,
-which does not establish subscription access. A GPT-4o comparison requires an
-API-access decision and a separately validated profile that omits reasoning
-parameters. No API-backed benchmark was started as part of this change.
+GPT-4o or GPT-4.1. The [Pi/OpenRouter grid](grids/pi.json) now provides a
+separately validated GPT-4o comparison using the user's connected OpenRouter
+account and paid credits. It sends no reasoning parameters, pins the `openai`
+upstream and disables provider fallback. A loopback HTTP test and separate live
+smoke checked this profile before the measured 100-trial-per-prompt run.
+
+The audit verifies the outgoing request, HTTP response, returned model alias,
+upstream provider, response ID and reported reasoning-token usage. The response
+alias is `openai/gpt-4o`; it does not establish an immutable dated backend
+snapshot. The system fingerprint is retained when supplied. Other OpenRouter
+models and thinking controls require their own validated profile before use.
 
 OpenAI lists GPT-4o and GPT-4.1 for API shutdown on January 14, 2027. Original
 GPT-4 and GPT-4 Turbo shut down on October 23, 2026. See the official
 [deprecation schedule](https://developers.openai.com/api/docs/deprecations),
 [GPT-4o model page](https://developers.openai.com/api/docs/models/gpt-4o) and
 [Codex model guidance](https://learn.chatgpt.com/docs/models). A future comparison
-should pin a still-available snapshot, preserve the exact two prompts, record
-reasoning as not applicable, and keep API and CLI runs separate.
+should preserve the exact two prompts, record reasoning as not applicable,
+and keep API and CLI runs separate. See [grid setup and reproduction](GRIDS.md).
 
 ## Sources
 

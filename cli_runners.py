@@ -48,7 +48,7 @@ FORMATS = {
 }
 EFFORTS = {
     "claude": ("off", "low", "medium", "high", "xhigh", "max"),
-    "codex": ("minimal", "low", "medium", "high", "xhigh"),
+    "codex": ("minimal", "low", "medium", "high", "xhigh", "max"),
     "grok": ("low", "medium", "high"),
     "agy": ("low", "medium", "high"),
 }
@@ -821,6 +821,14 @@ def _extract_claude(events, config, transcript):
     results = [e for e in events if e.get("type") == "result"]
     users = [e for e in events if e.get("type") == "user"]
     for event in events:
+        if event.get("type") == "system" and event.get("subtype") == "api_retry":
+            status = event.get("error_status")
+            transcript.errors.append(
+                "CLI internal retry observed; original attempt excluded: "
+                + (f"HTTP {status} " if type(status) is int else "")
+                + str(event.get("error", "unknown"))
+            )
+            continue
         if (
             config["runner"] == "claude"
             and event.get("type") == "system"
@@ -1141,7 +1149,24 @@ def parse(folder, config, returncode, timed_out=False, interrupted=False):
         return result
     if returncode != 0 or transcript.errors:
         joined = error_text or f"CLI exited with {returncode} and no error text"
-        result.update(outcome=error_kind(joined), error=joined[:4000])
+        # The authenticated Codex WebSocket edge intermittently returned this
+        # exact opaque handshake error during smoke checks, then the same
+        # model/effort succeeded. Bound retries via the shared controller.
+        # Explicit auth, quota and other 403 failures remain fatal.
+        transient_edge = (
+            runner == "codex"
+            and "unexpected status 403 forbidden: unknown error" in joined.lower()
+            and "wss://chatgpt.com/backend-api/codex/responses" in joined
+            and not re.search(
+                r"unauthorized|not logged in|invalid.api.key|quota|usage.limit|billing",
+                joined,
+                re.I,
+            )
+        )
+        result.update(
+            outcome="provider_error" if transient_edge else error_kind(joined),
+            error=joined[:4000],
+        )
         return result
     if not transcript.terminal:
         transcript.issues.insert(0, "Transcript has no terminal event")

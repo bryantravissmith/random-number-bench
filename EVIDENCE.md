@@ -11,6 +11,19 @@ Each public result contains:
 - `summary.json`: per-condition counts, validity, exclusions, TV and runner cost metadata.
 - `source/`: the exact frozen runner, observer and verifier files used by each source batch.
 
+Grid exports additionally retain the full randomized model/effort schedule,
+cell assignments, requested model and effort on every attempt, and pointwise
+95% Wilson intervals for each answer proportion. The public verifier checks
+the schedule against its seed, maps every attempt including errors to its cell,
+validates bounded retry histories and independently recomputes counts and
+intervals. The exporter runs the hash-checked frozen raw verifier before
+creating the public package. Export and resume both take the batch lock.
+
+The OpenRouter GPT-4o profile audits Chat Completions requests with OpenAI
+pinned as the upstream and fallback disabled. Accepted rows preserve the
+returned model alias, upstream name and supplied system fingerprints. These
+fields do not independently identify an immutable model snapshot.
+
 Runner, runner version, evidence level and observed response model (when exposed) are preserved. The legacy field `pi_reported_cost` also stores native runner estimates; `reported_cost_known` distinguishes unknown values from reported zeroes.
 
 Local paths and identifiers are replaced by SHA-256 hashes. Headers, credentials, environment values, full commands and free-form error text are omitted. A working-directory hash preserves comparability without publishing the local path embedded in the system prompt. Invalid-response free text stays in raw logs; its category and evidence hashes remain public.

@@ -1,0 +1,2126 @@
+{
+  "schema": "random-number-public-grid-v1",
+  "exported_at": "2026-11-01T19:40:12.475081+00:00",
+  "grid": {
+    "schema": "random-number-grid-v1",
+    "created_at": "2026-11-01T19:30:04.169057+00:00",
+    "runner": "pi",
+    "provider": "openrouter",
+    "protocol": {
+      "version": "random-number-bench-v1",
+      "range": [
+        1,
+        10
+      ],
+      "default_trials_per_condition": 1000,
+      "prompts": {
+        "baseline": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+        "meta": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+      }
+    },
+    "cells": [
+      {
+        "id": "openai--gpt-4o--off",
+        "model": "openai/gpt-4o",
+        "thinking": "off"
+      }
+    ],
+    "planned_per_condition": 100,
+    "order_seed": 634646317512794036,
+    "design": "randomized_complete_cell_blocks_with_adjacent_prompt_pairs",
+    "order_note": "Every block randomizes all model/effort cells and each cell's two prompts. Scheduling randomness is never inserted in prompts or model sampling parameters.",
+    "batch_manifest_sha256": "7046c3664bdf9006b52e96f5eac86fbfb73263205e8c9a960f7cfaf76915d4ff"
+  },
+  "schedule": [
+    {
+      "trial": 1,
+      "block": 1,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 1,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 2,
+      "block": 1,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 1,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 3,
+      "block": 2,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 2,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 4,
+      "block": 2,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 2,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 5,
+      "block": 3,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 3,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 6,
+      "block": 3,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 3,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 7,
+      "block": 4,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 4,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 8,
+      "block": 4,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 4,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 9,
+      "block": 5,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 5,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 10,
+      "block": 5,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 5,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 11,
+      "block": 6,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 6,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 12,
+      "block": 6,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 6,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 13,
+      "block": 7,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 7,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 14,
+      "block": 7,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 7,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 15,
+      "block": 8,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 8,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 16,
+      "block": 8,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 8,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 17,
+      "block": 9,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 9,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 18,
+      "block": 9,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 9,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 19,
+      "block": 10,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 10,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 20,
+      "block": 10,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 10,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 21,
+      "block": 11,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 11,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 22,
+      "block": 11,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 11,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 23,
+      "block": 12,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 12,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 24,
+      "block": 12,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 12,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 25,
+      "block": 13,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 13,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 26,
+      "block": 13,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 13,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 27,
+      "block": 14,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 14,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 28,
+      "block": 14,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 14,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 29,
+      "block": 15,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 15,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 30,
+      "block": 15,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 15,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 31,
+      "block": 16,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 16,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 32,
+      "block": 16,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 16,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 33,
+      "block": 17,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 17,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 34,
+      "block": 17,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 17,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 35,
+      "block": 18,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 18,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 36,
+      "block": 18,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 18,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 37,
+      "block": 19,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 19,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 38,
+      "block": 19,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 19,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 39,
+      "block": 20,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 20,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 40,
+      "block": 20,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 20,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 41,
+      "block": 21,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 21,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 42,
+      "block": 21,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 21,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 43,
+      "block": 22,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 22,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 44,
+      "block": 22,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 22,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 45,
+      "block": 23,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 23,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 46,
+      "block": 23,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 23,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 47,
+      "block": 24,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 24,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 48,
+      "block": 24,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 24,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 49,
+      "block": 25,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 25,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 50,
+      "block": 25,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 25,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 51,
+      "block": 26,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 26,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 52,
+      "block": 26,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 26,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 53,
+      "block": 27,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 27,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 54,
+      "block": 27,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 27,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 55,
+      "block": 28,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 28,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 56,
+      "block": 28,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 28,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 57,
+      "block": 29,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 29,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 58,
+      "block": 29,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 29,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 59,
+      "block": 30,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 30,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 60,
+      "block": 30,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 30,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 61,
+      "block": 31,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 31,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 62,
+      "block": 31,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 31,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 63,
+      "block": 32,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 32,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 64,
+      "block": 32,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 32,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 65,
+      "block": 33,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 33,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 66,
+      "block": 33,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 33,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 67,
+      "block": 34,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 34,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 68,
+      "block": 34,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 34,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 69,
+      "block": 35,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 35,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 70,
+      "block": 35,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 35,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 71,
+      "block": 36,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 36,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 72,
+      "block": 36,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 36,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 73,
+      "block": 37,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 37,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 74,
+      "block": 37,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 37,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 75,
+      "block": 38,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 38,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 76,
+      "block": 38,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 38,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 77,
+      "block": 39,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 39,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 78,
+      "block": 39,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 39,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 79,
+      "block": 40,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 40,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 80,
+      "block": 40,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 40,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 81,
+      "block": 41,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 41,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 82,
+      "block": 41,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 41,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 83,
+      "block": 42,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 42,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 84,
+      "block": 42,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 42,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 85,
+      "block": 43,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 43,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 86,
+      "block": 43,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 43,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 87,
+      "block": 44,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 44,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 88,
+      "block": 44,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 44,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 89,
+      "block": 45,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 45,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 90,
+      "block": 45,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 45,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 91,
+      "block": 46,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 46,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 92,
+      "block": 46,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 46,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 93,
+      "block": 47,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 47,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 94,
+      "block": 47,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 47,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 95,
+      "block": 48,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 48,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 96,
+      "block": 48,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 48,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 97,
+      "block": 49,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 49,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 98,
+      "block": 49,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 49,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 99,
+      "block": 50,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 50,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 100,
+      "block": 50,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 50,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 101,
+      "block": 51,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 51,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 102,
+      "block": 51,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 51,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 103,
+      "block": 52,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 52,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 104,
+      "block": 52,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 52,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 105,
+      "block": 53,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 53,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 106,
+      "block": 53,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 53,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 107,
+      "block": 54,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 54,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 108,
+      "block": 54,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 54,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 109,
+      "block": 55,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 55,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 110,
+      "block": 55,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 55,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 111,
+      "block": 56,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 56,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 112,
+      "block": 56,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 56,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 113,
+      "block": 57,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 57,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 114,
+      "block": 57,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 57,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 115,
+      "block": 58,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 58,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 116,
+      "block": 58,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 58,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 117,
+      "block": 59,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 59,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 118,
+      "block": 59,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 59,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 119,
+      "block": 60,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 60,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 120,
+      "block": 60,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 60,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 121,
+      "block": 61,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 61,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 122,
+      "block": 61,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 61,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 123,
+      "block": 62,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 62,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 124,
+      "block": 62,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 62,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 125,
+      "block": 63,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 63,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 126,
+      "block": 63,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 63,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 127,
+      "block": 64,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 64,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 128,
+      "block": 64,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 64,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 129,
+      "block": 65,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 65,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 130,
+      "block": 65,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 65,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 131,
+      "block": 66,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 66,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 132,
+      "block": 66,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 66,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 133,
+      "block": 67,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 67,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 134,
+      "block": 67,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 67,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 135,
+      "block": 68,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 68,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 136,
+      "block": 68,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 68,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 137,
+      "block": 69,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 69,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 138,
+      "block": 69,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 69,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 139,
+      "block": 70,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 70,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 140,
+      "block": 70,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 70,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 141,
+      "block": 71,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 71,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 142,
+      "block": 71,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 71,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 143,
+      "block": 72,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 72,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 144,
+      "block": 72,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 72,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 145,
+      "block": 73,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 73,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 146,
+      "block": 73,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 73,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 147,
+      "block": 74,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 74,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 148,
+      "block": 74,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 74,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 149,
+      "block": 75,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 75,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 150,
+      "block": 75,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 75,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 151,
+      "block": 76,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 76,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 152,
+      "block": 76,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 76,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 153,
+      "block": 77,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 77,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 154,
+      "block": 77,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 77,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 155,
+      "block": 78,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 78,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 156,
+      "block": 78,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 78,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 157,
+      "block": 79,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 79,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 158,
+      "block": 79,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 79,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 159,
+      "block": 80,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 80,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 160,
+      "block": 80,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 80,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 161,
+      "block": 81,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 81,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 162,
+      "block": 81,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 81,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 163,
+      "block": 82,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 82,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 164,
+      "block": 82,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 82,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 165,
+      "block": 83,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 83,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 166,
+      "block": 83,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 83,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 167,
+      "block": 84,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 84,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 168,
+      "block": 84,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 84,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 169,
+      "block": 85,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 85,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 170,
+      "block": 85,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 85,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 171,
+      "block": 86,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 86,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 172,
+      "block": 86,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 86,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 173,
+      "block": 87,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 87,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 174,
+      "block": 87,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 87,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 175,
+      "block": 88,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 88,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 176,
+      "block": 88,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 88,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 177,
+      "block": 89,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 89,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 178,
+      "block": 89,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 89,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 179,
+      "block": 90,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 90,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 180,
+      "block": 90,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 90,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 181,
+      "block": 91,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 91,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 182,
+      "block": 91,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 91,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 183,
+      "block": 92,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 92,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 184,
+      "block": 92,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 92,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 185,
+      "block": 93,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 93,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 186,
+      "block": 93,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 93,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 187,
+      "block": 94,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 94,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 188,
+      "block": 94,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 94,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 189,
+      "block": 95,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 95,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 190,
+      "block": 95,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 95,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 191,
+      "block": 96,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 96,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 192,
+      "block": 96,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 96,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 193,
+      "block": 97,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 97,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 194,
+      "block": 97,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 97,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 195,
+      "block": 98,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 98,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 196,
+      "block": 98,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 98,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 197,
+      "block": 99,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 99,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 198,
+      "block": 99,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 99,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 199,
+      "block": 100,
+      "cell": "openai--gpt-4o--off",
+      "condition": "meta",
+      "condition_trial": 100,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    },
+    {
+      "trial": 200,
+      "block": 100,
+      "cell": "openai--gpt-4o--off",
+      "condition": "baseline",
+      "condition_trial": 100,
+      "model": "openai/gpt-4o",
+      "thinking": "off",
+      "prompt": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    }
+  ],
+  "service": {
+    "runner": "pi",
+    "provider": "openrouter",
+    "evidence_level": "pi_http_request",
+    "runner_version": "1.3.0",
+    "runner_binary_sha256": null,
+    "runner_format": null,
+    "auth_type": "oauth",
+    "pi_version": "1.3.0",
+    "pi_settings_sha256": "780869754ddb8fbb8d517b5ab3d0078e0730c05da389569137312c503ae6e53e",
+    "models_file_sha256": "6c6d9c8515f2a8042d7348e1f96d1af6988475dafa688546ce7c7861bf848702",
+    "openrouter_routing": {
+      "only": [
+        "openai"
+      ],
+      "allow_fallbacks": false
+    },
+    "system_prompt": "You are a helpful assistant.",
+    "system_preamble_application": "system override plus cwd",
+    "working_directory": "/",
+    "working_directory_sha256": "8a5edab282632443219e051e4ade2d1d5bbc671c781051bf1437897cbdfea0f1",
+    "controller": "One bounded concurrency controller shared by every cell and prompt in this service grid",
+    "concurrency_ceiling": 4,
+    "control_settings": {
+      "max_attempts": 3,
+      "timeout": 180,
+      "base_backoff": 15,
+      "max_backoff": 300,
+      "recovery_successes": 20,
+      "circuit_errors": 8,
+      "max_seconds": 86400,
+      "max_cost": 1.0
+    },
+    "prompt_policy": "Frozen per-trial prompts",
+    "sampling": "No temperature/top_p/seed override; Pi verifies payload defaults, native CLI backend defaults are opaque",
+    "error_policy": "Transport failures excluded; bounded retries within logical trial; invalid answers never retried",
+    "raw_schema_version": "random-numbers-v1.0",
+    "raw_created_at": "2026-11-01T19:30:04.485116+00:00",
+    "raw_manifest_sha256": "7046c3664bdf9006b52e96f5eac86fbfb73263205e8c9a960f7cfaf76915d4ff",
+    "grid_json_sha256": "dc35df2ba623a8705b622012153a5804f3305a33c54c044e48e4078b17ac8e1d",
+    "state": "complete",
+    "elapsed_seconds": 67.08160379203036,
+    "source_sha256": {
+      "batch.py": "b3051a70140e1bd1ef650791ca26991497aab89e8bdee49817c49df510ff3796",
+      "pi-audit.ts": "c256166dc1ee70038bc7b3a8acb6afad14cb9af8f294d977d68d458ff53d7e9a",
+      "verify.py": "93733e530af575cd36976fa12e4e4321e60c3aa85202de61e452347aec82149b",
+      "grid.py": "bb8245ecb467fb95a81ea5c8ea258485b470eadeb22eeb5a46db9a649ddf53d2"
+    },
+    "raw_verifier": "Frozen snapshot verify.py, run in a subprocess after source hash checks",
+    "raw_verification": {
+      "physical_attempts": 200,
+      "accepted_unique_trials": 200,
+      "unique_sessions": 200,
+      "counts_from_native_sessions": {
+        "1": 0,
+        "2": 13,
+        "3": 29,
+        "4": 36,
+        "5": 19,
+        "6": 12,
+        "7": 69,
+        "8": 19,
+        "9": 3,
+        "10": 0
+      },
+      "evidence_hashes_match": true,
+      "error_attempts_excluded": true,
+      "configuration_matches": true
+    }
+  },
+  "interval": {
+    "method": "wilson_score",
+    "confidence": 0.95,
+    "scope": "Pointwise per cell, prompt and answer; proportion of accepted answers only"
+  },
+  "redactions": [
+    "Working directories are replaced by hashes; a neutral root directory is disclosed as / when used.",
+    "Session and response IDs are hashed. Credentials, environment, CLI argv, binary paths and free-form error text are not exported.",
+    "Public rows are selected fields from verified native logs. Raw logs stay local; raw file hashes are commitments, not transcripts."
+  ],
+  "cost_basis": "Runner-reported API-equivalent usage metadata when available, not a verified bill. Field name pi_reported_cost is kept for compatibility.",
+  "model_identity": "Requested model and effort come from the frozen schedule. Native reported model is retained and checked where exposed. Immutable backend snapshot is not independently established.",
+  "files_sha256": {
+    "attempts.jsonl": "5133d68126b6ebd7da4fc9fb4f3eaf6683733e0e559d3c776b7666f29c8bbf82",
+    "source/batch.py": "b3051a70140e1bd1ef650791ca26991497aab89e8bdee49817c49df510ff3796",
+    "source/grid.py": "bb8245ecb467fb95a81ea5c8ea258485b470eadeb22eeb5a46db9a649ddf53d2",
+    "source/pi-audit.ts": "c256166dc1ee70038bc7b3a8acb6afad14cb9af8f294d977d68d458ff53d7e9a",
+    "source/verify.py": "93733e530af575cd36976fa12e4e4321e60c3aa85202de61e452347aec82149b",
+    "summary.json": "c4db873a00ef75456172afd2aa75b7060e99e539562f5071ad13e7579a966cd0"
+  }
+}

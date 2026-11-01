@@ -1,0 +1,908 @@
+{
+  "schema": "random-number-public-grid-v1",
+  "interval_method": "wilson_score_pointwise",
+  "confidence": 0.95,
+  "totals": {
+    "planned_trials": 1200,
+    "attempted_trials": 1200,
+    "physical_attempts": 1200,
+    "accepted_trials": 1192,
+    "excluded_attempts": 8,
+    "outcomes": {
+      "invalid_response": 8,
+      "valid": 1192
+    },
+    "counts": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 21,
+      "5": 0,
+      "6": 1,
+      "7": 1170,
+      "8": 0,
+      "9": 0,
+      "10": 0
+    }
+  },
+  "cells": {
+    "grok-4.5--low": {
+      "model": "grok-4.5",
+      "thinking": "low",
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.1729808,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.17289,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    "grok-4.5--medium": {
+      "model": "grok-4.5",
+      "thinking": "medium",
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.194088,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 99,
+          "physical_attempts": 100,
+          "excluded_attempts": 1,
+          "invalid_response_attempts": 1,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "invalid_response": 1,
+            "valid": 99
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 99,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.037353212068
+            ],
+            "2": [
+              0.0,
+              0.037353212068
+            ],
+            "3": [
+              0.0,
+              0.037353212068
+            ],
+            "4": [
+              0.0,
+              0.037353212068
+            ],
+            "5": [
+              0.0,
+              0.037353212068
+            ],
+            "6": [
+              0.0,
+              0.037353212068
+            ],
+            "7": [
+              0.962646787932,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.037353212068
+            ],
+            "9": [
+              0.0,
+              0.037353212068
+            ],
+            "10": [
+              0.0,
+              0.037353212068
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 0.99,
+          "reported_cost": 0.2038612,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    "grok-4.5--high": {
+      "model": "grok-4.5",
+      "thinking": "high",
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.1674476,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 93,
+          "physical_attempts": 100,
+          "excluded_attempts": 7,
+          "invalid_response_attempts": 7,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "invalid_response": 7,
+            "valid": 93
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 93,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.039667502612
+            ],
+            "2": [
+              0.0,
+              0.039667502612
+            ],
+            "3": [
+              0.0,
+              0.039667502612
+            ],
+            "4": [
+              0.0,
+              0.039667502612
+            ],
+            "5": [
+              0.0,
+              0.039667502612
+            ],
+            "6": [
+              0.0,
+              0.039667502612
+            ],
+            "7": [
+              0.960332497388,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.039667502612
+            ],
+            "9": [
+              0.0,
+              0.039667502612
+            ],
+            "10": [
+              0.0,
+              0.039667502612
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 0.93,
+          "reported_cost": 0.180294,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    "grok-4.7--low": {
+      "model": "grok-4.7",
+      "thinking": "low",
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 7,
+            "5": 0,
+            "6": 0,
+            "7": 93,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.034319261067,
+              0.137495147391
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.862504852609,
+              0.965680738933
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.83,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.257074,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.281036,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    "grok-4.7--medium": {
+      "model": "grok-4.7",
+      "thinking": "medium",
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 5,
+            "5": 0,
+            "6": 0,
+            "7": 95,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.021543679154,
+              0.111750469232
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.888249530768,
+              0.978456320846
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.85,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.278614,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 100,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.0,
+              0.036993498207
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.963006501793,
+              1.0
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.9,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.264434,
+          "missing_cost_attempts": 0
+        }
+      }
+    },
+    "grok-4.7--high": {
+      "model": "grok-4.7",
+      "thinking": "high",
+      "conditions": {
+        "baseline": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 8,
+            "5": 0,
+            "6": 1,
+            "7": 91,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.041093461484,
+              0.149981077009
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "7": [
+              0.837737871473,
+              0.951927459997
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.81,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.285604,
+          "missing_cost_attempts": 0
+        },
+        "meta": {
+          "planned_trials": 100,
+          "attempted_trials": 100,
+          "accepted_trials": 100,
+          "physical_attempts": 100,
+          "excluded_attempts": 0,
+          "invalid_response_attempts": 0,
+          "operational_exclusions": 0,
+          "outcomes": {
+            "valid": 100
+          },
+          "counts": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 99,
+            "8": 0,
+            "9": 0,
+            "10": 0
+          },
+          "wilson_intervals": {
+            "1": [
+              0.0,
+              0.036993498207
+            ],
+            "2": [
+              0.0,
+              0.036993498207
+            ],
+            "3": [
+              0.0,
+              0.036993498207
+            ],
+            "4": [
+              0.001767432064,
+              0.054486196179
+            ],
+            "5": [
+              0.0,
+              0.036993498207
+            ],
+            "6": [
+              0.0,
+              0.036993498207
+            ],
+            "7": [
+              0.945513803821,
+              0.998232567936
+            ],
+            "8": [
+              0.0,
+              0.036993498207
+            ],
+            "9": [
+              0.0,
+              0.036993498207
+            ],
+            "10": [
+              0.0,
+              0.036993498207
+            ]
+          },
+          "tv_to_uniform": 0.89,
+          "model_valid_response_rate": 1.0,
+          "reported_cost": 0.262496,
+          "missing_cost_attempts": 0
+        }
+      }
+    }
+  }
+}

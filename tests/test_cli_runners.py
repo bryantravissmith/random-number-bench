@@ -231,6 +231,43 @@ class RunnerFixtureTest(unittest.TestCase):
                 cr.parse(folder, config, 0)["outcome"], "protocol_error", override
             )
 
+    def test_internal_cli_retry_excludes_eventual_integer(self):
+        for status, outcome in (
+            (None, "provider_error"),
+            (429, "rate_limit"),
+            (503, "provider_error"),
+        ):
+            events = claude_events("4")
+            events.insert(
+                1,
+                {
+                    "type": "system",
+                    "subtype": "api_retry",
+                    "error_status": status,
+                    "error": "unknown",
+                },
+            )
+            folder, config = self.attempt("claude", events)
+            result = cr.parse(folder, config, 0)
+            self.assertEqual(result["outcome"], outcome)
+            self.assertIsNone(result["number"])
+
+    def test_codex_opaque_websocket_edge_403_is_bounded_retryable(self):
+        edge = "unexpected status 403 Forbidden: Unknown error, url: wss://chatgpt.com/backend-api/codex/responses"
+        for message, outcome in (
+            (edge, "provider_error"),
+            ("HTTP 403 Unauthorized", "fatal_error"),
+            (edge + " not logged in", "fatal_error"),
+        ):
+            events = [
+                {"type": "error", "message": message},
+                {"type": "turn.failed", "error": {"message": message}},
+            ]
+            folder, config = self.attempt("codex", events)
+            result = cr.parse(folder, config, 1)
+            self.assertEqual(result["outcome"], outcome)
+            self.assertIsNone(result["number"])
+
     def test_codex_reasoning_usage_and_last_message_cross_check(self):
         folder, config = self.attempt("codex", codex_events())
         (folder / "last-message.txt").write_text("3\n")
