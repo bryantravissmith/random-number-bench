@@ -12,7 +12,6 @@
   },
   "notes": [
     "Codex's 8,000-trial grid was still running at this publication snapshot and is not included.",
-    "The separate analytics pilot stopped at its 30-minute limit: 23/40 terminal trials, 22 schema-valid answers. Its partial responses have been blindly graded; that semantic study remains separate from the integer benchmark.",
     "V3.1 is hidden by default at the author's request; reveal it to inspect the failure counts."
   ]
 }

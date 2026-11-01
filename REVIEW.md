@@ -95,10 +95,8 @@ examined the earlier presentation, not the final rewritten matrix; browser QA
 and generated-artifact checks cover that revision.
 
 At that publication snapshot, the four completed grid exports were unchanged.
-Codex was still running and excluded. The analytics pilot's frozen verifier passed for
-27 physical attempts, but the run stopped after 23/40 terminal trials. It was
-then incomplete and ungraded; documentation did not imply a completed diversity
-finding. Subsequent partial grading is documented below. No new benchmark inference was performed for this cleanup.
+Codex was still running and excluded. No new benchmark inference was performed
+for this cleanup.
 
 ## Repository consistency audit, 2026-11-01
 
@@ -116,30 +114,4 @@ Corrected stale pre-DeepSeek support descriptions, separated default round/grid
 limits, added DeepSeek to the profile index, and made the matrix shortfall label
 refer to the planned sample size. The latter was reproduced and rechecked with
 a 200-trial presentation fixture. Historical evidence and original study
-proposals were preserved. At that audit, Codex remained active and the analytics pilot was
-stopped, incomplete and ungraded. Its subsequent partial grading is recorded below.
-
-
-## Partial analytics grading, 2026-11-01
-
-Bryan requested grading the stopped run instead of collecting replacement trials.
-The partial exporter ran the original frozen native verifier and archived all
-27 physical attempts. It preserved the stopped state and created a shuffled
-22-answer packet without effort, run order, timing, usage or author stories.
-Grok 4.7 graded the packet through the subscription-only orchestrator. The
-coordinator recorded initial scores before reading Grok's grades; every label,
-consistency flag, single-mechanism flag and diagnostic score agreed. No grades
-were changed. Grades, the audit, the partial analysis plan and the analyzer
-were sealed before joining the treatment key.
-
-All valid answers were useful and scored 2/2. Each case/effort cell contained one
-useful mechanism. Support changed from issue composition at low to response
-selection at max. The partial sample shows equally concentrated repetition,
-with no demonstrated quality improvement or diversity penalty at max. The
-rubric's ceiling limits interpretation; mean reported reasoning usage differs
-substantially but is not evidence of improved quality. The
-[graded report](studies/analytics-coverage/results/2026-11-01-001-partial/REPORT.md)
-keeps unfinished trials missing and uses equal-size observed coverage. Frozen
-inference sources and original limits remain unchanged. New tests cover partial
-export, sealed grading and the distinction between invalid, pending and unstarted
-trials. These results remain separate from the integer benchmark.
+proposals were preserved. At that audit, Codex remained active.

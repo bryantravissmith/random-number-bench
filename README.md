@@ -10,14 +10,6 @@ This benchmark runs fresh sessions for each of two fixed prompts, records every 
 
 Completed-grid snapshot: effective answer count from **1 (concentrated)** to **10 (evenly spread)**. [View full-resolution image](reports/comparison.png), or download and open the [interactive matrix](reports/comparison.html) for counts and 95% CIs.
 
-[Analytics coverage pilot](studies/analytics-coverage/README.md): a separate
-40-call study of repeated first-hypothesis coverage at requested low versus max
-effort. The first run stopped at its 30-minute limit: 23 terminal trials, 22
-schema-valid responses. [Blind grading of the partial run](studies/analytics-coverage/results/2026-11-01-001-partial/REPORT.md)
-found one useful mechanism per case at each effort level. Max changed the preferred
-support hypothesis, but coverage did not differ; every valid answer scored 2/2,
-so the quality rubric hit its ceiling. These are partial exploratory observations.
-
 **[Run a reproducible model/effort grid](GRIDS.md).** Checked-in profiles cover
 Codex, Claude, Grok and Pi/OpenRouter. Plan with `grid.py plan --spec grids/codex.json --count 100 --out runs/my-grid`, then use `grid.py run`,
 `grid.py status` and `grid.py export`. Each cell gets 100 trials for each prompt.

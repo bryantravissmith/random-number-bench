@@ -19,20 +19,6 @@ jobs:
       - run: python tests/test_grid.py
       - run: python tests/test_grid_results.py
       - run: python tests/test_openrouter_profiles.py
-      - run: python tests/test_analytics_coverage.py
-      - run: python tests/test_analytics_analysis.py
-      - name: Verify sealed analytics grading and reports
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          import subprocess
-          import sys
-          for manifest in Path("studies/analytics-coverage/results").glob("*/manifest.json"):
-              root = manifest.parent
-              subprocess.run([sys.executable, str(root / "grading/analyze.py"), "report", str(root)], check=True, stdout=subprocess.DEVNULL)
-              print("Verified graded study:", root.name)
-          PY
-          git diff --exit-code -- studies/analytics-coverage/results
       - name: Recount published results
         run: |
           python - <<'PY'
