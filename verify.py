@@ -83,6 +83,16 @@ def verify(root):
             continue
         assert result["trial"] not in trials, "Duplicate counted trial"
         trials.add(result["trial"])
+        if config.get("runner", "pi") != "pi":
+            import cli_runners
+
+            cli_runners.verify_attempt(path.parent, config, result)
+            session = result.get("session_id")
+            if session:
+                assert session not in sessions, "Reused CLI session"
+                sessions.add(session)
+            counts[result["number"]] += 1
+            continue
         assert len(result["session_files"]) == 1
         native = jsonl(path.parent / result["session_files"][0])
         session = next(e["id"] for e in native if e["type"] == "session")

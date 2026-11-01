@@ -2,7 +2,7 @@
 # requires-python = ">=3.12"
 # dependencies = []
 # ///
-"""Plan, run/resume, and summarize bounded parallel headless Pi batches."""
+"""Plan, run/resume, and summarize bounded parallel headless model batches."""
 
 import argparse
 import asyncio
@@ -25,6 +25,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 VERSION = "random-numbers-v1.0"
+RUNNER_DEFAULTS = {
+    "pi": ("openai", "gpt-6.1-sol"),
+    "claude": ("anthropic", "claude-opus-5-5"),
+    "codex": ("openai", "gpt-6.1-sol"),
+    "grok": ("xai", "grok-4.7"),
+    "agy": ("antigravity", "gemini-3.8-flash-medium"),
+}
 PROMPT = (
     "Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
 )
@@ -170,6 +177,10 @@ def expected_input(config):
 
 def parse_attempt(folder, config, returncode, timed_out=False, interrupted=False):
     """Fail closed: a valid-looking digit from an errored request never counts."""
+    if config.get("runner", "pi") != "pi":
+        import cli_runners
+
+        return cli_runners.parse(folder, config, returncode, timed_out, interrupted)
     result = {
         "outcome": "provider_error",
         "number": None,
@@ -376,7 +387,7 @@ def summary(batch, manifest, rows=None):
         r["outcome"] in ("valid", "invalid_response") for r in terminal
     )
     usage_cost = sum(
-        (r.get("usage") or {}).get("cost", {}).get("total", 0) for r in rows
+        (((r.get("usage") or {}).get("cost") or {}).get("total") or 0) for r in rows
     )
     out = {
         "schema_version": VERSION,
@@ -398,8 +409,12 @@ def summary(batch, manifest, rows=None):
         if n
         else None,
         "pi_reported_cost": usage_cost,
-        "cost_basis": "Pi usage metadata, includes failed attempts with usage; not a verified bill",
+        "cost_basis": "Runner usage metadata, includes failed attempts with usage; not a verified bill",
         "missing_usage_attempts": sum(r.get("usage") is None for r in rows),
+        "missing_cost_attempts": sum(
+            ((r.get("usage") or {}).get("cost") or {}).get("total") is None
+            for r in rows
+        ),
         "sequence_note": "Parallel launch order is descriptive, not a serial independence test",
     }
     save(batch / "summary.json", out)
@@ -506,6 +521,10 @@ async def attempt(batch, manifest, environment, trial, attempt_no, limit, genera
         "--",
         config["prompt"],
     ]
+    if config.get("runner", "pi") != "pi":
+        import cli_runners
+
+        command = cli_runners.command(config, folder)
     start = {
         "trial": trial,
         "attempt": attempt_no,
@@ -515,6 +534,10 @@ async def attempt(batch, manifest, environment, trial, attempt_no, limit, genera
         "generation": generation,
         "folder": str(folder.relative_to(batch)),
         "command": command,
+        "runner": config.get("runner", "pi"),
+        "evidence_level": "pi_http_request"
+        if config.get("runner", "pi") == "pi"
+        else "cli_transcript",
     }
     save(folder / "started.json", start)
     process, timed_out, interrupted = None, False, False
@@ -609,7 +632,9 @@ def recover_unfinished(batch, manifest):
                     text=True,
                     check=False,
                 ).stdout
-                if str(folder / "sessions") in command:
+                if str(folder / "sessions") in command or (
+                    manifest["config"].get("runner", "pi") != "pi" and command.strip()
+                ):
                     raise RuntimeError(
                         f"Unfinished attempt PID {pid} is still alive; refusing duplicate work"
                     )
@@ -625,6 +650,10 @@ def recover_unfinished(batch, manifest):
             {
                 **start,
                 **recovered,
+                "runner": config.get("runner", "pi"),
+                "evidence_level": "pi_http_request"
+                if config.get("runner", "pi") == "pi"
+                else "cli_transcript",
                 "outcome": "interrupted",
                 "number": None,
                 "error": "Recovered unfinished attempt; outcome unknown and excluded",
@@ -703,7 +732,7 @@ async def execute(batch, manifest, env):
                 ctl.state["stopped"] = "Batch wall-time limit reached"
             if report["pi_reported_cost"] >= config["max_cost"]:
                 ctl.state["stopped"] = (
-                    "Pi metadata cost limit reached (in-flight calls may overshoot)"
+                    "Runner metadata cost limit reached (in-flight calls may overshoot)"
                 )
             if stop_requested and not cancellation_sent:
                 for task in tasks:
@@ -856,13 +885,24 @@ def plan(args):
         )
     }
     config.update(prompt=args.prompt, system_prompt=SYSTEM, cwd=str(args.cwd.resolve()))
+    config["runner"] = args.runner
     command = (
         json.loads(args.pi_command) if args.pi_command else [shutil.which("pi") or "pi"]
     )
-    version = subprocess.check_output(
-        [*command, "--offline", "--version"], text=True
-    ).strip()
-    files = ("batch.py", "pi-audit.ts", "verify.py")
+    runner_metadata = None
+    if args.runner == "pi":
+        version = subprocess.check_output(
+            [*command, "--offline", "--version"], text=True
+        ).strip()
+    else:
+        import cli_runners
+
+        cli_runners.validate_config(config)
+        runner_metadata = cli_runners.preflight(args.runner, args.model)
+        version = runner_metadata["version"]
+    files = ["batch.py", "pi-audit.ts", "verify.py"]
+    if args.runner != "pi":
+        files.append("cli_runners.py")
     for name in files:
         shutil.copyfile(ROOT / name, batch / "snapshot" / name)
     manifest = {
@@ -870,9 +910,13 @@ def plan(args):
         "created_at": now(),
         "config": config,
         "pi_command": command,
-        "pi_version": version,
-        "pi_settings": SETTINGS,
-        "provider_metadata": local_provider_metadata(args.provider),
+        "pi_version": version if args.runner == "pi" else None,
+        "runner_version": version,
+        "runner_metadata": runner_metadata,
+        "pi_settings": SETTINGS if args.runner == "pi" else {},
+        "provider_metadata": local_provider_metadata(args.provider)
+        if args.runner == "pi"
+        else {"stored_auth_type": runner_metadata["auth_type"]},
         "source_sha256": {name: digest(ROOT / name) for name in files},
         "schedule": [
             {
@@ -885,7 +929,7 @@ def plan(args):
         "prompt_policy": "Frozen per-trial prompts"
         if args.trial_prompts
         else "One fixed prompt",
-        "sampling": "No temperature/top_p/seed override; require provider defaults in audited payload",
+        "sampling": "No temperature/top_p/seed override; Pi verifies payload defaults, native CLI backend defaults are opaque",
         "error_policy": "Transport failures excluded; bounded retries within logical trial; invalid answers never retried",
     }
     save(batch / "manifest.json", manifest)
@@ -895,7 +939,8 @@ def plan(args):
                 "batch": str(batch),
                 "config": config,
                 "max_physical_attempts": args.count * args.max_attempts,
-                "pi_version": version,
+                "runner": args.runner,
+                "runner_version": version,
             },
             indent=2,
         )
@@ -920,8 +965,11 @@ def main():
         ("max-cost", 10, float),
     ):
         p.add_argument("--" + name, type=kind, default=default)
-    p.add_argument("--provider", default="openai")
-    p.add_argument("--model", default="gpt-6.1-sol")
+    p.add_argument("--provider")
+    p.add_argument(
+        "--runner", choices=["pi", "claude", "codex", "grok", "agy"], default="pi"
+    )
+    p.add_argument("--model")
     p.add_argument("--thinking", default="medium")
     p.add_argument(
         "--cwd",
@@ -946,6 +994,11 @@ def main():
         sub.add_parser(action).add_argument("batch", type=Path)
     args = parser.parse_args()
     if args.action == "plan":
+        provider, model = RUNNER_DEFAULTS[args.runner]
+        args.provider = args.provider or provider
+        args.model = args.model or model
+        if args.runner != "pi" and args.pi_command:
+            parser.error("--pi-command requires --runner pi")
         numeric = [
             args.count,
             args.concurrency,
@@ -990,6 +1043,23 @@ def main():
                 raise RuntimeError(
                     "Runner snapshot changed; use the frozen snapshot/batch.py to resume"
                 )
+        if manifest["config"].get("runner", "pi") != "pi":
+            import cli_runners
+
+            runner = manifest["config"]["runner"]
+            actual = cli_runners.preflight(runner, manifest["config"]["model"])
+            frozen = manifest["runner_metadata"]
+            if any(
+                actual[k] != frozen[k]
+                for k in ("runner", "version", "auth_type", "binary", "binary_sha256")
+            ):
+                raise RuntimeError(
+                    "CLI version or subscription authentication changed since planning"
+                )
+            cli_runners.prepare(runner)
+            return asyncio.run(
+                execute(batch, manifest, cli_runners.environment(runner))
+            )
         actual_version = subprocess.check_output(
             [*manifest["pi_command"], "--offline", "--version"], text=True
         ).strip()

@@ -15,6 +15,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 import public_results
+from batch import RUNNER_DEFAULTS
 
 ROOT = Path(__file__).resolve().parent
 
@@ -33,6 +34,11 @@ def plan(args):
     root = args.out.resolve()
     root.mkdir(parents=True, exist_ok=False)
     protocol = read(ROOT / "protocol.json")
+    default_provider, default_model = RUNNER_DEFAULTS[args.runner]
+    args.model = args.model or default_model
+    provider = args.provider or default_provider
+    if args.runner == "pi" and provider != "openai":
+        raise ValueError("The Pi adapter currently audits OpenAI Responses only")
     seed = args.order_seed if args.order_seed is not None else secrets.randbits(64)
     rng = random.Random(seed)
     schedule = []
@@ -60,7 +66,9 @@ def plan(args):
         "--concurrency",
         str(args.concurrency),
         "--provider",
-        args.provider,
+        provider,
+        "--runner",
+        args.runner,
         "--model",
         args.model,
         "--thinking",
@@ -133,8 +141,11 @@ def main():
         "--count", type=int, default=1000, help="Logical trials per condition"
     )
     p.add_argument("--concurrency", type=int, default=4)
-    p.add_argument("--provider", choices=["openai"], default="openai")
-    p.add_argument("--model", default="gpt-6.1-sol")
+    p.add_argument(
+        "--runner", choices=["pi", "claude", "codex", "grok", "agy"], default="pi"
+    )
+    p.add_argument("--provider", default=None)
+    p.add_argument("--model", default=None)
     p.add_argument("--thinking", default="medium")
     p.add_argument("--order-seed", type=int)
     p.add_argument("--max-seconds", type=float, default=7200)
@@ -156,9 +167,20 @@ def main():
     p = actions.add_parser("verify-public")
     p.add_argument("result", type=Path)
     actions.add_parser("report")
+    p = actions.add_parser(
+        "check", help="Check native CLI subscription login without inference"
+    )
+    p.add_argument(
+        "--runner", choices=["claude", "codex", "grok", "agy"], required=True
+    )
+    p.add_argument("--model")
     args = parser.parse_args()
     if args.action == "plan":
         plan(args)
+    elif args.action == "check":
+        import cli_runners
+
+        print(json.dumps(cli_runners.preflight(args.runner, args.model), indent=2))
     elif args.action in ("run", "export"):
         root = args.round.resolve()
         spec = validate_round(root)

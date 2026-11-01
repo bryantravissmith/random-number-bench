@@ -1,6 +1,7 @@
 """End-to-end round, retry, public export and tamper checks without model calls."""
 
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -125,6 +126,100 @@ class RoundTest(unittest.TestCase):
             self.cli("export", self.round, "--out", self.result).returncode, 0
         )
         self.assertFalse(self.result.exists())
+
+    def test_native_cli_round_and_unknown_cost_export(self):
+        binary = self.folder / "codex"
+        binary.write_text(
+            "#!"
+            + sys.executable
+            + "\n"
+            + """
+import json, sys, uuid
+args = sys.argv[1:]
+if '--version' in args:
+    print('fake-codex-1')
+elif args == ['login', 'status']:
+    print('Logged in using ChatGPT')
+else:
+    number = '4' if 'random sample' in args[-1] else '7'
+    print(json.dumps({'type': 'thread.started', 'thread_id': str(uuid.uuid4())}))
+    print(json.dumps({'type': 'turn.started'}))
+    print(json.dumps({'type': 'item.completed', 'item': {
+        'id': 'answer', 'type': 'agent_message', 'text': number}}))
+    print(json.dumps({'type': 'turn.completed', 'usage': {
+        'input_tokens': 10, 'output_tokens': 1}}))
+    from pathlib import Path
+    Path(args[args.index('--output-last-message') + 1]).write_text(number)
+"""
+        )
+        binary.chmod(0o700)
+        env = {**os.environ, "PATH": str(self.folder) + os.pathsep + os.environ["PATH"]}
+
+        def invoke(*args):
+            return subprocess.run(
+                [sys.executable, str(ROOT / "bench.py"), *map(str, args)],
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=30,
+            )
+
+        result = invoke("plan", "--runner", "codex", "--out", self.round, "--count", 2)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        result = invoke("run", self.round)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        result = invoke("export", self.round, "--out", self.result)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        manifest, summary = public_results.verify_public(self.result)
+        self.assertEqual(manifest["sources"]["shared"]["runner"], "codex")
+        self.assertEqual(summary["baseline"]["counts"]["7"], 2)
+        self.assertEqual(summary["meta"]["counts"]["4"], 2)
+        self.assertEqual(summary["meta"]["missing_cost_attempts"], 2)
+        rows = [
+            json.loads(line)
+            for line in (self.result / "attempts.jsonl").read_text().splitlines()
+        ]
+        self.assertTrue(all(r["http_statuses"] == [] for r in rows))
+        report = self.folder / "report.md"
+        # Ignore the raw round by putting only the public export under this root.
+        results = self.folder / "results"
+        results.mkdir()
+        self.result.rename(results / "codex-fixture")
+        public_results.report(results, report)
+        self.assertIn("n/a", report.read_text())
+        self.assertIn("| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |", report.read_text())
+
+    def test_native_orphan_cannot_duplicate_a_live_process(self):
+        folder = self.round / "attempts/00001/01"
+        folder.mkdir(parents=True)
+        command = [sys.executable, "-c", "import time; time.sleep(30)"]
+        process = subprocess.Popen(command, start_new_session=True)
+        manifest = {
+            "config": {"runner": "codex", "prompt": "test", "model": "fixture"},
+            "schedule": [{"trial": 1}],
+        }
+        public_results.save(
+            folder / "started.json",
+            {
+                "trial": 1,
+                "attempt": 1,
+                "pid": process.pid,
+                "command": command,
+                "folder": "attempts/00001/01",
+            },
+        )
+        try:
+            with self.assertRaisesRegex(RuntimeError, "still alive"):
+                batch.recover_unfinished(self.round, manifest)
+            self.assertFalse((folder / "result.json").exists())
+        finally:
+            process.terminate()
+            process.wait(timeout=5)
+        batch.recover_unfinished(self.round, manifest)
+        recovered = public_results.read(folder / "result.json")
+        self.assertEqual(recovered["runner"], "codex")
+        self.assertEqual(recovered["outcome"], "interrupted")
+        self.assertIsNone(recovered["number"])
 
     def test_public_error_cannot_contribute_number(self):
         rows = [

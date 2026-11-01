@@ -16,13 +16,13 @@ This benchmark runs **1,000 fresh sessions for each of two fixed prompts**, reco
 
 > Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer.
 
-Both use the same model, reasoning setting, system preamble, working directory and sampling defaults. New rounds use the neutral working directory `/`; Pi appends `<cwd>\n/\n</cwd>` to the system preamble. No tools, previous conversation, external random value, temperature override or seed override is supplied to the model. The scheduling seed only controls condition order.
+Within each round both prompts use the same model, reasoning setting, runner and working directory. New rounds use the neutral working directory `/`; Pi appends `<cwd>\n/\n</cwd>` to the system preamble. Each trial starts a fresh conversation. No external random value, temperature override or seed override is supplied. Tools are disabled or denied, and observed tool use excludes an attempt. The scheduling seed only controls condition order.
 
-The starting model is `openai/gpt-6.1-sol`, medium reasoning, through Pi 1.3.0. Availability and credentials are provider-dependent. The audited adapter currently covers OpenAI Responses; validate other adapters before comparing them.
+Pi remains the default. Native `claude`, `codex`, `grok` and `agy` runners are additional options that use existing subscription/account logins. Native CLI calls carry their own system context and expose less request detail than Pi. Treat the runner as part of the experimental condition. See [CLI setup and evidence limits](CLI_RUNNERS.md).
 
 ## Run another round
 
-Requires macOS or Linux, Python 3.12+, [uv](https://docs.astral.sh/uv/), Node.js 22.19+ and [Pi](https://github.com/earendil-works/pi). The runner uses POSIX file locks and process groups.
+Requires macOS or Linux, Python 3.12+, [uv](https://docs.astral.sh/uv/) and the selected CLI. Pi additionally requires Node.js 22.19+. To use [Pi](https://github.com/earendil-works/pi): The runner uses POSIX file locks and process groups.
 
 ```sh
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent@1.3.0
@@ -45,9 +45,9 @@ uv run --python 3.12 bench.py verify-public results/round-001
 uv run --python 3.12 bench.py report
 ```
 
-Repeat with `round-002`, `round-003`, and so on. Add `--model` or `--thinking` to `plan` to choose settings. The public round command currently accepts the audited OpenAI provider only. `--count` changes trials **per condition** and is useful for engineering smoke checks; the benchmark default is 1,000 each. Preserve smoke checks separately from measured rounds. Time, metadata-cost, attempt and timeout limits can be set before freezing with `--max-seconds`, `--max-cost`, `--max-attempts` and `--timeout`.
+Repeat with `round-002`, `round-003`, and so on. Add `--model` or `--thinking` to `plan` to choose settings. Use `--runner claude --model claude-opus-5-5` for Claude Code, or `--runner codex`, `--runner grok`, `--runner agy`. Pi currently audits OpenAI Responses only. `--count` changes trials **per condition** and is useful for engineering smoke checks; the benchmark default is 1,000 each. Preserve smoke checks separately from measured rounds. Time, metadata-cost, attempt and timeout limits can be set before freezing with `--max-seconds`, `--max-cost`, `--max-attempts` and `--timeout`.
 
-The two conditions are interleaved in randomized adjacent pairs under one shared controller. Every trial starts a new Pi process and conversation. Ctrl-C pauses the round; the same `run` command resumes it using frozen source without repeating completed trials. Exports refuse to overwrite an existing result directory.
+The two conditions are interleaved in randomized adjacent pairs under one shared controller. Every trial starts a new runner process and conversation. Ctrl-C pauses the round; the same `run` command resumes it using frozen source without repeating completed trials. Exports refuse to overwrite an existing result directory.
 
 After reviewing a public export, commit its `results/<id>/` directory and the regenerated `RESULTS.md`. The local `runs/` directory is ignored. No recurring schedule or automatic publication is installed. CI runs offline tests and checks published records; it makes no inference calls.
 
@@ -55,9 +55,9 @@ After reviewing a public export, commit its `results/<id>/` directory and the re
 
 - A 429, transient provider error or timeout pauses new launches and halves concurrency, down to one. Existing requests drain.
 - Backoff starts at 15 seconds, doubles with repeated trouble, adds jitter, and respects longer `Retry-After` hints. Twenty healthy completions increase concurrency by one, up to four.
-- Each logical trial allows at most three physical attempts. Retries use a fresh conversation with the **same prompt**. Pi's hidden retries and cache warming are disabled.
+- Each logical trial allows at most three physical attempts. Retries use a fresh conversation with the **same prompt**. Pi's hidden retries and cache warming are disabled. Native CLI internal HTTP retries are not visible; their attempts count CLI processes, not audited HTTP calls.
 - Failed attempts never contribute a number. Completed invalid responses are retained and never retried. Counts, valid-response rate and operational failures are reported separately.
-- Authentication, billing/quota and protocol errors stop the batch. A persistent-error circuit, two-hour active-run limit and 10 USD Pi-metadata limit also stop it. Limits apply across resumes; in-flight requests can exceed a ceiling slightly.
+- Authentication, billing/quota and protocol errors stop the batch. A persistent-error circuit, two-hour active-run limit and 10 USD runner-metadata limit (where reported) also stop it. Limits apply across resumes; in-flight requests can exceed a ceiling slightly. Missing costs display as `n/a` and cannot enforce a cost ceiling. These are reported estimates, not subscription charges.
 
 ## Read the results
 
@@ -72,6 +72,7 @@ Pi's configured model ID and outgoing payload are checked. This does not indepen
 ```sh
 uv run --python 3.12 tests/test_batch.py
 uv run --python 3.12 tests/test_round.py
+uv run --python 3.12 tests/test_cli_runners.py
 # Requires installed Pi; points it at a loopback HTTP server, not a real provider.
 uv run --python 3.12 tests/test_pi_http.py
 ```

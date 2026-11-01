@@ -4,26 +4,36 @@
 
 Each row is one condition in one round. Rounds are kept separate.
 TV is distance from uniform: 0 is an exact uniform histogram; 0.90 is the maximum for ten categories.
-Dollar figures are Pi API-equivalent metadata, not verified charges.
+Dollar figures are runner-reported API-equivalent metadata, not verified charges; n/a means cost was not fully reported.
 
-| Round | Model | Condition | State | Accepted / planned | Excluded attempts | TV | Pi metadata (USD) |
-| --- | --- | --- | --- | ---: | ---: | ---: | ---: |
-| [2026-11-01-gpt-6.1-sol-initial](results/2026-11-01-gpt-6.1-sol-initial/summary.json) | gpt-6.1-sol | baseline | complete | 1000 / 1000 | 2 | 0.900 | 0.1920 |
-| [2026-11-01-gpt-6.1-sol-initial](results/2026-11-01-gpt-6.1-sol-initial/summary.json) | gpt-6.1-sol | meta | complete | 1000 / 1000 | 0 | 0.716 | 0.2834 |
+| Round | Runner | Model | Condition | State | Accepted / planned | Excluded attempts | TV | Reported metadata (USD) |
+| --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |
+| [2026-11-01-claude-opus-5-5-001-stopped](results/2026-11-01-claude-opus-5-5-001-stopped/summary.json) | claude | claude-opus-5-5 | baseline | stopped | 87 / 1000 | 0 | 0.900 | 0.0156 |
+| [2026-11-01-claude-opus-5-5-001-stopped](results/2026-11-01-claude-opus-5-5-001-stopped/summary.json) | claude | claude-opus-5-5 | meta | stopped | 85 / 1000 | 2 | 0.888 | 0.0165 |
+| [2026-11-01-claude-opus-5-5-002-stopped](results/2026-11-01-claude-opus-5-5-002-stopped/summary.json) | claude | claude-opus-5-5 | baseline | stopped | 63 / 1000 | 0 | 0.900 | 0.0113 |
+| [2026-11-01-claude-opus-5-5-002-stopped](results/2026-11-01-claude-opus-5-5-002-stopped/summary.json) | claude | claude-opus-5-5 | meta | stopped | 62 / 1000 | 1 | 0.852 | 0.0127 |
+| [2026-11-01-gpt-6.1-sol-initial](results/2026-11-01-gpt-6.1-sol-initial/summary.json) | pi | gpt-6.1-sol | baseline | complete | 1000 / 1000 | 2 | 0.900 | 0.1920 |
+| [2026-11-01-gpt-6.1-sol-initial](results/2026-11-01-gpt-6.1-sol-initial/summary.json) | pi | gpt-6.1-sol | meta | complete | 1000 / 1000 | 0 | 0.716 | 0.2834 |
+
+## Answer counts
+
+| Round | Runner | Model | Prompt | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| [2026-11-01-claude-opus-5-5-001-stopped](results/2026-11-01-claude-opus-5-5-001-stopped/manifest.json) | claude | claude-opus-5-5 | baseline | 0 | 0 | 0 | 0 | 0 | 0 | 87 | 0 | 0 | 0 |
+| [2026-11-01-claude-opus-5-5-001-stopped](results/2026-11-01-claude-opus-5-5-001-stopped/manifest.json) | claude | claude-opus-5-5 | meta | 0 | 0 | 0 | 0 | 0 | 1 | 84 | 0 | 0 | 0 |
+| [2026-11-01-claude-opus-5-5-002-stopped](results/2026-11-01-claude-opus-5-5-002-stopped/manifest.json) | claude | claude-opus-5-5 | baseline | 0 | 0 | 0 | 0 | 0 | 0 | 63 | 0 | 0 | 0 |
+| [2026-11-01-claude-opus-5-5-002-stopped](results/2026-11-01-claude-opus-5-5-002-stopped/manifest.json) | claude | claude-opus-5-5 | meta | 0 | 0 | 0 | 0 | 0 | 3 | 59 | 0 | 0 | 0 |
+| [2026-11-01-gpt-6.1-sol-initial](results/2026-11-01-gpt-6.1-sol-initial/manifest.json) | pi | gpt-6.1-sol | baseline | 0 | 0 | 0 | 0 | 0 | 0 | 1000 | 0 | 0 | 0 |
+| [2026-11-01-gpt-6.1-sol-initial](results/2026-11-01-gpt-6.1-sol-initial/manifest.json) | pi | gpt-6.1-sol | meta | 0 | 3 | 2 | 206 | 0 | 0 | 710 | 78 | 1 | 0 |
+
+### 2026-11-01-claude-opus-5-5-001-stopped
+
+Design: interleaved_pairs. [Protocol and provenance](results/2026-11-01-claude-opus-5-5-001-stopped/manifest.json).
+
+### 2026-11-01-claude-opus-5-5-002-stopped
+
+Design: interleaved_pairs. [Protocol and provenance](results/2026-11-01-claude-opus-5-5-002-stopped/manifest.json).
 
 ### 2026-11-01-gpt-6.1-sol-initial
 
 Design: separate_historical_batches. [Protocol and provenance](results/2026-11-01-gpt-6.1-sol-initial/manifest.json).
-
-| Number | Baseline | Sampling meta-prompt |
-| --- | ---: | ---: |
-| 1 | 0 | 0 |
-| 2 | 0 | 3 |
-| 3 | 0 | 2 |
-| 4 | 0 | 206 |
-| 5 | 0 | 0 |
-| 6 | 0 | 0 |
-| 7 | 1000 | 710 |
-| 8 | 0 | 78 |
-| 9 | 0 | 1 |
-| 10 | 0 | 0 |

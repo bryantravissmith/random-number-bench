@@ -69,6 +69,10 @@ def tally(rows, planned):
             "model_valid_response_rate": n / (n + invalid) if n + invalid else None,
             "pi_reported_cost": round(sum(r["pi_reported_cost"] for r in selected), 9),
         }
+        if any("reported_cost_known" in r for r in selected):
+            output[condition]["missing_cost_attempts"] = sum(
+                not r.get("reported_cost_known", True) for r in selected
+            )
     return output
 
 
@@ -76,6 +80,9 @@ def normalized_record(raw, condition, trial, folder):
     valid = raw["outcome"] == "valid"
     usage = raw.get("usage") or {}
     return {
+        "runner": raw.get("runner", "pi"),
+        "evidence_level": raw.get("evidence_level", "pi_http_request"),
+        "observed_model": raw.get("observed_model"),
         "condition": condition,
         "trial": trial,
         "attempt": raw["attempt"],
@@ -94,7 +101,8 @@ def normalized_record(raw, condition, trial, folder):
         "input_tokens": usage.get("input"),
         "output_tokens": usage.get("output"),
         "reasoning_tokens": usage.get("reasoning"),
-        "pi_reported_cost": (usage.get("cost") or {}).get("total", 0),
+        "pi_reported_cost": (usage.get("cost") or {}).get("total") or 0,
+        "reported_cost_known": (usage.get("cost") or {}).get("total") is not None,
     }
 
 
@@ -118,7 +126,12 @@ def _export(sources, destination, protocol, schedule, design, seed):
     planned = dict.fromkeys(CONDITIONS, 0)
     for label, root in sources.items():
         manifest = read(root / "manifest.json")
-        if set(manifest["source_sha256"]) != SOURCE_FILES:
+        expected_files = SOURCE_FILES | (
+            {"cli_runners.py"}
+            if manifest["config"].get("runner", "pi") != "pi"
+            else set()
+        )
+        if set(manifest["source_sha256"]) != expected_files:
             raise ValueError("Unexpected source snapshot files")
         checks[label] = verify.verify(root)
         manifests[label] = manifest
@@ -140,6 +153,18 @@ def _export(sources, destination, protocol, schedule, design, seed):
             rows.append(normalized_record(raw, condition, trial, path.parent))
         status = read(root / "status.json")
         provenance[label] = {
+            "runner": config.get("runner", "pi"),
+            "runner_version": manifest.get("runner_version", manifest["pi_version"]),
+            "evidence_level": "pi_http_request"
+            if config.get("runner", "pi") == "pi"
+            else "cli_transcript",
+            "system_preamble_application": {
+                "pi": "system override plus cwd",
+                "claude": "system override; native CLI context may remain",
+                "codex": "instructions file; native CLI context may remain",
+                "grok": "system override; native CLI context may remain",
+                "agy": "unsupported by CLI; native agent instructions remain",
+            }[config.get("runner", "pi")],
             "created_at": manifest["created_at"],
             "state": status["state"],
             "elapsed_seconds": status["elapsed_seconds"],
@@ -178,6 +203,8 @@ def _export(sources, destination, protocol, schedule, design, seed):
             ),
         }
     keys = (
+        "runner",
+        "runner_version",
         "provider",
         "model",
         "thinking",
@@ -224,8 +251,8 @@ def _export(sources, destination, protocol, schedule, design, seed):
                 "Session and response IDs are hashed. Credentials, endpoint headers, environment and free-form error text are not exported.",
                 "Public rows are selected fields from verified native logs. Full raw logs remain local; raw file hashes are commitments, not downloadable transcripts.",
             ],
-            "cost_basis": "Pi API-equivalent usage metadata; not a verified bill",
-            "model_identity": "Configured identifier and outgoing request verified; immutable backend snapshot is not independently established",
+            "cost_basis": "Runner-reported API-equivalent usage metadata when available, not a verified bill. Legacy field name pi_reported_cost is retained for compatibility.",
+            "model_identity": "Pi outgoing payload or native CLI model option checked; native reported model retained where exposed. Immutable backend snapshot is not independently established.",
         }
         metadata["files_sha256"] = {
             str(p.relative_to(target)): digest(p)
@@ -243,9 +270,10 @@ def verify_public(root):
     manifest = read(root / "manifest.json")
     required = {"attempts.jsonl", "summary.json"}
     for label, source in manifest["sources"].items():
-        if (
-            label not in {"baseline", "meta", "shared"}
-            or set(source["source_sha256"]) != SOURCE_FILES
+        if label not in {"baseline", "meta", "shared"} or set(
+            source["source_sha256"]
+        ) != SOURCE_FILES | (
+            {"cli_runners.py"} if source.get("runner", "pi") != "pi" else set()
         ):
             raise ValueError("Invalid source metadata")
         for name, sha in source["source_sha256"].items():
@@ -288,12 +316,26 @@ def verify_public(root):
                 raise ValueError("Invalid response counted")
             if int(row["response_text"].strip()) != row["number"]:
                 raise ValueError("Parsed response differs from number")
-            if row["http_statuses"] != [200]:
-                raise ValueError("Errored HTTP response counted")
+            source = manifest["sources"].get(
+                row["condition"], manifest["sources"].get("shared")
+            )
+            runner = row.get("runner", "pi")
+            if runner != source.get("runner", "pi"):
+                raise ValueError("Runner label differs from provenance")
+            if runner == "pi":
+                if row["http_statuses"] != [200]:
+                    raise ValueError("Errored HTTP response counted")
+            elif (
+                runner not in {"claude", "codex", "grok", "agy"}
+                or row.get("evidence_level") != "cli_transcript"
+                or row["http_statuses"]
+            ):
+                raise ValueError("Invalid native CLI evidence profile")
             session = row["session_id_sha256"]
-            if not session or session in sessions:
+            if (not session and runner == "pi") or (session and session in sessions):
                 raise ValueError("Reused native session")
-            sessions.add(session)
+            if session:
+                sessions.add(session)
         elif row["number"] is not None:
             raise ValueError("Error attempt contributed a number")
     actual = tally(rows, manifest["planned_per_condition"])
@@ -316,12 +358,21 @@ def report(results, output):
         "",
         "Each row is one condition in one round. Rounds are kept separate.",
         "TV is distance from uniform: 0 is an exact uniform histogram; 0.90 is the maximum for ten categories.",
-        "Dollar figures are Pi API-equivalent metadata, not verified charges.",
+        "Dollar figures are runner-reported API-equivalent metadata, not verified charges; n/a means cost was not fully reported.",
         "",
-        "| Round | Model | Condition | State | Accepted / planned | Excluded attempts | TV | Pi metadata (USD) |",
-        "| --- | --- | --- | --- | ---: | ---: | ---: | ---: |",
+        "| Round | Runner | Model | Condition | State | Accepted / planned | Excluded attempts | TV | Reported metadata (USD) |",
+        "| --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: |",
     ]
     details = []
+    histogram = [
+        "",
+        "## Answer counts",
+        "",
+        "| Round | Runner | Model | Prompt | "
+        + " | ".join(map(str, range(1, 11)))
+        + " |",
+        "| --- | --- | --- | --- | " + " | ".join(["---:"] * 10) + " |",
+    ]
     for folder in sorted(results.iterdir() if results.exists() else []):
         if not (folder / "manifest.json").exists():
             continue
@@ -336,19 +387,23 @@ def report(results, output):
                 else "n/a"
             )
             lines.append(
-                f"| [{folder.name}](results/{folder.name}/summary.json) | {model} | {condition} | {source['state']} | {row['accepted_trials']} / {row['planned_trials']} | {row['excluded_attempts']} | {tv} | {row['pi_reported_cost']:.4f} |"
+                f"| [{folder.name}](results/{folder.name}/summary.json) | {source.get('runner', 'pi')} | {model} | {condition} | {source['state']} | {row['accepted_trials']} / {row['planned_trials']} | {row['excluded_attempts']} | {tv} | "
+                + (
+                    "n/a"
+                    if row.get("missing_cost_attempts", 0)
+                    else f"{row['pi_reported_cost']:.4f}"
+                )
+                + " |"
+            )
+            runner = source.get("runner", "pi")
+            counts = " | ".join(str(row["counts"][str(n)]) for n in range(1, 11))
+            histogram.append(
+                f"| [{folder.name}](results/{folder.name}/manifest.json) | {runner} | {model} | {condition} | {counts} |"
             )
         details += [
             "",
             f"### {folder.name}",
             "",
             f"Design: {meta['design']}. [Protocol and provenance](results/{folder.name}/manifest.json).",
-            "",
-            "| Number | Baseline | Sampling meta-prompt |",
-            "| --- | ---: | ---: |",
         ]
-        for number in range(1, 11):
-            details.append(
-                f"| {number} | {summary['baseline']['counts'][str(number)]} | {summary['meta']['counts'][str(number)]} |"
-            )
-    output.write_text("\n".join(lines + details) + "\n")
+    output.write_text("\n".join(lines + histogram + details) + "\n")

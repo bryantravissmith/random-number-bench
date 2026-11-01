@@ -15,6 +15,7 @@ jobs:
           python-version: '3.12'
       - run: python tests/test_batch.py
       - run: python tests/test_round.py
+      - run: python tests/test_cli_runners.py
       - name: Recount published results
         run: |
           python - <<'PY'
