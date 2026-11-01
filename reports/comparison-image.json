@@ -1,11 +1,11 @@
 {
   "schema": "random-number-matrix-image-v1",
   "sources": {
-    "html_sha256": "780920fc476eb9e1913552d9b17b20ad79c0f26a25f4d1d3de02a8e76c28c288",
-    "presentation_manifest_sha256": "0544ad1650bc070f6e2e4652ff63d3cf8b9acd1f44a01869b969194f53caf0b9",
+    "html_sha256": "dfc0c381ce3b6001513e419906cd6b969863244d6b2d2c371fa71a41a1c9511d",
+    "presentation_manifest_sha256": "4c17d15e530cab0a82b1198ace24574bec467d095dc0051571e42b8c69a985e0",
     "renderer_sha256": "6bbfd03f02417af9af08dacbddaed6aeba86d4ded19e3073729b98120fa5c10a"
   },
-  "png_sha256": "6b8e01a5ea5afac47fd101f35a1bc117089fb10b52424f5085bb52e3444c9372",
+  "png_sha256": "b84d9aff99898b905cf558056445ba68b64a6f2ed3554e77bcfcce0c2556fae4",
   "browser_channel": "chrome",
   "browser_version": "156.0.8078.76",
   "playwright_version": "1.64.1",

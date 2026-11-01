@@ -50,7 +50,7 @@ The transcript does **not** reveal every backend HTTP request, retry, injected s
 
 The benchmark provides the same system preamble where a CLI supports an override. Native built-in instructions may still be present. AGY does not expose the same system override. Tool permissions and observed tool activity are checked, but the complete backend tool schema is not exposed by every CLI. These differences are part of the measured runner condition. Do not attribute cross-runner differences solely to the base model.
 
-Costs are runner-reported estimates, not subscription charges. Unknown costs display as `n/a`; a missing estimate cannot trigger the metadata-cost ceiling. Time and attempt bounds still apply. The default ceiling is 10 reported USD across the round and can be changed before planning with `--max-cost`.
+Costs are runner-reported estimates, not subscription charges. Unknown costs display as `n/a`; a missing estimate cannot trigger the metadata-cost ceiling. Time and attempt bounds still apply. Single-model rounds default to 10 reported USD; grids default to 100. Set `--max-cost` when planning to freeze a different ceiling.
 
 ## Local validation on 2026-11-01
 
@@ -92,8 +92,8 @@ documents thinking controls and says its off switch has no effect on Opus 5.5,
 Sonnet 5.5 or Haiku 5.5. The
 [API's thinking support table](https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting)
 allows additional combinations, including Haiku 5.5 with thinking disabled at
-high effort or below. API support does not establish CLI support. No direct API
-calls are used here.
+high effort or below. API support does not establish CLI support. This benchmark
+launches the Claude CLI rather than making direct Anthropic API requests.
 
 The Claude launcher rejects inherited `CLAUDE_CODE_EFFORT_LEVEL`,
 `MAX_THINKING_TOKENS`, `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING` and
@@ -112,8 +112,10 @@ smoke checked this profile before the measured 100-trial-per-prompt run.
 The audit verifies the outgoing request, HTTP response, returned model alias,
 upstream provider, response ID and reported reasoning-token usage. The response
 alias is `openai/gpt-4o`; it does not establish an immutable dated backend
-snapshot. The system fingerprint is retained when supplied. Other OpenRouter
-models and thinking controls require their own validated profile before use.
+snapshot. The system fingerprint is retained when supplied. The separately
+validated [DeepSeek profile](GRIDS.md#deepseek-history-with-fixed-decoding) adds
+fixed decoding and thinking controls with pinned DeepInfra/SiliconFlow routes.
+Other OpenRouter models and controls require their own validated profile before use.
 
 OpenAI lists GPT-4o and GPT-4.1 for API shutdown on January 14, 2027. Original
 GPT-4 and GPT-4 Turbo shut down on October 23, 2026. See the official

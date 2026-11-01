@@ -13,6 +13,7 @@ not 100 across the whole grid. Invalid answers are excluded and never replaced.
 | [Claude](grids/claude.json) | Opus/Sonnet/Haiku 5.5, Fable 5.1, Opus 4.8; Sonnet 4.6 | low through max; Sonnet 4.6 omits unsupported xhigh | 29 | 5,800 |
 | [Grok](grids/grok.json) | Grok 4.5 and 4.7 | low, medium, high | 6 | 1,200 |
 | [Pi/OpenRouter](grids/pi.json) | `openai/gpt-4o` | off, reasoning not applicable | 1 | 200 |
+| [DeepSeek/Pi](grids/deepseek.json) | V3, V3-0324, R1-0528, V3.2, V4 Pro 0813, V4.1 Flash 1017 | supported off/on modes, temperatures 0.7 and 1.0 | 18 | 3,600 |
 
 `ultra` is outside this experiment because it invokes agent delegation. Model
 and effort availability depends on the installed CLI and account. Unsupported
@@ -130,7 +131,9 @@ values. A grid combines its profile with the unchanged prompts in
 [protocol.json](protocol.json). Prompt changes require a new protocol version
 and separate results. The current Pi/OpenRouter profile is specifically audited
 for non-reasoning OpenAI models, with OpenAI as the sole upstream and provider
-fallback disabled. Other OpenRouter providers need their own validated profile.
+fallback disabled. The separate [DeepSeek fixed-decoding profile](#deepseek-history-with-fixed-decoding)
+also has validated routing and reasoning controls. Additional providers or
+model/mode combinations need their own validated profile.
 
 ## Read confidence intervals
 

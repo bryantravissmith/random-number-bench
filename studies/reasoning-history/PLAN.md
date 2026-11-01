@@ -11,6 +11,8 @@ contains 3,993 accepted answers, 407 invalid final responses and 27 timeout
 attempts. All 4,400 logical trials finished. Four hundred invalid responses
 were empty V3.1 thinking outputs; no distribution is estimated for those cells.
 The historical proposal below its status note is retained as provenance.
+The default [repeat profile](../../grids/deepseek.json) now omits V3.1 and has
+18 settings / 3,600 trials; the original seven-release design remains archived.
 
 ## Hypothesis
 
@@ -116,8 +118,11 @@ support for the requested parameters. Use one runner, identical system/user
 text and fresh sessions. Do not add `/think` text to only one prompt. A hidden
 reasoning response is not proof that thinking was disabled: audit the request
 and record exposed reasoning usage. Record unobservable backend settings as
-unknown. The current Pi profile only audits non-reasoning OpenAI upstreams;
-extend and validate it before using these candidates.
+unknown. The initial Pi profile audited only non-reasoning OpenAI upstreams.
+The implemented DeepSeek v2 profile now audits its pinned routes, explicit
+decoding controls and reasoning modes; see [grid controls](../../GRIDS.md#deepseek-history-with-fixed-decoding).
+Other candidates, including the proposed Qwen models, still need validated
+profiles before inference.
 
 Use a fresh scheduling seed per independent round. Do not reuse one fixed
 generation seed for every trial. Repeat rounds on separate occasions and keep

@@ -97,9 +97,9 @@ Exploratory 50-trial rounds live separately in `probes/<id>/`. Generate their re
 
 - A 429, transient provider error or timeout pauses new launches and halves concurrency, down to one. Existing requests drain.
 - Backoff starts at 15 seconds, doubles with repeated trouble, adds jitter, and respects longer `Retry-After` hints. Twenty healthy completions increase concurrency by one, up to the frozen concurrency ceiling (four by default).
-- Each logical trial allows at most three physical attempts. Retries use a fresh conversation with the **same prompt**. Pi's hidden retries and cache warming are disabled. Native CLI internal HTTP retries are not visible; their attempts count CLI processes, not audited HTTP calls.
+- Each logical trial defaults to at most three physical attempts; the frozen plan records the bound. Retries use a fresh conversation with the **same prompt**. Pi's hidden retries and cache warming are disabled. Native CLI internal HTTP retries are not visible; their attempts count CLI processes, not audited HTTP calls.
 - Failed attempts never contribute a number. Completed invalid responses are retained and never retried. Counts, valid-response rate and operational failures are reported separately.
-- Authentication, billing/quota and protocol errors stop the batch. A persistent-error circuit, two-hour active-run limit and 10 USD runner-metadata limit (where reported) also stop it. Limits apply across resumes; in-flight requests can exceed a ceiling slightly. Missing costs display as `n/a` and cannot enforce a cost ceiling. These are reported estimates, not subscription charges.
+- Authentication, billing/quota and protocol errors stop the batch. A persistent-error circuit and the frozen time/cost limits also stop it. Single-model rounds default to two hours and 10 USD in runner metadata; grids default to 24 hours and 100 USD. Planning can change these limits. They apply across resumes; in-flight requests can exceed a ceiling slightly. Missing costs display as `n/a` and cannot enforce a cost ceiling. These are reported estimates, not subscription charges.
 
 ## Read the results
 

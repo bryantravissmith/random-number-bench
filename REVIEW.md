@@ -15,8 +15,9 @@ or inference benchmark calls. Its findings led to:
   their original inputs and disclose the directory hash and context difference.
 - Result tables show complete, paused or stopped state, alongside accepted and
   planned trial counts. Partial results remain reportable.
-- The public runner explicitly restricts the provider to the audited OpenAI
-  Responses adapter. Other adapters need their own transport validation.
+- At that revision, the public Pi runner restricted the provider to the audited
+  OpenAI Responses adapter. Subsequent OpenRouter validations are documented in
+  [GRIDS.md](GRIDS.md); new adapters still need transport validation.
 - Exports lock source batches, check all relevant condition settings and publish
   a verified directory atomically. Free-form errors and local paths stay local.
 
@@ -98,3 +99,22 @@ excluded from this snapshot. The analytics pilot's frozen verifier passed for
 27 physical attempts, but the run stopped after 23/40 terminal trials. It is
 incomplete and ungraded; documentation no longer implies a completed diversity
 finding. No new benchmark inference was performed for this cleanup.
+
+## Repository consistency audit, 2026-11-01
+
+Reverified all eight result packages and six probe packages, reconciled the
+three static figure collections with their source cell counts, checked every
+tracked Markdown file link and heading anchor, and checked the matrix/image
+source hashes. Rebuilding RESULTS.md and PROBES.md produced no data-table changes.
+All six grid profiles expand to their documented setting and trial counts.
+
+The installed Pi integration checks (`test_pi_http.py`, `test_openrouter.py`,
+`test_deepseek_grid.py`) passed against local HTTP fixtures without provider
+inference. Local run folders, credentials and preview assets remain untracked.
+
+Corrected stale pre-DeepSeek support descriptions, separated default round/grid
+limits, added DeepSeek to the profile index, and made the matrix shortfall label
+refer to the planned sample size. The latter was reproduced and rechecked with
+a 200-trial presentation fixture. Historical evidence and original study
+proposals were preserved. Codex remains active; the analytics pilot remains
+stopped, incomplete and ungraded.
