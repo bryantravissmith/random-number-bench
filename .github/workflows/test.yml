@@ -21,10 +21,12 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import public_results
-          for path in Path("results").glob("*/manifest.json"):
-              public_results.verify_public(path.parent)
+          for root in ("results", "probes"):
+              for path in Path(root).glob("*/manifest.json"):
+                  public_results.verify_public(path.parent)
           PY
       - name: Check generated report
         run: |
           python bench.py report
-          git diff --exit-code -- RESULTS.md
+          python bench.py report --probes
+          git diff --exit-code -- RESULTS.md PROBES.md

@@ -67,6 +67,41 @@ Codex and AGY did not. All four returned `7` in the final two-call smoke checks.
 
 ## Non-reasoning comparisons
 
+**Verified subscription option: Haiku 4.5 with thinking off.** On 2026-11-01,
+Claude Code 2.1.296 completed one call with each canonical prompt using
+`claude-haiku-4-5-20251001 --thinking off`. Both returned `7`, reported zero
+thinking tokens, and passed raw-to-public verification. These two engineering
+smoke calls remain local and are not benchmark samples.
+
+```sh
+uv run bench.py plan --runner claude --model claude-haiku-4-5-20251001 \
+  --thinking off --count 50 --out runs/haiku-thinking-off-001
+```
+
+The adapter maps `off` to an explicit session setting
+`--settings '{"alwaysThinkingEnabled":false}'` and omits the unsupported Haiku
+4.5 effort option. It rejects observed thinking blocks, thinking progress or
+positive thinking-token usage in this mode. Only the Haiku 4.5 family is
+currently allowed for this profile; other models need separate validation.
+This is a thinking-capable model with thinking disabled, not a distinct model
+family trained without a reasoning mode. An omitted effort option or `low`
+effort alone does not disable thinking.
+
+[Claude Code's model configuration](https://code.claude.com/docs/en/model-config#extended-thinking)
+documents thinking controls and says its off switch has no effect on Opus 5.5,
+Sonnet 5.5 or Haiku 5.5. The
+[API's thinking support table](https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting)
+allows additional combinations, including Haiku 5.5 with thinking disabled at
+high effort or below. API support does not establish CLI support. No direct API
+calls are used here.
+
+The Claude launcher rejects inherited `CLAUDE_CODE_EFFORT_LEVEL`,
+`MAX_THINKING_TOKENS`, `CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING` and
+`CLAUDE_CODE_EXTRA_BODY` so they cannot silently override the frozen settings.
+The first three Opus effort plans predate this guard; all four variables were
+confirmed absent before those runs. Native transcripts establish the requested
+CLI controls and reported token usage, not a complete backend request payload.
+
 As checked on 2026-11-01, the local Codex subscription catalog does not list
 GPT-4o or GPT-4.1. Pi lists them as non-reasoning models in its general catalog,
 which does not establish subscription access. A GPT-4o comparison requires an

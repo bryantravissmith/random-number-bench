@@ -197,6 +197,40 @@ class RunnerFixtureTest(unittest.TestCase):
         self.assertEqual(result["response_id"], "msg_01")
         self.assertEqual(result["observed_model"], "claude-opus-5-5-20260301")
 
+    def test_claude_thinking_token_progress_is_not_an_answer_or_usage(self):
+        # Reproduces Claude Code 2.1.296 max-effort native transcripts.
+        events = claude_events("4")
+        progress = {
+            "type": "system",
+            "subtype": "thinking_tokens",
+            "session_id": "sess-1",
+            "estimated_tokens": 50,
+            "estimated_tokens_delta": 50,
+        }
+        events.insert(1, progress)
+        events.insert(
+            2, {**progress, "estimated_tokens": 221, "estimated_tokens_delta": 171}
+        )
+        events[-1]["usage"]["output_tokens_details"] = {"thinking_tokens": 96}
+        folder, config = self.attempt("claude", events)
+        result = cr.parse(folder, config, 0)
+        self.assertEqual(result["outcome"], "valid")
+        self.assertEqual(result["number"], 4)
+        self.assertEqual(result["usage"]["reasoning"], 96)
+        for override in (
+            {"estimated_tokens": "50"},
+            {"estimated_tokens_delta": -1},
+            {"error": "failure"},
+            {"subtype": "unknown_progress"},
+            {"session_id": "other-session"},
+        ):
+            changed = json.loads(json.dumps(events))
+            changed[1].update(override)
+            folder, config = self.attempt("claude", changed)
+            self.assertEqual(
+                cr.parse(folder, config, 0)["outcome"], "protocol_error", override
+            )
+
     def test_codex_reasoning_usage_and_last_message_cross_check(self):
         folder, config = self.attempt("codex", codex_events())
         (folder / "last-message.txt").write_text("3\n")
@@ -443,6 +477,41 @@ class RunnerFixtureTest(unittest.TestCase):
         self.assertNotIn("--resume", argv)
         self.assertNotIn("--continue", argv)
 
+    def test_claude_thinking_off_profile_and_contradictory_evidence(self):
+        model = "claude-haiku-4-5-20251001"
+        config = config_for("claude", self.root, model=model, thinking="off")
+        events = claude_events()
+        events[0]["model"] = model
+        events[1]["message"]["model"] = model
+        events[2]["modelUsage"] = {model: {"costUSD": 0.0123}}
+        folder, config = self.attempt("claude", events, config=config)
+        argv = cr.read_json(folder / cr.REQUEST_FILE)["command"]
+        self.assertEqual(
+            json.loads(argv[argv.index("--settings") + 1]),
+            {"alwaysThinkingEnabled": False},
+        )
+        self.assertNotIn("--effort", argv)
+        self.assertEqual(cr.parse(folder, config, 0)["outcome"], "valid")
+        events[1]["message"]["content"].insert(0, {"type": "thinking", "thinking": ""})
+        folder, config = self.attempt("claude", events, config=config)
+        self.assertEqual(cr.parse(folder, config, 0)["outcome"], "protocol_error")
+        events[1]["message"]["content"].pop(0)
+        events[2]["usage"]["output_tokens_details"] = {"thinking_tokens": 4}
+        folder, config = self.attempt("claude", events, config=config)
+        self.assertEqual(cr.parse(folder, config, 0)["outcome"], "protocol_error")
+        for unsupported in (
+            "claude-opus-5-5",
+            "claude-haiku-5-5",
+            "claude-sonnet-5-5",
+            "unknown",
+        ):
+            with self.subTest(model=unsupported), self.assertRaises(cr.RunnerError):
+                cr.command(
+                    {**config, "model": unsupported},
+                    self.root / "bad",
+                    binary="/fake/claude",
+                )
+
     def test_codex_command_freezes_instructions_file(self):
         folder, config = self.attempt("codex", codex_events())
         argv = cr.read_json(folder / cr.REQUEST_FILE)["command"]
@@ -530,6 +599,10 @@ class RunnerFixtureTest(unittest.TestCase):
             ("claude", "ANTHROPIC_API_KEY"),
             ("claude", "ANTHROPIC_BASE_URL"),
             ("claude", "CLAUDE_CODE_USE_BEDROCK"),
+            ("claude", "CLAUDE_CODE_EFFORT_LEVEL"),
+            ("claude", "MAX_THINKING_TOKENS"),
+            ("claude", "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING"),
+            ("claude", "CLAUDE_CODE_EXTRA_BODY"),
             ("codex", "OPENAI_API_KEY"),
             ("codex", "OPENAI_BASE_URL"),
             ("grok", "XAI_API_KEY"),

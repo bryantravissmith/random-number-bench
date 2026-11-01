@@ -47,11 +47,14 @@ FORMATS = {
     "agy": "agy-json",
 }
 EFFORTS = {
-    "claude": ("low", "medium", "high", "xhigh", "max"),
+    "claude": ("off", "low", "medium", "high", "xhigh", "max"),
     "codex": ("minimal", "low", "medium", "high", "xhigh"),
     "grok": ("low", "medium", "high"),
     "agy": ("low", "medium", "high"),
 }
+# Models whose thinking-off setting is supported by Claude Code, not merely
+# the API. Newer Haiku/Sonnet 5.5 and Opus 5.5 ignore the CLI's off setting.
+CLAUDE_THINKING_OFF_MODELS = {"claude-haiku-4-5"}
 EVIDENCE_LEVEL = "cli_transcript"
 OUTCOMES = (
     "valid",
@@ -101,6 +104,10 @@ REJECTED_ENV = {
         "ANTHROPIC_DEFAULT_OPUS_MODEL",
         "ANTHROPIC_DEFAULT_SONNET_MODEL",
         "ANTHROPIC_DEFAULT_HAIKU_MODEL",
+        "CLAUDE_CODE_EFFORT_LEVEL",
+        "MAX_THINKING_TOKENS",
+        "CLAUDE_CODE_DISABLE_ADAPTIVE_THINKING",
+        "CLAUDE_CODE_EXTRA_BODY",
     ),
     "codex": (
         "OPENAI_API_KEY",
@@ -297,7 +304,7 @@ def environment(runner, base=None):
     present = [key for key in REJECTED_ENV[runner] if key in source]
     if present:
         raise RunnerError(
-            f"{runner} launch refused: API credential or routing variables set: "
+            f"{runner} launch refused: credential, routing or model-control variables set: "
             + ", ".join(sorted(present))
         )
     env = {
@@ -473,6 +480,11 @@ def validate_config(config):
         raise RunnerError("Model must be an exact non-empty identifier")
     if config["thinking"] is not None and config["thinking"] not in EFFORTS[runner]:
         raise RunnerError(f"{runner} thinking must be one of {EFFORTS[runner]} or None")
+    if runner == "claude" and config["thinking"] == "off":
+        if DATED_SUFFIX.sub("", model) not in CLAUDE_THINKING_OFF_MODELS:
+            raise RunnerError(
+                "Claude Code thinking-off is not supported for this model"
+            )
     for key in ("system_prompt", "prompt"):
         if not isinstance(config[key], str) or not config[key].strip():
             raise RunnerError(f"{key} must be a non-empty string")
@@ -517,7 +529,11 @@ def _argv(config, folder, binary):
             "--system-prompt",
             config["system_prompt"],
         ]
-        if thinking is not None:
+        if thinking == "off":
+            argv += ["--settings", json.dumps({"alwaysThinkingEnabled": False})]
+            # Haiku 4.5 has no effort parameter. Off is a separate thinking
+            # control, not a synonym for low effort or an omitted option.
+        elif thinking is not None:
             argv += ["--effort", thinking]
         return argv + ["--", config["prompt"]]
     if runner == "codex":
@@ -805,6 +821,31 @@ def _extract_claude(events, config, transcript):
     results = [e for e in events if e.get("type") == "result"]
     users = [e for e in events if e.get("type") == "user"]
     for event in events:
+        if (
+            config["runner"] == "claude"
+            and event.get("type") == "system"
+            and event.get("subtype") == "thinking_tokens"
+        ):
+            # Native progress estimates are neither output nor final usage.
+            # Preserve them in evidence, but tally the terminal usage only.
+            allowed = {
+                "type",
+                "subtype",
+                "session_id",
+                "uuid",
+                "estimated_tokens",
+                "estimated_tokens_delta",
+            }
+            if set(event) - allowed or any(
+                type(event.get(key)) is not int or event[key] < 0
+                for key in ("estimated_tokens", "estimated_tokens_delta")
+            ):
+                transcript.issues.append("Malformed thinking-token progress event")
+            if config["thinking"] == "off":
+                transcript.issues.append(
+                    "Thinking progress observed with thinking disabled"
+                )
+            continue
         if event.get("type") == "rate_limit_event":
             info = event.get("rate_limit_info") or {}
             if info.get("isUsingOverage"):
@@ -866,6 +907,10 @@ def _extract_claude(events, config, transcript):
             elif kind in CLAUDE_TEXT_BLOCKS:
                 texts.append(block.get("text", ""))
             elif kind in CLAUDE_IGNORED_BLOCKS:
+                if config["thinking"] == "off":
+                    transcript.issues.append(
+                        "Thinking block observed with thinking disabled"
+                    )
                 continue
             else:
                 transcript.issues.append(f"Unexpected content block {kind!r}")
@@ -896,6 +941,8 @@ def _extract_claude(events, config, transcript):
         (usage.get("output_tokens_details") or {}).get("thinking_tokens"),
         None if result.get("cost_is_partial") else result.get("total_cost_usd"),
     )
+    if config["thinking"] == "off" and (transcript.usage.get("reasoning") or 0) > 0:
+        transcript.issues.append("Thinking tokens reported with thinking disabled")
     if transcript.errors:
         return
     if result.get("num_turns") != 1:

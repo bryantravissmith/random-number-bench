@@ -4,7 +4,7 @@ What distribution do you get when you ask an LLM for a random integer from 1 to 
 
 This benchmark runs **1,000 fresh sessions for each of two fixed prompts**, records every attempt, and compares the accepted answers with a uniform distribution. Each repeat gets its own immutable result directory.
 
-**[Recorded results](RESULTS.md)** · [Protocol](PROTOCOL.md) · [Public evidence format](EVIDENCE.md)
+**[Recorded results](RESULTS.md)** · [50-trial effort probes](PROBES.md) · [Protocol](PROTOCOL.md) · [Public evidence format](EVIDENCE.md)
 
 The completed Claude Opus 5.5 subscription round returned `7` in all 1,000 baseline trials. The meta-prompt produced 958 sevens, 37 sixes, three fours and one three; one prose response was excluded. The two earlier stopped Claude rounds remain separate in the report. These are descriptive results under the recorded CLI settings.
 
@@ -52,6 +52,8 @@ Repeat with `round-002`, `round-003`, and so on. Add `--model` or `--thinking` t
 The two conditions are interleaved in randomized adjacent pairs under one shared controller. Every trial starts a new runner process and conversation. Ctrl-C pauses the round; the same `run` command resumes it using frozen source without repeating completed trials. Exports refuse to overwrite an existing result directory.
 
 After reviewing a public export, commit its `results/<id>/` directory and the regenerated `RESULTS.md`. The local `runs/` directory is ignored. No recurring schedule or automatic publication is installed. CI runs offline tests and checks published records; it makes no inference calls.
+
+Exploratory 50-trial rounds live separately in `probes/<id>/`. Generate their report with `uv run bench.py report --probes`; see [probe design and interpretation](PROBE_NOTES.md). Reports show the thinking/effort setting as well as the model. For a subscription-backed thinking-off comparison, the Claude adapter supports `--model claude-haiku-4-5-20251001 --thinking off`; see [the validated profile](CLI_RUNNERS.md#non-reasoning-comparisons).
 
 ## Errors and rate limits
 

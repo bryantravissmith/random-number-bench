@@ -1,0 +1,97 @@
+{
+  "schema": "random-number-public-result-v1",
+  "exported_at": "2026-11-01T18:53:31.317382+00:00",
+  "protocol": {
+    "version": "random-number-bench-v1",
+    "range": [
+      1,
+      10
+    ],
+    "default_trials_per_condition": 1000,
+    "prompts": {
+      "baseline": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "meta": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    }
+  },
+  "design": "interleaved_pairs",
+  "order_seed": 5061705399756359078,
+  "planned_per_condition": {
+    "baseline": 50,
+    "meta": 50
+  },
+  "sources": {
+    "shared": {
+      "runner": "claude",
+      "runner_version": "2.1.296 (Claude Code)",
+      "evidence_level": "cli_transcript",
+      "system_preamble_application": "system override; native CLI context may remain",
+      "created_at": "2026-11-01T18:49:10.069971+00:00",
+      "state": "complete",
+      "elapsed_seconds": 64.05709783395287,
+      "raw_manifest_sha256": "f1b36775aa3c9d7373f6a1f83f9d5cd1015e4d8b622884918a39f2bb3d786b05",
+      "raw_verification": {
+        "verified_at": "2026-11-01T18:53:31.307568+00:00",
+        "physical_attempts": 100,
+        "accepted_unique_trials": 100,
+        "unique_sessions": 100,
+        "counts_from_native_sessions": {
+          "1": 0,
+          "2": 0,
+          "3": 1,
+          "4": 0,
+          "5": 0,
+          "6": 0,
+          "7": 99,
+          "8": 0,
+          "9": 0,
+          "10": 0
+        },
+        "evidence_hashes_match": true,
+        "error_attempts_excluded": true,
+        "configuration_matches": true
+      },
+      "working_directory_sha256": "8a5edab282632443219e051e4ade2d1d5bbc671c781051bf1437897cbdfea0f1",
+      "working_directory": "/",
+      "source_sha256": {
+        "batch.py": "4f81289d906967ac76d49a64866127a6e8137132777a690c0ef375a7ebdf4034",
+        "pi-audit.ts": "8a65297b9fe6d6e0c84dee32ccd117daccda5f5336aebfcaa4071077654d0513",
+        "verify.py": "92806e78776696b736c8a0ccceba21d90f535107d1df67df79166b98cc9fdffb",
+        "cli_runners.py": "c87ea77fd282c89abdf310d84fed0781d4cb7b9a35524361787ed04dbf1e9b92"
+      },
+      "runner_schema": "random-numbers-v1.0",
+      "pi_version": null,
+      "provider": "anthropic",
+      "model": "claude-opus-5-5",
+      "thinking": "xhigh",
+      "concurrency_ceiling": 4,
+      "control_settings": {
+        "max_attempts": 3,
+        "timeout": 180.0,
+        "base_backoff": 15,
+        "max_backoff": 300,
+        "recovery_successes": 20,
+        "circuit_errors": 8,
+        "max_seconds": 7200.0,
+        "max_cost": 10.0
+      },
+      "pi_settings_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "models_file_sha256": null,
+      "stored_auth_type": "oauth"
+    }
+  },
+  "redactions": [
+    "Historical private working directories are replaced by hashes. A neutral root directory is disclosed as / when used. Pi includes this directory in its system prompt.",
+    "Session and response IDs are hashed. Credentials, endpoint headers, environment and free-form error text are not exported.",
+    "Public rows are selected fields from verified native logs. Full raw logs remain local; raw file hashes are commitments, not downloadable transcripts."
+  ],
+  "cost_basis": "Runner-reported API-equivalent usage metadata when available, not a verified bill. Legacy field name pi_reported_cost is retained for compatibility.",
+  "model_identity": "Pi outgoing payload or native CLI model option checked; native reported model retained where exposed. Immutable backend snapshot is not independently established.",
+  "files_sha256": {
+    "summary.json": "523a0fa44d6fa2f05c25a5daec09c438d8f8b071919d801cc0985370aa0f677a",
+    "attempts.jsonl": "8e57977db06f5dd090ff1d5478ae5635ab2b4627074ea483189a3fa8b93e8a1d",
+    "source/shared/cli_runners.py": "c87ea77fd282c89abdf310d84fed0781d4cb7b9a35524361787ed04dbf1e9b92",
+    "source/shared/pi-audit.ts": "8a65297b9fe6d6e0c84dee32ccd117daccda5f5336aebfcaa4071077654d0513",
+    "source/shared/batch.py": "4f81289d906967ac76d49a64866127a6e8137132777a690c0ef375a7ebdf4034",
+    "source/shared/verify.py": "92806e78776696b736c8a0ccceba21d90f535107d1df67df79166b98cc9fdffb"
+  }
+}
