@@ -1,0 +1,29 @@
+name: Test and verify
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - run: python tests/test_batch.py
+      - run: python tests/test_round.py
+      - name: Recount published results
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import public_results
+          for path in Path("results").glob("*/manifest.json"):
+              public_results.verify_public(path.parent)
+          PY
+      - name: Check generated report
+        run: |
+          python bench.py report
+          git diff --exit-code -- RESULTS.md

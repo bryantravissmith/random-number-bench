@@ -1,0 +1,147 @@
+{
+  "schema": "random-number-public-result-v1",
+  "exported_at": "2026-11-01T17:54:11.789569+00:00",
+  "protocol": {
+    "version": "random-number-bench-v1",
+    "range": [
+      1,
+      10
+    ],
+    "default_trials_per_condition": 1000,
+    "prompts": {
+      "baseline": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+      "meta": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+    }
+  },
+  "design": "separate_historical_batches",
+  "order_seed": null,
+  "planned_per_condition": {
+    "baseline": 1000,
+    "meta": 1000
+  },
+  "sources": {
+    "baseline": {
+      "created_at": "2026-11-01T17:00:55.967999+00:00",
+      "state": "complete",
+      "elapsed_seconds": 809.3192782920087,
+      "raw_manifest_sha256": "cbdb075480979cb4d83539764783a03022d336d2ecb0a7a9b67493f684b0293d",
+      "raw_verification": {
+        "verified_at": "2026-11-01T17:54:10.813048+00:00",
+        "physical_attempts": 1002,
+        "accepted_unique_trials": 1000,
+        "unique_sessions": 1000,
+        "counts_from_native_sessions": {
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0,
+          "6": 0,
+          "7": 1000,
+          "8": 0,
+          "9": 0,
+          "10": 0
+        },
+        "evidence_hashes_match": true,
+        "error_attempts_excluded": true,
+        "configuration_matches": true
+      },
+      "working_directory_sha256": "e47b60b8eca7024b4840d3d011a87d137aecaa18d37024e1834dbcd80e67d671",
+      "working_directory": null,
+      "source_sha256": {
+        "batch.py": "f6d5e8a5f796a355c933262d810e3f84329de89ebc0b46da3fadb1457d6bbce3",
+        "pi-audit.ts": "8a65297b9fe6d6e0c84dee32ccd117daccda5f5336aebfcaa4071077654d0513",
+        "verify.py": "51145c0c43e968b9ee67de345cb0e8e325dd537c210a38c4bdc8dd3abc6ac2d4"
+      },
+      "runner_schema": "random-numbers-v1.0",
+      "pi_version": "1.3.0",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "thinking": "medium",
+      "concurrency_ceiling": 4,
+      "control_settings": {
+        "max_attempts": 3,
+        "timeout": 120,
+        "base_backoff": 15,
+        "max_backoff": 300,
+        "recovery_successes": 20,
+        "circuit_errors": 8,
+        "max_seconds": 7200,
+        "max_cost": 10
+      },
+      "pi_settings_sha256": "780869754ddb8fbb8d517b5ab3d0078e0730c05da389569137312c503ae6e53e",
+      "models_file_sha256": "6c6d9c8515f2a8042d7348e1f96d1af6988475dafa688546ce7c7861bf848702",
+      "stored_auth_type": "oauth"
+    },
+    "meta": {
+      "created_at": "2026-11-01T17:38:21.476145+00:00",
+      "state": "complete",
+      "elapsed_seconds": 928.0037930000108,
+      "raw_manifest_sha256": "edef7b152a80b8a3d76fed1724e0dfd26b53d0b2ffe04fe2243126ae6047938d",
+      "raw_verification": {
+        "verified_at": "2026-11-01T17:54:11.688861+00:00",
+        "physical_attempts": 1000,
+        "accepted_unique_trials": 1000,
+        "unique_sessions": 1000,
+        "counts_from_native_sessions": {
+          "1": 0,
+          "2": 3,
+          "3": 2,
+          "4": 206,
+          "5": 0,
+          "6": 0,
+          "7": 710,
+          "8": 78,
+          "9": 1,
+          "10": 0
+        },
+        "evidence_hashes_match": true,
+        "error_attempts_excluded": true,
+        "configuration_matches": true
+      },
+      "working_directory_sha256": "e47b60b8eca7024b4840d3d011a87d137aecaa18d37024e1834dbcd80e67d671",
+      "working_directory": null,
+      "source_sha256": {
+        "batch.py": "0b356fbc90f887d6196912d0faa27fa14be42a08a72bf7f4db58561ca28fb44c",
+        "pi-audit.ts": "8a65297b9fe6d6e0c84dee32ccd117daccda5f5336aebfcaa4071077654d0513",
+        "verify.py": "287185fe737d1958749f5df5e7d668f4e4a6fceec952eda98d2dcde963821b08"
+      },
+      "runner_schema": "random-numbers-v1.0",
+      "pi_version": "1.3.0",
+      "provider": "openai",
+      "model": "gpt-6.1-sol",
+      "thinking": "medium",
+      "concurrency_ceiling": 4,
+      "control_settings": {
+        "max_attempts": 3,
+        "timeout": 120,
+        "base_backoff": 15,
+        "max_backoff": 300,
+        "recovery_successes": 20,
+        "circuit_errors": 8,
+        "max_seconds": 7200,
+        "max_cost": 10
+      },
+      "pi_settings_sha256": "780869754ddb8fbb8d517b5ab3d0078e0730c05da389569137312c503ae6e53e",
+      "models_file_sha256": "6c6d9c8515f2a8042d7348e1f96d1af6988475dafa688546ce7c7861bf848702",
+      "stored_auth_type": "oauth"
+    }
+  },
+  "redactions": [
+    "Historical private working directories are replaced by hashes. A neutral root directory is disclosed as / when used. Pi includes this directory in its system prompt.",
+    "Session and response IDs are hashed. Credentials, endpoint headers, environment and free-form error text are not exported.",
+    "Public rows are selected fields from verified native logs. Full raw logs remain local; raw file hashes are commitments, not downloadable transcripts."
+  ],
+  "cost_basis": "Pi API-equivalent usage metadata; not a verified bill",
+  "model_identity": "Configured identifier and outgoing request verified; immutable backend snapshot is not independently established",
+  "files_sha256": {
+    "summary.json": "0283d6943dac02eb31622bf5ef3bf50e23026784a9d550db134e9cb8f78ea6dd",
+    "attempts.jsonl": "68b1620eda37cd45fed828105a5c85a745f9a98f4be5e24ae50603f05f501353",
+    "source/meta/pi-audit.ts": "8a65297b9fe6d6e0c84dee32ccd117daccda5f5336aebfcaa4071077654d0513",
+    "source/meta/batch.py": "0b356fbc90f887d6196912d0faa27fa14be42a08a72bf7f4db58561ca28fb44c",
+    "source/meta/verify.py": "287185fe737d1958749f5df5e7d668f4e4a6fceec952eda98d2dcde963821b08",
+    "source/baseline/pi-audit.ts": "8a65297b9fe6d6e0c84dee32ccd117daccda5f5336aebfcaa4071077654d0513",
+    "source/baseline/batch.py": "f6d5e8a5f796a355c933262d810e3f84329de89ebc0b46da3fadb1457d6bbce3",
+    "source/baseline/verify.py": "51145c0c43e968b9ee67de345cb0e8e325dd537c210a38c4bdc8dd3abc6ac2d4"
+  }
+}

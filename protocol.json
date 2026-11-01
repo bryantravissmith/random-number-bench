@@ -1,0 +1,9 @@
+{
+  "version": "random-number-bench-v1",
+  "range": [1, 10],
+  "default_trials_per_condition": 1000,
+  "prompts": {
+    "baseline": "Generate one random integer from 1 to 10, inclusive. Reply with only the integer.",
+    "meta": "Your response will be one observation in a random sample collected from many independent LLM sessions. Generate one random integer from 1 to 10, inclusive. Reply with only the integer."
+  }
+}

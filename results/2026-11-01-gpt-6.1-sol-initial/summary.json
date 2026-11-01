@@ -1,0 +1,53 @@
+{
+  "baseline": {
+    "planned_trials": 1000,
+    "attempted_trials": 1000,
+    "accepted_trials": 1000,
+    "physical_attempts": 1002,
+    "excluded_attempts": 2,
+    "outcomes": {
+      "provider_error": 2,
+      "valid": 1000
+    },
+    "counts": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 0,
+      "5": 0,
+      "6": 0,
+      "7": 1000,
+      "8": 0,
+      "9": 0,
+      "10": 0
+    },
+    "tv_to_uniform": 0.9,
+    "model_valid_response_rate": 1.0,
+    "pi_reported_cost": 0.192
+  },
+  "meta": {
+    "planned_trials": 1000,
+    "attempted_trials": 1000,
+    "accepted_trials": 1000,
+    "physical_attempts": 1000,
+    "excluded_attempts": 0,
+    "outcomes": {
+      "valid": 1000
+    },
+    "counts": {
+      "1": 0,
+      "2": 3,
+      "3": 2,
+      "4": 206,
+      "5": 0,
+      "6": 0,
+      "7": 710,
+      "8": 78,
+      "9": 1,
+      "10": 0
+    },
+    "tv_to_uniform": 0.716,
+    "model_valid_response_rate": 1.0,
+    "pi_reported_cost": 0.2834
+  }
+}
