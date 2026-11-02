@@ -69,8 +69,8 @@ system and serif fonts; `--embed-fonts` optionally embeds local brand fonts.
 
 For another completed round, add its export to a new scope or pass explicit
 result directories. Repeated runs remain separate blocks even for identical
-model settings. Smoke checks, probes and separate historical batches belong in
-separate views. Do not append active partial results to this matrix.
+model settings. Separate historical batches remain in the recorded results.
+Only completed measured grids belong in this matrix.
 
 For local collaborative review, run `lavish-axi reports/comparison.html`.
 The CSV download contains every displayed cell's exact counts, CIs, entropy,

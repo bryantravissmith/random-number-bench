@@ -155,8 +155,8 @@ all-identical responses.
 ## Publish and verify
 
 After a measured run is exported, commit its `results/<id>/` folder and
-regenerate `RESULTS.md`. Smoke checks, exploratory probes and planning notes
-stay in ignored local paths; they are not published benchmark results.
+regenerate `RESULTS.md`. Publish only measured rounds; keep development
+artifacts local under ignored paths.
 Never edit generated result JSON, JSONL or reports by hand. Full raw evidence
 stays under ignored `runs/`; the public export contains allowlisted records,
 hashes, schedules and frozen source. Keep the raw run locally for audit.

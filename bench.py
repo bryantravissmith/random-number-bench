@@ -168,10 +168,7 @@ def main():
     p.add_argument("--out", type=Path, required=True)
     p = actions.add_parser("verify-public")
     p.add_argument("result", type=Path)
-    p = actions.add_parser("report")
-    p.add_argument(
-        "--probes", action="store_true", help="Report local exploratory runs (ignored by Git)"
-    )
+    actions.add_parser("report")
     p = actions.add_parser(
         "check", help="Check native CLI subscription login without inference"
     )
@@ -219,10 +216,7 @@ def main():
         public_results.verify_public(args.result)
         print("Public records, hashes and tallies verified")
     else:
-        if args.probes:
-            public_results.report(ROOT / "probes", ROOT / "PROBES.md", probes=True)
-        else:
-            public_results.report(ROOT / "results", ROOT / "RESULTS.md")
+        public_results.report(ROOT / "results", ROOT / "RESULTS.md")
     return 0
 
 

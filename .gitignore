@@ -8,7 +8,7 @@ __pycache__/
 .DS_Store
 .lavish/
 
-# Exploratory outputs and working plans stay local.
+# Local development artifacts.
 probes/
 PROBES.md
 PROBE_NOTES.md
