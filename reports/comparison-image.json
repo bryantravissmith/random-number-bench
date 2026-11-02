@@ -1,11 +1,11 @@
 {
   "schema": "random-number-matrix-image-v1",
   "sources": {
-    "html_sha256": "368b362e2c086c3dfa2fc5b0e1880bfca4330225341169a7e151ed16e98b7529",
-    "presentation_manifest_sha256": "2bc31c24210f8a2aaba01c19f95577f79fbc06f86c11a654edb548a51a918af6",
+    "html_sha256": "5a19c852d16a479c0619def4a63c7bf16b1947a6bba4262c82e82916fd8afcf4",
+    "presentation_manifest_sha256": "068bb56e605bc6b2cbc9dabafe24e463cbe7da0a03592f2e63fd424948b95ba1",
     "renderer_sha256": "6bbfd03f02417af9af08dacbddaed6aeba86d4ded19e3073729b98120fa5c10a"
   },
-  "png_sha256": "b84d9aff99898b905cf558056445ba68b64a6f2ed3554e77bcfcce0c2556fae4",
+  "png_sha256": "a80ae3a244bf0563bfe7ba4fabba14682ffd81f2d5c623fe9f1e3e82672665a0",
   "browser_channel": "chrome",
   "browser_version": "156.0.8078.76",
   "playwright_version": "1.64.1",
@@ -13,6 +13,6 @@
   "device_scale_factor": 2,
   "image_pixels": [
     3200,
-    2532
+    3156
   ]
 }

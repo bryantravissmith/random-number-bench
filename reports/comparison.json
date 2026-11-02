@@ -5,13 +5,14 @@
     "results/2026-11-01-grid-claude-001",
     "results/2026-11-01-grid-grok-001",
     "results/2026-11-01-grid-pi-001",
-    "results/2026-11-01-deepseek-history-c16-001"
+    "results/2026-11-01-deepseek-history-c16-001",
+    "results/2026-11-01-grid-codex-001"
   ],
   "excluded_models": {
     "deepseek/deepseek-chat-v3.1": "Excluded from the substantive comparison at Bryan's request after all 400 thinking trials returned empty final answers. Both modes remain in the archived evidence."
   },
   "notes": [
-    "Codex's 8,000-trial grid was still running at this publication snapshot and is not included.",
+    "Codex's completed grid contributes 8,000 valid samples across eight models and five effort levels; 162 operational attempts were excluded.",
     "V3.1 is hidden by default at the author's request; reveal it to inspect the failure counts."
   ]
 }

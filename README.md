@@ -30,9 +30,9 @@ keep missing answers and serving differences visible.
 | Grok | 1,200 | 1,192 | Complete |
 | GPT-4o via Pi/OpenRouter | 200 | 200 | Complete |
 | DeepSeek history | 4,400 | 3,993 | Complete; V3.1 retained in archive |
-| Codex | 8,000 | Pending | Running at the 2026-11-01 snapshot; omitted from comparison |
+| Codex | 8,000 | 8,000 | Complete |
 
-The matrix shows 15 models and 54 settings from the four completed grids.
+The matrix shows 23 models and 94 settings from five completed grids.
 V3.1 is excluded from the main comparison at the author's request; a reveal
 control shows its archived settings and missing responses. Measured historical
 rounds remain separate in RESULTS.md. Exploratory runs and smoke checks stay local.
